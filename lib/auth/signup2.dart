@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_user/auth/login.dart';
+import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/dialogs/normal_dialog.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
@@ -19,14 +20,7 @@ class Signup2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        elevation: 0.5,
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.grey[300],
-        title: TextBold(
-            text: 'Emergency Cases', fontSize: 18, color: Colors.black),
-        centerTitle: true,
-      ),
+      appBar: NormalAppbar('Emergency Cases', Colors.grey[300]!),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

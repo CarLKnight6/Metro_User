@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_user/auth/signup.dart';
+import 'package:taxi_user/screens/home_screen.dart';
 import 'package:taxi_user/widgets/buttons/auth_buton.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
@@ -48,7 +49,12 @@ class LoginPage extends StatelessWidget {
                   height: 10,
                 ),
                 ButtonWidget(
-                    label: 'Login', color: Colors.amber, onPressed: () {}),
+                    label: 'Login',
+                    color: Colors.amber,
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => HomeScreen()));
+                    }),
                 Padding(
                   padding: const EdgeInsets.only(right: 40),
                   child: Align(
