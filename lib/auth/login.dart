@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_user/auth/signup.dart';
 import 'package:taxi_user/widgets/buttons/auth_buton.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
@@ -93,7 +94,10 @@ class LoginPage extends StatelessWidget {
                         fontSize: 14,
                         color: Colors.black),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SignupPage()));
+                      },
                       child: TextBold(
                           text: "Signup",
                           fontSize: 16,
