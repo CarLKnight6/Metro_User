@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_user/auth/signup2.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
@@ -463,9 +464,8 @@ class _SignupPageState extends State<SignupPage> {
                   label: 'Continue',
                   color: Colors.amber,
                   onPressed: () {
-                    //                   Navigator.of(context).pushReplacement(
-                    // MaterialPageRoute(
-                    // 	builder: (context) => const NameOfPage()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Signup2()));
                   }),
               const SizedBox(
                 height: 50,
