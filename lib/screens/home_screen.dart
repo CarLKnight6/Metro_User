@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
+import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   final Completer<GoogleMapController> _controller = Completer();
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: const DrawerWidget(),
       appBar: NormalAppbar('Home', Colors.white),
       body: Stack(
         children: [
