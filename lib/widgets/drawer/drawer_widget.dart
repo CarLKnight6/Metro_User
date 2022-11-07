@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:taxi_user/screens/pages/profile_screen.dart';
 import 'package:taxi_user/widgets/containers/booking_tile.dart';
 import 'package:taxi_user/widgets/containers/normal_tile.dart';
 
@@ -77,7 +78,10 @@ class _MyDrawerState extends State<DrawerWidget> {
               NormalTile(
                   icon: Icons.person,
                   label: 'Profile',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
+                  },
                   tileColor: Colors.transparent),
               NormalTile(
                   icon: Icons.phone,
