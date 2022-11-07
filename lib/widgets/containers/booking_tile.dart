@@ -8,6 +8,13 @@ class BookingTile extends StatelessWidget {
   late Color tileColor;
   late IconData icon;
 
+  BookingTile({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+    required this.tileColor,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
