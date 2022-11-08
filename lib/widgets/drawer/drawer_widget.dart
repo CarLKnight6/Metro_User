@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:taxi_user/screens/booking_screens/book_now.dart';
 import 'package:taxi_user/screens/home_screen.dart';
 import 'package:taxi_user/screens/pages/profile_screen.dart';
 import 'package:taxi_user/widgets/containers/booking_tile.dart';
@@ -54,7 +55,10 @@ class _MyDrawerState extends State<DrawerWidget> {
               BookingTile(
                   icon: Icons.local_taxi,
                   label: 'Book Now',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => BookNowScreen()));
+                  },
                   tileColor: Colors.red[600]!),
               BookingTile(
                   icon: Icons.people_alt_rounded,
