@@ -21,6 +21,9 @@ class _BookNowScreenState extends State<BookAFriend> {
   final Completer<GoogleMapController> _controller = Completer();
   Set<Marker> markers = {};
 
+  final _nameController = TextEditingController();
+  final _contactNumberController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +37,8 @@ class _BookNowScreenState extends State<BookAFriend> {
             initialCameraPosition: BookAFriend._camPosition,
             onMapCreated: (GoogleMapController controller) {
               setState(() {
-                bookAFriendMarker(markers, context);
+                bookAFriendMarker(markers, context, _nameController,
+                    _contactNumberController);
               });
               _controller.complete(controller);
             },

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
+import 'package:taxi_user/widgets/textfields/contactnumber_field.dart';
+import 'package:taxi_user/widgets/textfields/normal_field.dart';
 
 import '../text/text_bold.dart';
 import '../text/text_regular.dart';
 
-bookAFriendMarker(Set<Marker> markers, BuildContext context) async {
+bookAFriendMarker(Set<Marker> markers, BuildContext context, _nameController,
+    _contactNumController) async {
   Marker mark1 = Marker(
       markerId: const MarkerId('mark1'),
       infoWindow: InfoWindow(
@@ -25,7 +28,7 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context) async {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        height: 550,
+                        height: 520,
                         width: double.infinity,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
@@ -84,7 +87,7 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context) async {
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Current Location',
+                                  text: "Friend's Current Location",
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
@@ -114,7 +117,7 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context) async {
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Destination Location',
+                                  text: "Friend's Destination Location",
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
@@ -153,72 +156,6 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context) async {
                                     fontSize: 18,
                                     color: Colors.black),
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Container(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 7, 10, 7),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              Icons.calendar_today,
-                                              color: Colors.white,
-                                            ),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            TextRegular(
-                                                text: 'Pick Date',
-                                                fontSize: 14,
-                                                color: Colors.white),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                      color: Colors.red[600],
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 7, 10, 7),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              Icons.timelapse_rounded,
-                                              color: Colors.white,
-                                            ),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            TextRegular(
-                                                text: 'Pick Time',
-                                                fontSize: 14,
-                                                color: Colors.white),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    width: 120,
-                                    decoration: BoxDecoration(
-                                      color: Colors.red[600],
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                  ),
-                                ],
-                              ),
                               const SizedBox(
                                 height: 30,
                               ),
@@ -227,9 +164,61 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context) async {
                                   padding: const EdgeInsets.only(
                                       left: 30, right: 30),
                                   child: ButtonWidget(
-                                    label: 'Book',
+                                    label: 'Continue',
                                     color: Colors.red[600]!,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              backgroundColor: Colors.grey[200],
+                                              title: TextBold(
+                                                  text:
+                                                      "Friend's personal Details",
+                                                  fontSize: 16,
+                                                  color: Colors.black),
+                                              content: SizedBox(
+                                                height: 180,
+                                                child: Column(
+                                                  children: [
+                                                    NormalTextField(
+                                                        controller:
+                                                            _nameController,
+                                                        label:
+                                                            'Name of Friend'),
+                                                    ContactNumberField(
+                                                        controller:
+                                                            _contactNumController,
+                                                        label:
+                                                            'Contact Number of Friend'),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                FlatButton(
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pop(true),
+                                                  child: TextRegular(
+                                                      text: 'Close',
+                                                      color: Colors.black,
+                                                      fontSize: 12),
+                                                ),
+                                                FlatButton(
+                                                  onPressed: () async {
+                                                    // Navigator.of(context).pushReplacement(
+                                                    //     MaterialPageRoute(
+                                                    //         builder: (context) => LoginPage()));
+                                                  },
+                                                  child: TextBold(
+                                                      text: 'Continue',
+                                                      color: Colors.black,
+                                                      fontSize: 14),
+                                                ),
+                                              ],
+                                            );
+                                          });
+                                    },
                                   ),
                                 ),
                               ),
