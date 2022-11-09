@@ -25,7 +25,7 @@ advanceBookingMarker(Set<Marker> markers, BuildContext context) async {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        height: 520,
+                        height: 550,
                         width: double.infinity,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
@@ -153,6 +153,72 @@ advanceBookingMarker(Set<Marker> markers, BuildContext context) async {
                                     fontSize: 18,
                                     color: Colors.black),
                               ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 7, 10, 7),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.calendar_today,
+                                              color: Colors.white,
+                                            ),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
+                                            TextRegular(
+                                                text: 'Pick Date',
+                                                fontSize: 14,
+                                                color: Colors.white),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    width: 120,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red[600],
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 7, 10, 7),
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              Icons.timelapse_rounded,
+                                              color: Colors.white,
+                                            ),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
+                                            TextRegular(
+                                                text: 'Pick Time',
+                                                fontSize: 14,
+                                                color: Colors.white),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    width: 120,
+                                    decoration: BoxDecoration(
+                                      color: Colors.red[600],
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               const SizedBox(
                                 height: 30,
                               ),
@@ -161,7 +227,7 @@ advanceBookingMarker(Set<Marker> markers, BuildContext context) async {
                                   padding: const EdgeInsets.only(
                                       left: 30, right: 30),
                                   child: ButtonWidget(
-                                    label: 'Book Now',
+                                    label: 'Book',
                                     color: Colors.red[600]!,
                                     onPressed: () {},
                                   ),
