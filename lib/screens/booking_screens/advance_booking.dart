@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
-import 'package:taxi_user/widgets/markers/book_now_marker.dart';
+import 'package:taxi_user/widgets/markers/advance_booking_marker.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
 
-class BookNowScreen extends StatefulWidget {
+class AdvanceBooking extends StatefulWidget {
   static const CameraPosition _camPosition = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
 
   @override
-  State<BookNowScreen> createState() => _BookNowScreenState();
+  State<AdvanceBooking> createState() => _BookNowScreenState();
 }
 
-class _BookNowScreenState extends State<BookNowScreen> {
+class _BookNowScreenState extends State<AdvanceBooking> {
   final Completer<GoogleMapController> _controller = Completer();
   Set<Marker> markers = {};
 
@@ -25,16 +25,16 @@ class _BookNowScreenState extends State<BookNowScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerWidget(),
-      appBar: NormalAppbar('Book Now', Colors.white),
+      appBar: NormalAppbar('Advance Booking', Colors.white),
       body: Stack(
         children: [
           GoogleMap(
             markers: Set<Marker>.from(markers),
             mapType: MapType.normal,
-            initialCameraPosition: BookNowScreen._camPosition,
+            initialCameraPosition: AdvanceBooking._camPosition,
             onMapCreated: (GoogleMapController controller) {
               setState(() {
-                bookNowMarker(markers, context);
+                advanceBookingMarker(markers, context);
               });
               _controller.complete(controller);
             },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:taxi_user/screens/booking_screens/advance_booking.dart';
 import 'package:taxi_user/screens/booking_screens/book_now.dart';
 import 'package:taxi_user/screens/home_screen.dart';
 import 'package:taxi_user/screens/pages/profile_screen.dart';
@@ -68,7 +69,10 @@ class _MyDrawerState extends State<DrawerWidget> {
               BookingTile(
                   icon: Icons.calendar_today_sharp,
                   label: 'Advance Booking',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => AdvanceBooking()));
+                  },
                   tileColor: Colors.red[600]!),
               NormalTile(
                   icon: Icons.home,
