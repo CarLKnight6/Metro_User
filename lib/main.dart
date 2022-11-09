@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taxi_user/screens/booking_screens/advance_booking.dart';
+import 'package:taxi_user/screens/booking_screens/book_a_friend.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AdvanceBooking(),
+      home: BookAFriend(),
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:taxi_user/screens/pages/profile_screen.dart';
 import 'package:taxi_user/widgets/containers/booking_tile.dart';
 import 'package:taxi_user/widgets/containers/normal_tile.dart';
 
+import '../../screens/booking_screens/book_a_friend.dart';
 import '../text/text_bold.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -64,7 +65,10 @@ class _MyDrawerState extends State<DrawerWidget> {
               BookingTile(
                   icon: Icons.people_alt_rounded,
                   label: 'Book a Friend',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => BookAFriend()));
+                  },
                   tileColor: Colors.red[600]!),
               BookingTile(
                   icon: Icons.calendar_today_sharp,
