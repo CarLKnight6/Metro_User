@@ -4,6 +4,7 @@ import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/textfields/contactnumber_field.dart';
 import 'package:taxi_user/widgets/textfields/normal_field.dart';
 
+import '../dialogs/booking_details_dialog.dart';
 import '../text/text_bold.dart';
 import '../text/text_regular.dart';
 
@@ -209,6 +210,35 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context, _nameController,
                                                     // Navigator.of(context).pushReplacement(
                                                     //     MaterialPageRoute(
                                                     //         builder: (context) => LoginPage()));
+                                                    Navigator.of(context)
+                                                        .pop(true);
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return BookingDetailsDialog(
+                                                              passengerName:
+                                                                  'Lance Olana',
+                                                              passengerContactNumber:
+                                                                  '09090104355',
+                                                              driverName:
+                                                                  'John Doe',
+                                                              driverRating: 4.5,
+                                                              plateNumber:
+                                                                  '123456',
+                                                              vehicleColor:
+                                                                  'White',
+                                                              vehicleModel:
+                                                                  'Honda Civic 123',
+                                                              pickupLocation:
+                                                                  'Your Current Location',
+                                                              destinationLocation:
+                                                                  'Cagayan De Oro City',
+                                                              fare: '200',
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              });
+                                                        });
                                                   },
                                                   child: TextBold(
                                                       text: 'Continue',
