@@ -7,6 +7,7 @@ import 'package:taxi_user/screens/home_screen.dart';
 import 'package:taxi_user/screens/pages/history_page.dart';
 import 'package:taxi_user/screens/pages/hotlines_page.dart';
 import 'package:taxi_user/screens/pages/profile_screen.dart';
+import 'package:taxi_user/screens/pages/termsofuse_page.dart';
 import 'package:taxi_user/widgets/containers/booking_tile.dart';
 import 'package:taxi_user/widgets/containers/normal_tile.dart';
 
@@ -124,7 +125,10 @@ class _MyDrawerState extends State<DrawerWidget> {
               NormalTile(
                   icon: Icons.library_books_rounded,
                   label: 'Terms of Use',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const TermsOfUsePage()));
+                  },
                   tileColor: Colors.transparent),
               NormalTile(
                   icon: Icons.flag,
