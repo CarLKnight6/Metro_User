@@ -6,6 +6,7 @@ import 'package:taxi_user/screens/booking_screens/book_now.dart';
 import 'package:taxi_user/screens/home_screen.dart';
 import 'package:taxi_user/screens/pages/history_page.dart';
 import 'package:taxi_user/screens/pages/hotlines_page.dart';
+import 'package:taxi_user/screens/pages/privacy_policy_page.dart';
 import 'package:taxi_user/screens/pages/profile_screen.dart';
 import 'package:taxi_user/screens/pages/termsofuse_page.dart';
 import 'package:taxi_user/widgets/containers/booking_tile.dart';
@@ -133,7 +134,10 @@ class _MyDrawerState extends State<DrawerWidget> {
               NormalTile(
                   icon: Icons.flag,
                   label: 'Privacy Policy',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const PrivacyPolicyPage()));
+                  },
                   tileColor: Colors.transparent),
               NormalTile(
                   icon: Icons.info_outline_rounded,
