@@ -5,6 +5,7 @@ import 'package:taxi_user/screens/booking_screens/advance_booking.dart';
 import 'package:taxi_user/screens/booking_screens/book_now.dart';
 import 'package:taxi_user/screens/home_screen.dart';
 import 'package:taxi_user/screens/pages/history_page.dart';
+import 'package:taxi_user/screens/pages/hotlines_page.dart';
 import 'package:taxi_user/screens/pages/profile_screen.dart';
 import 'package:taxi_user/widgets/containers/booking_tile.dart';
 import 'package:taxi_user/widgets/containers/normal_tile.dart';
@@ -39,7 +40,11 @@ class _MyDrawerState extends State<DrawerWidget> {
                 height: 120,
               ),
               const SizedBox(
-                height: 20,
+                height: 5,
+              ),
+              const Divider(),
+              const SizedBox(
+                height: 5,
               ),
               ListTile(
                 leading: const CircleAvatar(
@@ -106,7 +111,10 @@ class _MyDrawerState extends State<DrawerWidget> {
               NormalTile(
                   icon: Icons.phone,
                   label: 'Hotlines',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const HotlinesPage()));
+                  },
                   tileColor: Colors.transparent),
               NormalTile(
                   icon: Icons.engineering,

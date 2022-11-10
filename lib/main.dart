@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taxi_user/screens/booking_screens/book_a_friend.dart';
-import 'package:taxi_user/screens/pages/history_page.dart';
+import 'package:taxi_user/screens/pages/hotlines_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HistoryPage(),
+      home: const HotlinesPage(),
     );
   }
 }
