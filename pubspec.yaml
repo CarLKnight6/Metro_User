@@ -61,6 +61,7 @@ dependencies:
   flutter_facebook_auth:
   riverpod:
   flutter_riverpod:
+  flutter_slidable:
 
 dev_dependencies:
   flutter_test:

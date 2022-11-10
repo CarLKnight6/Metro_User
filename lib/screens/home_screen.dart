@@ -4,14 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
+import 'package:taxi_user/widgets/markers/my_location_marker.dart';
 
-class HomeScreen extends StatelessWidget {
-  final Completer<GoogleMapController> _controller = Completer();
-
+class HomeScreen extends StatefulWidget {
   static const CameraPosition _camPosition = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final Completer<GoogleMapController> _controller = Completer();
+
+  Set<Marker> markers = {};
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +30,11 @@ class HomeScreen extends StatelessWidget {
         children: [
           GoogleMap(
             mapType: MapType.normal,
-            initialCameraPosition: _camPosition,
+            initialCameraPosition: HomeScreen._camPosition,
             onMapCreated: (GoogleMapController controller) {
+              setState(() {
+                myLocationMarker(markers, context);
+              });
               _controller.complete(controller);
             },
           ),
