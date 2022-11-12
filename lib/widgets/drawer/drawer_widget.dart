@@ -7,6 +7,7 @@ import 'package:taxi_user/screens/home_screen.dart';
 import 'package:taxi_user/screens/pages/aboutus_page.dart';
 import 'package:taxi_user/screens/pages/history_page.dart';
 import 'package:taxi_user/screens/pages/hotlines_page.dart';
+import 'package:taxi_user/screens/pages/chat/message_page.dart';
 import 'package:taxi_user/screens/pages/operator_page.dart';
 import 'package:taxi_user/screens/pages/privacy_policy_page.dart';
 import 'package:taxi_user/screens/pages/profile_screen.dart';
@@ -95,6 +96,14 @@ class _MyDrawerState extends State<DrawerWidget> {
                   onTap: () {
                     Navigator.of(context).pushReplacement(
                         MaterialPageRoute(builder: (context) => HomeScreen()));
+                  },
+                  tileColor: Colors.transparent),
+              NormalTile(
+                  icon: Icons.message_outlined,
+                  label: 'Messages',
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const MessagePage()));
                   },
                   tileColor: Colors.transparent),
               NormalTile(
