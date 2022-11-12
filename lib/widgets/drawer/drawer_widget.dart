@@ -10,7 +10,7 @@ import 'package:taxi_user/screens/pages/hotlines_page.dart';
 import 'package:taxi_user/screens/pages/chat/message_page.dart';
 import 'package:taxi_user/screens/pages/operator_page.dart';
 import 'package:taxi_user/screens/pages/privacy_policy_page.dart';
-import 'package:taxi_user/screens/pages/profile_screen.dart';
+import 'package:taxi_user/screens/pages/profile/profile_screen.dart';
 import 'package:taxi_user/screens/pages/termsofuse_page.dart';
 import 'package:taxi_user/widgets/containers/booking_tile.dart';
 import 'package:taxi_user/widgets/containers/normal_tile.dart';
@@ -99,6 +99,14 @@ class _MyDrawerState extends State<DrawerWidget> {
                   },
                   tileColor: Colors.transparent),
               NormalTile(
+                  icon: Icons.person,
+                  label: 'Profile',
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const ProfileScreen()));
+                  },
+                  tileColor: Colors.transparent),
+              NormalTile(
                   icon: Icons.message_outlined,
                   label: 'Messages',
                   onTap: () {
@@ -112,14 +120,6 @@ class _MyDrawerState extends State<DrawerWidget> {
                   onTap: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const HistoryPage()));
-                  },
-                  tileColor: Colors.transparent),
-              NormalTile(
-                  icon: Icons.person,
-                  label: 'Profile',
-                  onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const ProfileScreen()));
                   },
                   tileColor: Colors.transparent),
               NormalTile(

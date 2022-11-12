@@ -4,7 +4,7 @@ import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
 
-import '../../widgets/drawer/drawer_widget.dart';
+import '../../../widgets/drawer/drawer_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
