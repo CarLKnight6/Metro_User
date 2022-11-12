@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taxi_user/screens/booking_screens/book_now2.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 
 import '../dialogs/booking_details_dialog.dart';
@@ -183,7 +184,11 @@ bookNowMarker(Set<Marker> markers, BuildContext context) async {
                                                     'Cagayan De Oro City',
                                                 fare: '200',
                                                 onPressed: () {
-                                                  Navigator.pop(context);
+                                                  Navigator.of(context)
+                                                      .pushReplacement(
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  BookNow2()));
                                                 });
                                           });
                                     },
