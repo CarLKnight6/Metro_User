@@ -6,6 +6,7 @@ import 'package:taxi_user/screens/booking_screens/book_now.dart';
 import 'package:taxi_user/screens/home_screen.dart';
 import 'package:taxi_user/screens/pages/history_page.dart';
 import 'package:taxi_user/screens/pages/hotlines_page.dart';
+import 'package:taxi_user/screens/pages/operator_page.dart';
 import 'package:taxi_user/screens/pages/privacy_policy_page.dart';
 import 'package:taxi_user/screens/pages/profile_screen.dart';
 import 'package:taxi_user/screens/pages/termsofuse_page.dart';
@@ -121,7 +122,10 @@ class _MyDrawerState extends State<DrawerWidget> {
               NormalTile(
                   icon: Icons.engineering,
                   label: 'Operator',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const OperatorPage()));
+                  },
                   tileColor: Colors.transparent),
               NormalTile(
                   icon: Icons.library_books_rounded,
