@@ -62,6 +62,7 @@ dependencies:
   riverpod:
   flutter_riverpod:
   flutter_slidable:
+  share_plus:
 
 dev_dependencies:
   flutter_test:
