@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:taxi_user/screens/booking_screens/advance_booking.dart';
 import 'package:taxi_user/screens/booking_screens/book_now.dart';
 import 'package:taxi_user/screens/home_screen.dart';
+import 'package:taxi_user/screens/pages/aboutus_page.dart';
 import 'package:taxi_user/screens/pages/history_page.dart';
 import 'package:taxi_user/screens/pages/hotlines_page.dart';
 import 'package:taxi_user/screens/pages/operator_page.dart';
@@ -146,7 +147,10 @@ class _MyDrawerState extends State<DrawerWidget> {
               NormalTile(
                   icon: Icons.info_outline_rounded,
                   label: 'Developer',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const AboutusPage()));
+                  },
                   tileColor: Colors.transparent),
               BookingTile(
                   icon: Icons.logout,

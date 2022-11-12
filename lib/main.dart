@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taxi_user/screens/pages/operator_page.dart';
+import 'package:taxi_user/screens/pages/aboutus_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OperatorPage(),
+      home: const AboutusPage(),
     );
   }
 }
