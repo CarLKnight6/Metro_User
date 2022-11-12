@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
+import 'package:taxi_user/screens/pages/profile/saved_locations.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
@@ -13,7 +13,21 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerWidget(),
-      appBar: NormalAppbar('Profile', Colors.grey[300]!),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.grey[300],
+        title: TextBold(text: 'Profile', fontSize: 18, color: Colors.black),
+        foregroundColor: Colors.black,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => SavedLocationsPage()));
+            },
+            icon: const Icon(Icons.my_location),
+          ),
+        ],
+      ),
       backgroundColor: Colors.grey[200],
       body: SingleChildScrollView(
         child: Column(

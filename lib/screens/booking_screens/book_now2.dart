@@ -38,6 +38,7 @@ class _HomeScreenState extends State<BookNow2> {
       body: Stack(
         children: [
           GoogleMap(
+            markers: markers,
             mapType: MapType.normal,
             initialCameraPosition: BookNow2._camPosition,
             onMapCreated: (GoogleMapController controller) {

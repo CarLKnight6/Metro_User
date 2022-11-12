@@ -25,10 +25,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerWidget(),
-      appBar: NormalAppbar('Home', Colors.white),
+      appBar: NormalAppbar('Home', Colors.grey[300]!),
       body: Stack(
         children: [
           GoogleMap(
+            markers: markers,
             mapType: MapType.normal,
             initialCameraPosition: HomeScreen._camPosition,
             onMapCreated: (GoogleMapController controller) {

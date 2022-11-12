@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_user/screens/booking_screens/book_now2.dart';
+import 'package:taxi_user/screens/pages/profile/profile_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BookNow2(),
+      home: const ProfileScreen(),
     );
   }
 }
