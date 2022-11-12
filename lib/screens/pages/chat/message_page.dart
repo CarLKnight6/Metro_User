@@ -21,8 +21,8 @@ class MessagePage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
               onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const ConvoPage()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => ConvoPage()));
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
