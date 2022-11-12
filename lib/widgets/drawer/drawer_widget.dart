@@ -16,6 +16,7 @@ import 'package:taxi_user/widgets/containers/normal_tile.dart';
 
 import '../../screens/booking_screens/book_a_friend.dart';
 import '../text/text_bold.dart';
+import '../text/text_regular.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({Key? key}) : super(key: key);
@@ -155,7 +156,42 @@ class _MyDrawerState extends State<DrawerWidget> {
               BookingTile(
                   icon: Icons.logout,
                   label: 'Logout',
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              title: TextBold(
+                                  text: 'Logout Confirmation',
+                                  color: Colors.black,
+                                  fontSize: 14),
+                              content: TextRegular(
+                                  text: 'Are you sure you want to logout?',
+                                  color: Colors.black,
+                                  fontSize: 16),
+                              actions: <Widget>[
+                                FlatButton(
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(true),
+                                  child: TextBold(
+                                      text: 'Close',
+                                      color: Colors.black,
+                                      fontSize: 14),
+                                ),
+                                FlatButton(
+                                  onPressed: () async {
+                                    // await FirebaseAuth.instance.signOut();
+                                    // Navigator.of(context).pushReplacement(
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => LoginPage()));
+                                  },
+                                  child: TextBold(
+                                      text: 'Continue',
+                                      color: Colors.black,
+                                      fontSize: 14),
+                                ),
+                              ],
+                            ));
+                  },
                   tileColor: Colors.red[600]!),
               const SizedBox(
                 height: 20,
