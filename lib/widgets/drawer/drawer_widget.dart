@@ -15,7 +15,6 @@ import 'package:taxi_user/screens/pages/operator_page.dart';
 import 'package:taxi_user/screens/pages/privacy_policy_page.dart';
 import 'package:taxi_user/screens/pages/profile/profile_screen.dart';
 import 'package:taxi_user/screens/pages/termsofuse_page.dart';
-import 'package:taxi_user/services/stream_data.dart';
 import 'package:taxi_user/widgets/containers/booking_tile.dart';
 import 'package:taxi_user/widgets/containers/normal_tile.dart';
 
@@ -35,6 +34,11 @@ class _MyDrawerState extends State<DrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final Stream<DocumentSnapshot> userData = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots();
+
     return StreamBuilder<DocumentSnapshot>(
         stream: userData,
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {

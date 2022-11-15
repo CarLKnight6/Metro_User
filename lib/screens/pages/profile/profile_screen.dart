@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:taxi_user/screens/pages/profile/saved_locations.dart';
-import 'package:taxi_user/services/stream_data.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
@@ -15,6 +14,10 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Stream<DocumentSnapshot> userData1 = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .snapshots();
     return Scaffold(
       drawer: const DrawerWidget(),
       appBar: AppBar(
@@ -35,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: Colors.grey[200],
       body: SingleChildScrollView(
         child: StreamBuilder<DocumentSnapshot>(
-            stream: userData,
+            stream: userData1,
             builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return const Center(child: Text('Loading'));
