@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:taxi_user/screens/home_screen.dart';
 
 import 'auth/login.dart';
 import 'firebase_options.dart';
@@ -19,8 +21,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Metro',
-      home: LoginPage(),
+      debugShowCheckedModeBanner: false,
+      home: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return HomeScreen();
+            } else {
+              return LoginPage();
+            }
+          }),
     );
   }
 }

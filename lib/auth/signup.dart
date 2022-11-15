@@ -13,6 +13,8 @@ import 'package:taxi_user/widgets/textfields/password_field.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
 
+import '../widgets/dialogs/error_dialog.dart';
+
 class SignupPage extends StatefulWidget {
   @override
   State<SignupPage> createState() => _SignupPageState();
@@ -153,10 +155,6 @@ class _SignupPageState extends State<SignupPage> {
                             minRadius: 60,
                             maxRadius: 60,
                             backgroundColor: Colors.blue[200],
-                            child: const Align(
-                              alignment: Alignment.bottomRight,
-                              child: Icon(Icons.camera_alt_rounded),
-                            ),
                             backgroundImage: NetworkImage(imageURL),
                           )
                         : GestureDetector(
@@ -559,18 +557,33 @@ class _SignupPageState extends State<SignupPage> {
                   label: 'Continue',
                   color: Colors.amber,
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => Signup2(
-                              profilePicture: imageURL,
-                              firstName: _firstnameController.text,
-                              lastName: _lastnameController.text,
-                              contactNumber: _contactnumberController.text,
-                              email: _usernameController.text,
-                              password: _passwordController.text,
-                              province: province,
-                              city: city,
-                              brgy: brgy,
-                            )));
+                    if (_passwordController.text !=
+                        _confirmpasswordController.text) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return ErrorDialog(label: 'Password do not match!');
+                          });
+                    } else if (_passwordController.text.length <= 6) {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return ErrorDialog(label: 'Password too short!');
+                          });
+                    } else {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Signup2(
+                                profilePicture: imageURL,
+                                firstName: _firstnameController.text,
+                                lastName: _lastnameController.text,
+                                contactNumber: _contactnumberController.text,
+                                email: _usernameController.text,
+                                password: _passwordController.text,
+                                province: province,
+                                city: city,
+                                brgy: brgy,
+                              )));
+                    }
                   }),
               const SizedBox(
                 height: 50,

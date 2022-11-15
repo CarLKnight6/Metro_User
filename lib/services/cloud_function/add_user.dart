@@ -17,7 +17,8 @@ Future addUser(
   String contactNumber2,
   String contactAddress2,
 ) async {
-  final docUser = FirebaseFirestore.instance.collection('Users').doc();
+  final user = FirebaseAuth.instance.currentUser!.uid;
+  final docUser = FirebaseFirestore.instance.collection('Users').doc(user);
 
   final json = {
     'profilePicture': profilePicture,
@@ -34,7 +35,7 @@ Future addUser(
     'contactName2': contactName2,
     'contactNumber2': contactNumber2,
     'contactAddress2': contactAddress2,
-    'id': FirebaseAuth.instance.currentUser!.uid,
+    'id': user,
   };
 
   await docUser.set(json);
