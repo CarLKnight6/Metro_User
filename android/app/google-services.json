@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "694409382296",
+    "project_id": "metro-806d3",
+    "storage_bucket": "metro-806d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694409382296:android:b48a452b213fc490ef43ed",
+        "android_client_info": {
+          "package_name": "com.example.taxi_user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "694409382296-q6eq4v8okdo5mregb0p4m953e1qaufgt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.taxi_user",
+            "certificate_hash": "5068bed63eda77bfc59d683b901b589c4386b6ac"
+          }
+        },
+        {
+          "client_id": "694409382296-fol9ij7o3deumb4sem4se4elqpuqbocj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGvmaaZPi6iTlVItrlxLc4uefvnfwSNPc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "694409382296-fol9ij7o3deumb4sem4se4elqpuqbocj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
