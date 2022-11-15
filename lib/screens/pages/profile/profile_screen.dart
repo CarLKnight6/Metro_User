@@ -51,10 +51,11 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  const CircleAvatar(
+                  CircleAvatar(
                     minRadius: 50,
                     maxRadius: 50,
                     backgroundColor: Colors.black,
+                    backgroundImage: NetworkImage(data['profilePicture']),
                   ),
                   const SizedBox(
                     height: 10,
