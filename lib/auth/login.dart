@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_user/auth/signup.dart';
-import 'package:taxi_user/screens/home_screen.dart';
-import 'package:taxi_user/widgets/buttons/auth_buton.dart';
+import 'package:taxi_user/services/authentication/email_login.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
@@ -42,7 +41,7 @@ class LoginPage extends StatelessWidget {
                   height: 50,
                 ),
                 NormalTextField(
-                    controller: _usernameController, label: 'Username'),
+                    controller: _usernameController, label: 'Email'),
                 PasswordField(
                     controller: _passwordController, label: 'Password'),
                 const SizedBox(
@@ -52,8 +51,8 @@ class LoginPage extends StatelessWidget {
                     label: 'Login',
                     color: Colors.amber,
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeScreen()));
+                      emailLogin(_usernameController.text,
+                          _passwordController.text, context);
                     }),
                 Padding(
                   padding: const EdgeInsets.only(right: 40),
@@ -67,27 +66,6 @@ class LoginPage extends StatelessWidget {
                           color: Colors.black),
                     ),
                   ),
-                ),
-                TextRegular(text: 'or', fontSize: 12, color: Colors.black),
-                const SizedBox(
-                  height: 10,
-                ),
-                AuthButton(
-                  label: 'Login with Google',
-                  color: Colors.white,
-                  onPressed: () {},
-                  textColor: Colors.black,
-                  logo: 'googlelogo',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                AuthButton(
-                  label: 'Login with Facebook',
-                  color: Colors.blue[700]!,
-                  onPressed: () {},
-                  textColor: Colors.white,
-                  logo: 'fblogo',
                 ),
                 const SizedBox(
                   height: 10,

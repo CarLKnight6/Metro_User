@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_user/auth/login.dart';
+import 'package:taxi_user/services/cloud_function/add_user.dart';
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/dialogs/normal_dialog.dart';
@@ -15,6 +16,28 @@ class Signup2 extends StatelessWidget {
   final _person2fullnameController = TextEditingController();
   final _person2addressController = TextEditingController();
   final _person2contactnumberController = TextEditingController();
+
+  late String profilePicture;
+  late String firstName;
+  late String lastName;
+  late String contactNumber;
+  late String email;
+  late String province;
+  late String city;
+  late String brgy;
+
+  late String password;
+
+  Signup2(
+      {required this.profilePicture,
+      required this.firstName,
+      required this.lastName,
+      required this.contactNumber,
+      required this.email,
+      required this.province,
+      required this.city,
+      required this.brgy,
+      required this.password});
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +81,21 @@ class Signup2 extends StatelessWidget {
                   label: 'Continue',
                   color: Colors.amber,
                   onPressed: () {
+                    addUser(
+                        profilePicture,
+                        firstName,
+                        lastName,
+                        contactNumber,
+                        email,
+                        province,
+                        city,
+                        brgy,
+                        _person1addressController.text,
+                        _person1contactnumberController.text,
+                        _person1addressController.text,
+                        _person2fullnameController.text,
+                        _person2contactnumberController.text,
+                        _person2addressController.text);
                     showDialog(
                         barrierDismissible: false,
                         context: context,

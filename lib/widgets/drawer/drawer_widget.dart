@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:taxi_user/auth/login.dart';
 import 'package:taxi_user/screens/booking_screens/advance_booking.dart';
 import 'package:taxi_user/screens/booking_screens/book_now.dart';
 import 'package:taxi_user/screens/home_screen.dart';
@@ -188,10 +190,10 @@ class _MyDrawerState extends State<DrawerWidget> {
                                 ),
                                 FlatButton(
                                   onPressed: () async {
-                                    // await FirebaseAuth.instance.signOut();
-                                    // Navigator.of(context).pushReplacement(
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => LoginPage()));
+                                    await FirebaseAuth.instance.signOut();
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
                                   },
                                   child: TextBold(
                                       text: 'Continue',

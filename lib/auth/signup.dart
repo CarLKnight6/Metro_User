@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:taxi_user/auth/signup2.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
@@ -6,6 +10,8 @@ import 'package:taxi_user/widgets/text/text_regular.dart';
 import 'package:taxi_user/widgets/textfields/contactnumber_field.dart';
 import 'package:taxi_user/widgets/textfields/normal_field.dart';
 import 'package:taxi_user/widgets/textfields/password_field.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
 
 class SignupPage extends StatefulWidget {
   @override
@@ -34,6 +40,81 @@ class _SignupPageState extends State<SignupPage> {
   var dropDownValue3 = 1;
 
   var brgy = 'Sample 1';
+
+  var hasLoaded = false;
+
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
+
+  late String fileName = '';
+
+  late File imageFile;
+
+  late String imageURL = '';
+
+  Future<void> uploadPicture(String inputSource) async {
+    final picker = ImagePicker();
+    XFile pickedImage;
+    try {
+      pickedImage = (await picker.pickImage(
+          source: inputSource == 'camera'
+              ? ImageSource.camera
+              : ImageSource.gallery,
+          maxWidth: 1920))!;
+
+      fileName = path.basename(pickedImage.path);
+      imageFile = File(pickedImage.path);
+
+      try {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: AlertDialog(
+                title: Row(
+              children: const [
+                CircularProgressIndicator(
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  'Loading . . .',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'QRegular'),
+                ),
+              ],
+            )),
+          ),
+        );
+
+        await firebase_storage.FirebaseStorage.instance
+            .ref('Users/$fileName')
+            .putFile(imageFile);
+        imageURL = await firebase_storage.FirebaseStorage.instance
+            .ref('Users/$fileName')
+            .getDownloadURL();
+
+        setState(() {
+          hasLoaded = true;
+        });
+
+        Navigator.of(context).pop();
+      } on firebase_storage.FirebaseException catch (error) {
+        if (kDebugMode) {
+          print(error);
+        }
+      }
+    } catch (err) {
+      if (kDebugMode) {
+        print(err);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,50 +148,65 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (context) {
-                              return SizedBox(
-                                height: 140,
-                                child: Column(
-                                  children: [
-                                    ListTile(
-                                      onTap: () {},
-                                      leading: TextRegular(
-                                        text: 'Open Camera',
-                                        fontSize: 14,
-                                        color: Colors.black,
+                    hasLoaded
+                        ? CircleAvatar(
+                            minRadius: 60,
+                            maxRadius: 60,
+                            backgroundColor: Colors.blue[200],
+                            child: const Align(
+                              alignment: Alignment.bottomRight,
+                              child: Icon(Icons.camera_alt_rounded),
+                            ),
+                            backgroundImage: NetworkImage(imageURL),
+                          )
+                        : GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return SizedBox(
+                                      height: 140,
+                                      child: Column(
+                                        children: [
+                                          ListTile(
+                                            onTap: () {
+                                              uploadPicture('camera');
+                                            },
+                                            leading: TextRegular(
+                                              text: 'Open Camera',
+                                              fontSize: 14,
+                                              color: Colors.black,
+                                            ),
+                                            trailing: const Icon(
+                                                Icons.camera_alt_rounded),
+                                          ),
+                                          const Divider(),
+                                          ListTile(
+                                            onTap: () {
+                                              uploadPicture('gallery');
+                                            },
+                                            leading: TextRegular(
+                                              text: 'Upload Image',
+                                              fontSize: 14,
+                                              color: Colors.black,
+                                            ),
+                                            trailing: const Icon(Icons.image),
+                                          ),
+                                        ],
                                       ),
-                                      trailing:
-                                          const Icon(Icons.camera_alt_rounded),
-                                    ),
-                                    const Divider(),
-                                    ListTile(
-                                      onTap: () {},
-                                      leading: TextRegular(
-                                        text: 'Upload Image',
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                      ),
-                                      trailing: const Icon(Icons.image),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            });
-                      },
-                      child: CircleAvatar(
-                        minRadius: 60,
-                        maxRadius: 60,
-                        backgroundColor: Colors.blue[200],
-                        child: const Align(
-                          alignment: Alignment.bottomRight,
-                          child: Icon(Icons.camera_alt_rounded),
-                        ),
-                      ),
-                    ),
+                                    );
+                                  });
+                            },
+                            child: CircleAvatar(
+                              minRadius: 60,
+                              maxRadius: 60,
+                              backgroundColor: Colors.blue[200],
+                              child: const Align(
+                                alignment: Alignment.bottomRight,
+                                child: Icon(Icons.camera_alt_rounded),
+                              ),
+                            ),
+                          ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -129,8 +225,7 @@ class _SignupPageState extends State<SignupPage> {
                   label: 'Contact number'),
               TextRegular(
                   text: 'Login Credentials', fontSize: 12, color: Colors.black),
-              NormalTextField(
-                  controller: _usernameController, label: 'Username'),
+              NormalTextField(controller: _usernameController, label: 'Email'),
               PasswordField(controller: _passwordController, label: 'Password'),
               PasswordField(
                   controller: _confirmpasswordController,
@@ -464,8 +559,18 @@ class _SignupPageState extends State<SignupPage> {
                   label: 'Continue',
                   color: Colors.amber,
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => Signup2()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Signup2(
+                              profilePicture: imageURL,
+                              firstName: _firstnameController.text,
+                              lastName: _lastnameController.text,
+                              contactNumber: _contactnumberController.text,
+                              email: _usernameController.text,
+                              password: _passwordController.text,
+                              province: province,
+                              city: city,
+                              brgy: brgy,
+                            )));
                   }),
               const SizedBox(
                 height: 50,

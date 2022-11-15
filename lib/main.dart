@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:taxi_user/screens/home_screen.dart';
 
+import 'auth/login.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Metro',
-      home: HomeScreen(),
+      home: LoginPage(),
     );
   }
 }
