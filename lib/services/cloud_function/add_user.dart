@@ -36,6 +36,7 @@ Future addUser(
     'contactNumber2': contactNumber2,
     'contactAddress2': contactAddress2,
     'id': user,
+    'locations': [],
   };
 
   await docUser.set(json);

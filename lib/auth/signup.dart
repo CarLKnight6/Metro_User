@@ -168,6 +168,7 @@ class _SignupPageState extends State<SignupPage> {
                                         children: [
                                           ListTile(
                                             onTap: () {
+                                              Navigator.of(context).pop();
                                               uploadPicture('camera');
                                             },
                                             leading: TextRegular(
@@ -181,6 +182,7 @@ class _SignupPageState extends State<SignupPage> {
                                           const Divider(),
                                           ListTile(
                                             onTap: () {
+                                              Navigator.of(context).pop();
                                               uploadPicture('gallery');
                                             },
                                             leading: TextRegular(
