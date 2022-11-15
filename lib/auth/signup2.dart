@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:taxi_user/auth/login.dart';
 import 'package:taxi_user/services/cloud_function/add_user.dart';
@@ -80,38 +81,74 @@ class Signup2 extends StatelessWidget {
               ButtonWidget(
                   label: 'Continue',
                   color: Colors.amber,
-                  onPressed: () {
-                    addUser(
-                        profilePicture,
-                        firstName,
-                        lastName,
-                        contactNumber,
-                        email,
-                        province,
-                        city,
-                        brgy,
-                        _person1addressController.text,
-                        _person1contactnumberController.text,
-                        _person1addressController.text,
-                        _person2fullnameController.text,
-                        _person2contactnumberController.text,
-                        _person2addressController.text);
-                    showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) {
-                          return NormalDialog(
-                              label: 'Account created succesfully!',
-                              buttonColor: Colors.amber,
-                              buttonText: 'Continue',
-                              icon: Icons.check_circle_rounded,
-                              onPressed: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
-                              },
-                              iconColor: Colors.amber);
-                        });
+                  onPressed: () async {
+                    try {
+                      await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: email, password: password);
+                      addUser(
+                          profilePicture,
+                          firstName,
+                          lastName,
+                          contactNumber,
+                          email,
+                          province,
+                          city,
+                          brgy,
+                          _person1addressController.text,
+                          _person1contactnumberController.text,
+                          _person1addressController.text,
+                          _person2fullnameController.text,
+                          _person2contactnumberController.text,
+                          _person2addressController.text);
+
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) {
+                            return NormalDialog(
+                                label: 'Account created succesfully!',
+                                buttonColor: Colors.amber,
+                                buttonText: 'Continue',
+                                icon: Icons.check_circle_rounded,
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()));
+                                },
+                                iconColor: Colors.amber);
+                          });
+                    } catch (e) {
+                      showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                title: const Text(
+                                  'Error',
+                                  style: TextStyle(
+                                      fontFamily: 'QBold',
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                content: Text(
+                                  e.toString(),
+                                  style:
+                                      const TextStyle(fontFamily: 'QRegular'),
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text(
+                                      'Close',
+                                      style: TextStyle(
+                                          fontFamily: 'QRegular',
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ));
+                    }
                   }),
               const SizedBox(
                 height: 50,
