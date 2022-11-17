@@ -25,11 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     determinePosition();
-
     getLocation();
   }
 
-  late String currentAddress = '';
+  late String currentAddress;
   late double lat;
   late double long;
   var hasLoaded = false;
