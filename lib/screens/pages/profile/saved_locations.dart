@@ -30,7 +30,8 @@ class _HomeScreenState extends State<SavedLocationsPage> {
         initialCameraPosition: SavedLocationsPage._camPosition,
         onMapCreated: (GoogleMapController controller) {
           setState(() {
-            myLocationMarker(markers, context);
+            myLocationMarker(
+                markers, context, 37.42796133580664, -122.085749655962);
           });
           _controller.complete(controller);
         },

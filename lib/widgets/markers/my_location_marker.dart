@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-myLocationMarker(Set<Marker> markers, BuildContext context) async {
-  Marker mark1 = const Marker(
-      markerId: MarkerId('mark1'),
-      infoWindow: InfoWindow(
+myLocationMarker(
+    Set<Marker> markers, BuildContext context, double lat, double lang) async {
+  Marker mark1 = Marker(
+      markerId: const MarkerId('mark1'),
+      infoWindow: const InfoWindow(
         title: 'Your Current Location',
       ),
       icon: BitmapDescriptor.defaultMarker,
-      position: LatLng(37.42796133580664, -122.085749655962));
+      position: LatLng(lat, lang));
 
   markers.add(mark1);
 }
