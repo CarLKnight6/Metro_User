@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future bookNow(
+Future bookAFriend(
   String profilePicture,
   String driverName,
   String driverContactNumber,
@@ -21,7 +21,10 @@ Future bookNow(
   double userDestinationLat,
   double userDestinationLang,
   String userDestination,
+  String userPickupLocation,
   double payment,
+  String friendName,
+  String friendContactNumber,
 ) async {
   final docUser = FirebaseFirestore.instance.collection('Bookings').doc();
 
@@ -48,10 +51,12 @@ Future bookNow(
     'userId': userId,
     'driverId': driverId,
     'id': docUser.id,
-    'type': 'Book Now',
+    'type': 'Book a Friend',
     'bookingStatus': 'Pending',
+    'friendName': friendName,
+    'friendContactNumber': friendContactNumber,
     'dateTime': DateTime.now(),
-    'userPickupLocation': "User's current location",
+    'userPickupLocation': userPickupLocation,
   };
 
   await docUser.set(json);

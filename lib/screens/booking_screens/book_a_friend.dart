@@ -65,6 +65,7 @@ class _BookNowScreenState extends State<BookAFriend> {
   late String vehicleModel;
   late double driverLat;
   late double driverLang;
+  late String driverId;
 
   getData() async {
     // Use provider
@@ -88,6 +89,7 @@ class _BookNowScreenState extends State<BookAFriend> {
             vehicleModel = data['vehicle_model'];
             driverLat = data['lat'];
             driverLang = data['lang'];
+            driverId = data['id'];
 
             // Get driver ID and put it in riverpod
           });
@@ -126,6 +128,18 @@ class _BookNowScreenState extends State<BookAFriend> {
                   vehicleModel,
                   driverLat,
                   driverLang,
+                  driverId,
+                  'userName',
+                  'userContactNumber',
+                  'userProfilePicture',
+                  'userId',
+                  lat,
+                  long,
+                  0,
+                  0,
+                  'userDestination',
+                  'pickupLocation',
+                  0,
                   _nameController,
                   _contactNumberController,
                 );

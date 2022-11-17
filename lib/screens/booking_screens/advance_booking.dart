@@ -63,6 +63,7 @@ class _BookNowScreenState extends State<AdvanceBooking> {
   late String vehicleModel;
   late double driverLat;
   late double driverLang;
+  late String driverId;
 
   getData() async {
     // Use provider
@@ -86,6 +87,7 @@ class _BookNowScreenState extends State<AdvanceBooking> {
             vehicleModel = data['vehicle_model'];
             driverLat = data['lat'];
             driverLang = data['lang'];
+            driverId = data['id'];
           });
         }
       });
@@ -121,7 +123,21 @@ class _BookNowScreenState extends State<AdvanceBooking> {
                     vehicleColor,
                     vehicleModel,
                     driverLat,
-                    driverLang);
+                    driverLang,
+                    driverId,
+                    'userName',
+                    'userContactNumber',
+                    'userProfilePicture',
+                    'userId',
+                    lat,
+                    long,
+                    0,
+                    0,
+                    'userDestination',
+                    'pickupLocation',
+                    0,
+                    'Date',
+                    'Time');
                 myLocationMarker(markers, context, lat, long);
               });
               _controller.complete(controller);

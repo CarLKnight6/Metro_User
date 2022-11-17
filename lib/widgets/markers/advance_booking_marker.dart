@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:taxi_user/screens/booking_screens/book_now2.dart';
+import 'package:taxi_user/screens/booking_screens/advance_booking.dart';
+import 'package:taxi_user/services/cloud_function/advance_booking.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 
 import '../dialogs/booking_details_dialog.dart';
@@ -20,6 +21,20 @@ advanceBookingMarker(
   String vehicleModel,
   double driverLat,
   double driverLang,
+  String driverId,
+  String userName,
+  String userContactNumber,
+  String userProfilePicture,
+  String userId,
+  double userLat,
+  double userLang,
+  double userDestinationLat,
+  double userDestinationLang,
+  String userDestination,
+  String pickupLocation,
+  double payment,
+  String date,
+  String time,
 ) async {
   Marker mark1 = Marker(
       markerId: MarkerId(driverContactNumber),
@@ -263,11 +278,36 @@ advanceBookingMarker(
                                                     'Cagayan De Oro City',
                                                 fare: '200',
                                                 onPressed: () {
+                                                  advanceBooking(
+                                                      profilePicture,
+                                                      driverName,
+                                                      driverContactNumber,
+                                                      ratings,
+                                                      reviews,
+                                                      plateNumber,
+                                                      vehicleColor,
+                                                      vehicleModel,
+                                                      driverLat,
+                                                      driverLang,
+                                                      driverId,
+                                                      userName,
+                                                      userContactNumber,
+                                                      userProfilePicture,
+                                                      userId,
+                                                      userLat,
+                                                      userLang,
+                                                      userDestinationLat,
+                                                      userDestinationLang,
+                                                      userDestination,
+                                                      pickupLocation,
+                                                      payment,
+                                                      date,
+                                                      time);
                                                   Navigator.of(context)
                                                       .pushReplacement(
                                                           MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  BookNow2()));
+                                                                  AdvanceBooking()));
                                                 });
                                           });
                                     },

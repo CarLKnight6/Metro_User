@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taxi_user/screens/booking_screens/book_a_friend.dart';
+import 'package:taxi_user/services/cloud_function/book_a_friend.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 
 import '../dialogs/booking_details_dialog.dart';
@@ -21,8 +23,20 @@ bookAFriendMarker(
   String vehicleModel,
   double driverLat,
   double driverLang,
-  _nameController,
-  _contactNumberController,
+  String driverId,
+  String userName,
+  String userContactNumber,
+  String userProfilePicture,
+  String userId,
+  double userLat,
+  double userLang,
+  double userDestinationLat,
+  double userDestinationLang,
+  String userDestination,
+  String pickupLocation,
+  double payment,
+  TextEditingController _nameController,
+  TextEditingController _contactNumberController,
 ) async {
   Marker mark1 = Marker(
       markerId: MarkerId(driverContactNumber),
@@ -231,9 +245,11 @@ bookAFriendMarker(
                                                         builder: (context) {
                                                           return BookingDetailsDialog(
                                                               passengerName:
-                                                                  'Lance Olana',
+                                                                  _nameController
+                                                                      .text,
                                                               passengerContactNumber:
-                                                                  '09090104355',
+                                                                  _contactNumberController
+                                                                      .text,
                                                               driverName:
                                                                   'John Doe',
                                                               driverRating: 4.5,
@@ -249,8 +265,40 @@ bookAFriendMarker(
                                                                   'Cagayan De Oro City',
                                                               fare: '200',
                                                               onPressed: () {
-                                                                Navigator.pop(
-                                                                    context);
+                                                                bookAFriend(
+                                                                  profilePicture,
+                                                                  driverName,
+                                                                  driverContactNumber,
+                                                                  ratings,
+                                                                  reviews,
+                                                                  plateNumber,
+                                                                  vehicleColor,
+                                                                  vehicleModel,
+                                                                  driverLat,
+                                                                  driverLang,
+                                                                  driverId,
+                                                                  userName,
+                                                                  userContactNumber,
+                                                                  userProfilePicture,
+                                                                  userId,
+                                                                  userLat,
+                                                                  userLang,
+                                                                  userDestinationLat,
+                                                                  userDestinationLang,
+                                                                  userDestination,
+                                                                  pickupLocation,
+                                                                  payment,
+                                                                  _nameController
+                                                                      .text,
+                                                                  _contactNumberController
+                                                                      .text,
+                                                                );
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pushReplacement(MaterialPageRoute(
+                                                                        builder:
+                                                                            (context) =>
+                                                                                BookAFriend()));
                                                               });
                                                         });
                                                   },

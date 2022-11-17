@@ -63,6 +63,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
   late String vehicleModel;
   late double driverLat;
   late double driverLang;
+  late String driverId;
 
   getData() async {
     // Use provider
@@ -86,6 +87,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
             vehicleModel = data['vehicle_model'];
             driverLat = data['lat'];
             driverLang = data['lang'];
+            driverId = data['id'];
           });
         }
       });
@@ -110,18 +112,30 @@ class _BookNowScreenState extends State<BookNowScreen> {
             onMapCreated: (GoogleMapController controller) {
               setState(() {
                 bookNowMarker(
-                    markers,
-                    context,
-                    profilePicture,
-                    driverName,
-                    driverContactNumber,
-                    ratings,
-                    reviews,
-                    plateNumber,
-                    vehicleColor,
-                    vehicleModel,
-                    driverLat,
-                    driverLang);
+                  markers,
+                  context,
+                  profilePicture,
+                  driverName,
+                  driverContactNumber,
+                  ratings,
+                  reviews,
+                  plateNumber,
+                  vehicleColor,
+                  vehicleModel,
+                  driverLat,
+                  driverLang,
+                  driverId,
+                  'userName',
+                  'userContactNumber',
+                  'userProfilePicture',
+                  'userId',
+                  lat,
+                  long,
+                  0,
+                  0,
+                  'userDestination',
+                  0,
+                );
                 myLocationMarker(markers, context, lat, long);
               });
               _controller.complete(controller);
