@@ -88,6 +88,8 @@ class _BookNowScreenState extends State<BookAFriend> {
             vehicleModel = data['vehicle_model'];
             driverLat = data['lat'];
             driverLang = data['lang'];
+
+            // Get driver ID and put it in riverpod
           });
         }
       });

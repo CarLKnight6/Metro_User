@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taxi_user/screens/booking_screens/book_now2.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 
 import '../dialogs/booking_details_dialog.dart';
 import '../text/text_bold.dart';
 import '../text/text_regular.dart';
 
-advanceBookingMarker(Set<Marker> markers, BuildContext context) async {
+advanceBookingMarker(
+  Set<Marker> markers,
+  BuildContext context,
+  String profilePicture,
+  String driverName,
+  String driverContactNumber,
+  double ratings,
+  int reviews,
+  String plateNumber,
+  String vehicleColor,
+  String vehicleModel,
+  double driverLat,
+  double driverLang,
+) async {
   Marker mark1 = Marker(
-      markerId: const MarkerId('mark1'),
+      markerId: MarkerId(driverContactNumber),
       infoWindow: InfoWindow(
         onTap: () {
           showModalBottomSheet(
@@ -42,35 +56,35 @@ advanceBookingMarker(Set<Marker> markers, BuildContext context) async {
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Name: Lance Olana',
+                                  text: 'Name: $driverName',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Rating: 4.5 ★',
+                                  text: 'Rating: $ratings ★',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Plate Number: 12345',
+                                  text: 'Plate Number: $plateNumber',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Color of Vehicle: White',
+                                  text: 'Color of Vehicle: $vehicleColor',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Model: Honda Civic 192',
+                                  text: 'Model: $vehicleModel',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
@@ -235,21 +249,25 @@ advanceBookingMarker(Set<Marker> markers, BuildContext context) async {
                                           context: context,
                                           builder: (context) {
                                             return BookingDetailsDialog(
-                                                passengerName: 'Lance Olana',
+                                                passengerName: 'John Doe',
                                                 passengerContactNumber:
-                                                    '09090104355',
-                                                driverName: 'John Doe',
-                                                driverRating: 4.5,
-                                                plateNumber: '123456',
-                                                vehicleColor: 'White',
-                                                vehicleModel: 'Honda Civic 123',
+                                                    '000000000',
+                                                driverName: driverName,
+                                                driverRating: ratings,
+                                                plateNumber: plateNumber,
+                                                vehicleColor: vehicleColor,
+                                                vehicleModel: vehicleModel,
                                                 pickupLocation:
                                                     'Your Current Location',
                                                 destinationLocation:
                                                     'Cagayan De Oro City',
                                                 fare: '200',
                                                 onPressed: () {
-                                                  Navigator.pop(context);
+                                                  Navigator.of(context)
+                                                      .pushReplacement(
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  BookNow2()));
                                                 });
                                           });
                                     },
@@ -265,11 +283,11 @@ advanceBookingMarker(Set<Marker> markers, BuildContext context) async {
                 );
               });
         },
-        snippet: '09090104355',
-        title: 'Lance Olana',
+        snippet: driverContactNumber,
+        title: driverName,
       ),
       icon: BitmapDescriptor.defaultMarker,
-      position: const LatLng(37.42796133580664, -122.085749655962));
+      position: LatLng(driverLat, driverLang));
 
   markers.add(mark1);
 }
