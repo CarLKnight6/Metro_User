@@ -131,11 +131,11 @@ class _BookNowScreenState extends State<AdvanceBooking> {
                     'userId',
                     lat,
                     long,
-                    0,
-                    0,
+                    0, // destination lat
+                    0, // destination lang
                     'userDestination',
                     'pickupLocation',
-                    0,
+                    0, // payment
                     'Date',
                     'Time');
                 myLocationMarker(markers, context, lat, long);
