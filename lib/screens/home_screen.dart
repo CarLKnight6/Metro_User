@@ -72,7 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       myLocationMarker(markers, context, lat, long);
                     });
                     _controller.complete(controller);
-                    print(currentAddress);
                   },
                 ),
                 SafeArea(
