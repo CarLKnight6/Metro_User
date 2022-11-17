@@ -1,18 +1,19 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
 import 'package:taxi_user/widgets/markers/book_a_friend_marker.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
 
-class BookAFriend extends StatefulWidget {
-  static const CameraPosition _camPosition = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+import '../../plugins/geolocation.dart';
+import '../../widgets/markers/my_location_marker.dart';
 
+class BookAFriend extends StatefulWidget {
   @override
   State<BookAFriend> createState() => _BookNowScreenState();
 }
@@ -25,7 +26,80 @@ class _BookNowScreenState extends State<BookAFriend> {
   final _contactNumberController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    determinePosition();
+    getLocation();
+    getData();
+  }
+
+  late String currentAddress;
+  late double lat;
+  late double long;
+  var hasLoaded = false;
+  getLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    List<Placemark> p =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+
+    Placemark place = p[0];
+
+    setState(() {
+      lat = position.latitude;
+      long = position.longitude;
+      currentAddress =
+          '${place.street}, ${place.subLocality}, ${place.locality}';
+      hasLoaded = true;
+    });
+  }
+
+  late String profilePicture;
+  late String driverName;
+  late String driverContactNumber;
+  late double ratings;
+  late int reviews;
+  late String plateNumber;
+  late String vehicleColor;
+  late String vehicleModel;
+  late double driverLat;
+  late double driverLang;
+
+  getData() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Drivers')
+        .where('isActive', isEqualTo: true);
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          setState(() {
+            profilePicture = data['profile_picture'];
+            driverName = data['name'];
+            driverContactNumber = data['contact_number'];
+            ratings = data['star'];
+            reviews = data['ratings'];
+            plateNumber = data['plate_number'];
+            vehicleColor = data['vehicle_color'];
+            vehicleModel = data['vehicle_model'];
+            driverLat = data['lat'];
+            driverLang = data['lang'];
+          });
+        }
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    CameraPosition _camPosition = CameraPosition(
+      target: LatLng(lat, long),
+      zoom: 14.4746,
+    );
     return Scaffold(
       drawer: const DrawerWidget(),
       appBar: NormalAppbar('Book a Friend', Colors.white),
@@ -34,11 +108,26 @@ class _BookNowScreenState extends State<BookAFriend> {
           GoogleMap(
             markers: Set<Marker>.from(markers),
             mapType: MapType.normal,
-            initialCameraPosition: BookAFriend._camPosition,
+            initialCameraPosition: _camPosition,
             onMapCreated: (GoogleMapController controller) {
               setState(() {
-                bookAFriendMarker(markers, context, _nameController,
-                    _contactNumberController);
+                bookAFriendMarker(
+                  markers,
+                  context,
+                  profilePicture,
+                  driverName,
+                  driverContactNumber,
+                  ratings,
+                  reviews,
+                  plateNumber,
+                  vehicleColor,
+                  vehicleModel,
+                  driverLat,
+                  driverLang,
+                  _nameController,
+                  _contactNumberController,
+                );
+                myLocationMarker(markers, context, lat, long);
               });
               _controller.complete(controller);
             },

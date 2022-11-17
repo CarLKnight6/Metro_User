@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:taxi_user/screens/booking_screens/book_now2.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 
 import '../dialogs/booking_details_dialog.dart';
 import '../text/text_bold.dart';
 import '../text/text_regular.dart';
+import '../textfields/contactnumber_field.dart';
+import '../textfields/normal_field.dart';
 
 bookAFriendMarker(
   Set<Marker> markers,
@@ -20,6 +21,8 @@ bookAFriendMarker(
   String vehicleModel,
   double driverLat,
   double driverLang,
+  _nameController,
+  _contactNumberController,
 ) async {
   Marker mark1 = Marker(
       markerId: MarkerId(driverContactNumber),
@@ -99,7 +102,7 @@ bookAFriendMarker(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Current Location',
+                                  text: "Friend's Current Location",
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
@@ -110,7 +113,7 @@ bookAFriendMarker(
                                 child: Container(
                                   child: Center(
                                     child: TextBold(
-                                        text: 'Your current location',
+                                        text: "Lapasan, CDO",
                                         fontSize: 12,
                                         color: Colors.white),
                                   ),
@@ -129,7 +132,7 @@ bookAFriendMarker(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Destination Location',
+                                  text: "Friend's Destination Location",
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
@@ -176,33 +179,88 @@ bookAFriendMarker(
                                   padding: const EdgeInsets.only(
                                       left: 30, right: 30),
                                   child: ButtonWidget(
-                                    label: 'Book Now',
+                                    label: 'Continue',
                                     color: Colors.red[600]!,
                                     onPressed: () {
                                       showDialog(
                                           context: context,
                                           builder: (context) {
-                                            return BookingDetailsDialog(
-                                                passengerName: 'John Doe',
-                                                passengerContactNumber:
-                                                    '000000000',
-                                                driverName: driverName,
-                                                driverRating: ratings,
-                                                plateNumber: plateNumber,
-                                                vehicleColor: vehicleColor,
-                                                vehicleModel: vehicleModel,
-                                                pickupLocation:
-                                                    'Your Current Location',
-                                                destinationLocation:
-                                                    'Cagayan De Oro City',
-                                                fare: '200',
-                                                onPressed: () {
-                                                  Navigator.of(context)
-                                                      .pushReplacement(
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  BookNow2()));
-                                                });
+                                            return AlertDialog(
+                                              backgroundColor: Colors.grey[200],
+                                              title: TextBold(
+                                                  text:
+                                                      "Friend's personal Details",
+                                                  fontSize: 16,
+                                                  color: Colors.black),
+                                              content: SizedBox(
+                                                height: 180,
+                                                child: Column(
+                                                  children: [
+                                                    NormalTextField(
+                                                        controller:
+                                                            _nameController,
+                                                        label:
+                                                            'Name of Friend'),
+                                                    ContactNumberField(
+                                                        controller:
+                                                            _contactNumberController,
+                                                        label:
+                                                            'Contact Number of Friend'),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: <Widget>[
+                                                FlatButton(
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pop(true),
+                                                  child: TextRegular(
+                                                      text: 'Close',
+                                                      color: Colors.black,
+                                                      fontSize: 12),
+                                                ),
+                                                FlatButton(
+                                                  onPressed: () async {
+                                                    // Navigator.of(context).pushReplacement(
+                                                    //     MaterialPageRoute(
+                                                    //         builder: (context) => LoginPage()));
+                                                    Navigator.of(context)
+                                                        .pop(true);
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return BookingDetailsDialog(
+                                                              passengerName:
+                                                                  'Lance Olana',
+                                                              passengerContactNumber:
+                                                                  '09090104355',
+                                                              driverName:
+                                                                  'John Doe',
+                                                              driverRating: 4.5,
+                                                              plateNumber:
+                                                                  '123456',
+                                                              vehicleColor:
+                                                                  'White',
+                                                              vehicleModel:
+                                                                  'Honda Civic 123',
+                                                              pickupLocation:
+                                                                  'Your Current Location',
+                                                              destinationLocation:
+                                                                  'Cagayan De Oro City',
+                                                              fare: '200',
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              });
+                                                        });
+                                                  },
+                                                  child: TextBold(
+                                                      text: 'Continue',
+                                                      color: Colors.black,
+                                                      fontSize: 14),
+                                                ),
+                                              ],
+                                            );
                                           });
                                     },
                                   ),
