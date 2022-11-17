@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taxi_user/screens/booking_screens/book_now2.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
-import 'package:taxi_user/widgets/textfields/contactnumber_field.dart';
-import 'package:taxi_user/widgets/textfields/normal_field.dart';
 
 import '../dialogs/booking_details_dialog.dart';
 import '../text/text_bold.dart';
 import '../text/text_regular.dart';
 
-bookAFriendMarker(Set<Marker> markers, BuildContext context, _nameController,
-    _contactNumController) async {
+bookAFriendMarker(
+  Set<Marker> markers,
+  BuildContext context,
+  String profilePicture,
+  String driverName,
+  String driverContactNumber,
+  double ratings,
+  int reviews,
+  String plateNumber,
+  String vehicleColor,
+  String vehicleModel,
+  double driverLat,
+  double driverLang,
+) async {
   Marker mark1 = Marker(
-      markerId: const MarkerId('mark1'),
+      markerId: MarkerId(driverContactNumber),
       infoWindow: InfoWindow(
         onTap: () {
           showModalBottomSheet(
@@ -45,35 +56,35 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context, _nameController,
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Name: Lance Olana',
+                                  text: 'Name: $driverName',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Rating: 4.5 ★',
+                                  text: 'Rating: $ratings ★',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Plate Number: 12345',
+                                  text: 'Plate Number: $plateNumber',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Color of Vehicle: White',
+                                  text: 'Color of Vehicle: $vehicleColor',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: 'Model: Honda Civic 192',
+                                  text: 'Model: $vehicleModel',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
@@ -88,7 +99,7 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context, _nameController,
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: "Friend's Current Location",
+                                  text: 'Current Location',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
@@ -118,7 +129,7 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context, _nameController,
                                 height: 10,
                               ),
                               TextRegular(
-                                  text: "Friend's Destination Location",
+                                  text: 'Destination Location',
                                   fontSize: 14,
                                   color: Colors.black),
                               const SizedBox(
@@ -165,88 +176,33 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context, _nameController,
                                   padding: const EdgeInsets.only(
                                       left: 30, right: 30),
                                   child: ButtonWidget(
-                                    label: 'Continue',
+                                    label: 'Book Now',
                                     color: Colors.red[600]!,
                                     onPressed: () {
                                       showDialog(
                                           context: context,
                                           builder: (context) {
-                                            return AlertDialog(
-                                              backgroundColor: Colors.grey[200],
-                                              title: TextBold(
-                                                  text:
-                                                      "Friend's personal Details",
-                                                  fontSize: 16,
-                                                  color: Colors.black),
-                                              content: SizedBox(
-                                                height: 180,
-                                                child: Column(
-                                                  children: [
-                                                    NormalTextField(
-                                                        controller:
-                                                            _nameController,
-                                                        label:
-                                                            'Name of Friend'),
-                                                    ContactNumberField(
-                                                        controller:
-                                                            _contactNumController,
-                                                        label:
-                                                            'Contact Number of Friend'),
-                                                  ],
-                                                ),
-                                              ),
-                                              actions: <Widget>[
-                                                FlatButton(
-                                                  onPressed: () =>
-                                                      Navigator.of(context)
-                                                          .pop(true),
-                                                  child: TextRegular(
-                                                      text: 'Close',
-                                                      color: Colors.black,
-                                                      fontSize: 12),
-                                                ),
-                                                FlatButton(
-                                                  onPressed: () async {
-                                                    // Navigator.of(context).pushReplacement(
-                                                    //     MaterialPageRoute(
-                                                    //         builder: (context) => LoginPage()));
-                                                    Navigator.of(context)
-                                                        .pop(true);
-                                                    showDialog(
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return BookingDetailsDialog(
-                                                              passengerName:
-                                                                  'Lance Olana',
-                                                              passengerContactNumber:
-                                                                  '09090104355',
-                                                              driverName:
-                                                                  'John Doe',
-                                                              driverRating: 4.5,
-                                                              plateNumber:
-                                                                  '123456',
-                                                              vehicleColor:
-                                                                  'White',
-                                                              vehicleModel:
-                                                                  'Honda Civic 123',
-                                                              pickupLocation:
-                                                                  'Your Current Location',
-                                                              destinationLocation:
-                                                                  'Cagayan De Oro City',
-                                                              fare: '200',
-                                                              onPressed: () {
-                                                                Navigator.pop(
-                                                                    context);
-                                                              });
-                                                        });
-                                                  },
-                                                  child: TextBold(
-                                                      text: 'Continue',
-                                                      color: Colors.black,
-                                                      fontSize: 14),
-                                                ),
-                                              ],
-                                            );
+                                            return BookingDetailsDialog(
+                                                passengerName: 'John Doe',
+                                                passengerContactNumber:
+                                                    '000000000',
+                                                driverName: driverName,
+                                                driverRating: ratings,
+                                                plateNumber: plateNumber,
+                                                vehicleColor: vehicleColor,
+                                                vehicleModel: vehicleModel,
+                                                pickupLocation:
+                                                    'Your Current Location',
+                                                destinationLocation:
+                                                    'Cagayan De Oro City',
+                                                fare: '200',
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pushReplacement(
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  BookNow2()));
+                                                });
                                           });
                                     },
                                   ),
@@ -261,11 +217,11 @@ bookAFriendMarker(Set<Marker> markers, BuildContext context, _nameController,
                 );
               });
         },
-        snippet: '09090104355',
-        title: 'Lance Olana',
+        snippet: driverContactNumber,
+        title: driverName,
       ),
       icon: BitmapDescriptor.defaultMarker,
-      position: const LatLng(37.42796133580664, -122.085749655962));
+      position: LatLng(driverLat, driverLang));
 
   markers.add(mark1);
 }
