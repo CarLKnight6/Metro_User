@@ -3,6 +3,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_user/screens/booking_screens/book_now2.dart';
 import 'package:taxi_user/services/cloud_function/book_now.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
+import 'package:taxi_user/widgets/delegate/search_destination.dart';
+import 'package:uuid/uuid.dart';
 
 import '../dialogs/booking_details_dialog.dart';
 import '../text/text_bold.dart';
@@ -118,7 +120,12 @@ bookNowMarker(
                                 height: 5,
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  final sessionToken = const Uuid().v4();
+                                  showSearch(
+                                      context: context,
+                                      delegate: AddressSearch(sessionToken));
+                                },
                                 child: Container(
                                   child: Center(
                                     child: TextBold(

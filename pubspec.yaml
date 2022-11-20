@@ -63,6 +63,8 @@ dependencies:
   flutter_slidable:
   share_plus:
   firebase_core_platform_interface: 4.5.1
+  uuid:
+  http:
 
 dev_dependencies:
   flutter_test:
