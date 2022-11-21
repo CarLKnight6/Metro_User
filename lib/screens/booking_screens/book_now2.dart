@@ -49,7 +49,7 @@ class _HomeScreenState extends State<BookNow2> {
                   IconButton(
                     onPressed: () {
                       Share.share(
-                          'My Ride\nDriver: ${data['driverName']}\nVehicle: ${data['vehicleModel']} ${data['plateNumber']}Destination: ${data['userDestination']}Date: ${data['dateTime']}');
+                          'My Ride\nDriver: ${data['driverName']}\nVehicle: ${data['vehicleModel']} ${data['plateNumber']}\nDestination: ${data['userDestination']}\nDate: ${data['dateTime']}');
                     },
                     icon: const Icon(Icons.share),
                   ),

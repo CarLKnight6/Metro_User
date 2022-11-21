@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future addHistory(
   String driverName,
@@ -19,6 +20,7 @@ Future addHistory(
     'id': docUser.id,
     'payment': payment,
     'dateTime': DateTime.now(),
+    'userId': FirebaseAuth.instance.currentUser!.uid,
   };
 
   await docUser.set(json);
