@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:taxi_user/services/cloud_function/add_history.dart';
 
 Future bookNow(
   String profilePicture,
@@ -57,6 +58,9 @@ Future bookNow(
   };
 
   box.write('bookingId', docUser.id);
+
+  addHistory(driverName, driverContactNumber, profilePicture,
+      "Your current location", userDestination);
 
   await docUser.set(json);
 }

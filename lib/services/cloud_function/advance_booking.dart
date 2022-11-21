@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:taxi_user/services/cloud_function/add_history.dart';
 
 Future advanceBooking(
     String profilePicture,
@@ -55,6 +56,9 @@ Future advanceBooking(
     'dateTime': DateTime.now(),
     'userPickupLocation': userPickupLocation,
   };
+
+  addHistory(driverName, driverContactNumber, profilePicture,
+      userPickupLocation, userDestination);
 
   await docUser.set(json);
 }
