@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
 import 'package:taxi_user/widgets/markers/my_location_marker.dart';
@@ -21,6 +22,8 @@ class _HomeScreenState extends State<BookNow2> {
   final Completer<GoogleMapController> _controller = Completer();
 
   Set<Marker> markers = {};
+
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
