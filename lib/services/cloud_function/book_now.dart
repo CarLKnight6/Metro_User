@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get_storage/get_storage.dart';
 
 Future bookNow(
   String profilePicture,
@@ -23,6 +24,7 @@ Future bookNow(
   String userDestination,
   double payment,
 ) async {
+  final box = GetStorage();
   final docUser = FirebaseFirestore.instance.collection('Bookings').doc();
 
   final json = {
@@ -53,6 +55,8 @@ Future bookNow(
     'dateTime': DateTime.now(),
     'userPickupLocation': "User's current location",
   };
+
+  box.write('bookingId', docUser.id);
 
   await docUser.set(json);
 }
