@@ -5,8 +5,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:taxi_user/services/locations/place_service.dart';
 import 'package:taxi_user/services/providers/destination_provider.dart';
 
-class AddressSearch extends SearchDelegate<Suggestion> {
-  AddressSearch(this.sessionToken) {
+class PickupSearch extends SearchDelegate<Suggestion> {
+  PickupSearch(this.sessionToken) {
     apiClient = PlaceApiProvider(sessionToken);
   }
 
@@ -68,7 +68,7 @@ class AddressSearch extends SearchDelegate<Suggestion> {
                               close(
                                   context, snapshot.data![index] as Suggestion);
 
-                              ref.read(destinationProvider.notifier).state =
+                              ref.read(pickupProvider.notifier).state =
                                   (snapshot.data![index] as Suggestion)
                                       .description;
                             },

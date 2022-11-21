@@ -4,6 +4,6 @@ final destinationProvider = StateProvider.autoDispose<String>((ref) {
   return 'Destination Location';
 });
 
-final pickupLocation = StateProvider.autoDispose<String>((ref) {
-  return 'PickupLocation Location';
+final pickupProvider = StateProvider.autoDispose<String>((ref) {
+  return 'Pickup Location';
 });

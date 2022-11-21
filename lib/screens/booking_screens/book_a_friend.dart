@@ -133,12 +133,7 @@ class _BookNowScreenState extends State<BookAFriend> {
                   'userContactNumber',
                   'userProfilePicture',
                   'userId',
-                  lat,
-                  long,
-                  0, // destination lat
-                  0, // destination lang
-                  'userDestination',
-                  'pickupLocation',
+                  
                   0, // payment
                   _nameController,
                   _contactNumberController,

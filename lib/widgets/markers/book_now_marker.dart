@@ -159,8 +159,8 @@ bookNowMarker(
                                       final sessionToken = const Uuid().v4();
                                       showSearch(
                                           context: context,
-                                          delegate: AddressSearch(
-                                              sessionToken, _street));
+                                          delegate:
+                                              AddressSearch(sessionToken));
                                     },
                                     child: Container(
                                       child: Padding(
