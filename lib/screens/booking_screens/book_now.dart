@@ -131,9 +131,8 @@ class _BookNowScreenState extends State<BookNowScreen> {
                   'userId',
                   lat,
                   long,
-                  0, // destination lat
-                  0, // destination lang
-                  'userDestination',
+                  // destination lang
+
                   0, // payment
                 );
                 myLocationMarker(markers, context, lat, long);

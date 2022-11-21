@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:taxi_user/services/locations/place_service.dart';
+import 'package:taxi_user/services/providers/destination_provider.dart';
 
-class AddressSearch extends SearchDelegate<Suggestion?> {
-  AddressSearch(this.sessionToken) {
+class AddressSearch extends SearchDelegate<Suggestion> {
+  String result;
+  AddressSearch(this.sessionToken, this.result) {
     apiClient = PlaceApiProvider(sessionToken);
   }
 
   final sessionToken;
   late PlaceApiProvider apiClient;
+
+  final box = GetStorage();
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -29,7 +35,7 @@ class AddressSearch extends SearchDelegate<Suggestion?> {
       tooltip: 'Back',
       icon: const Icon(Icons.arrow_back),
       onPressed: () {
-        close(context, null);
+        Navigator.of(context).pop();
       },
     );
   }
@@ -53,17 +59,26 @@ class AddressSearch extends SearchDelegate<Suggestion?> {
                   child: const Text('Search for Location'),
                 )
               : snapshot.hasData
-                  ? ListView.builder(
-                      itemBuilder: (context, index) => ListTile(
-                        title: Text(
-                            (snapshot.data![index] as Suggestion).description),
-                        onTap: () {
-                          close(context, snapshot.data![index] as Suggestion);
-                        },
-                      ),
-                      itemCount: snapshot.data!.length,
+                  ? Consumer(
+                      builder: ((context, ref, child) {
+                        return ListView.builder(
+                          itemBuilder: (context, index) => ListTile(
+                            title: Text((snapshot.data![index] as Suggestion)
+                                .description),
+                            onTap: () {
+                              close(
+                                  context, snapshot.data![index] as Suggestion);
+
+                              ref.read(destinationProvider.notifier).state =
+                                  (snapshot.data![index] as Suggestion)
+                                      .description;
+                            },
+                          ),
+                          itemCount: snapshot.data!.length,
+                        );
+                      }),
                     )
-                  : Container(child: const Text('Loading...'));
+                  : const Center(child: Text('Loading...'));
         });
   }
 }

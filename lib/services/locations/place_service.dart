@@ -74,6 +74,7 @@ class PlaceApiProvider {
         final components =
             result['result']['address_components'] as List<dynamic>;
         // build result
+
         final place = Place();
         for (var c in components) {
           final List type = c['types'];
