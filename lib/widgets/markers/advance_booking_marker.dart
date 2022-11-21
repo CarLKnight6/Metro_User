@@ -243,9 +243,9 @@ advanceBookingMarker(
                                               context: context,
                                               builder: (context) {
                                                 return BookingDetailsDialog(
-                                                    passengerName: 'John Doe',
+                                                    passengerName: userName,
                                                     passengerContactNumber:
-                                                        '000000000',
+                                                        userContactNumber,
                                                     driverName: driverName,
                                                     driverRating: ratings,
                                                     plateNumber: plateNumber,
