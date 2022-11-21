@@ -99,7 +99,9 @@ class _HomeScreenState extends State<BookNow2> {
                                   : TextRegular(
                                       text: '${data['bookingStatus']}. . .',
                                       fontSize: 14,
-                                      color: Colors.black),
+                                      color: data['bookingStatus'] == 'Rejected'
+                                          ? Colors.red
+                                          : Colors.black),
                               const SizedBox(
                                 height: 15,
                               ),
