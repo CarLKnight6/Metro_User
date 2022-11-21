@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -29,6 +30,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
     determinePosition();
     getLocation();
     getData();
+    getData1();
   }
 
   late String currentAddress;
@@ -94,6 +96,33 @@ class _BookNowScreenState extends State<BookNowScreen> {
     }
   }
 
+  late String myName;
+  late String myContactnumber;
+  late String myProfilePicture;
+  late String myId;
+
+  getData1() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid);
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          setState(() {
+            myName = data['firstName'] + ' ' + data['lastName'];
+            myContactnumber = data['contactNumber'];
+            myProfilePicture = data['profilePicture'];
+            myId = data['id'];
+          });
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     CameraPosition _camPosition = CameraPosition(
@@ -125,10 +154,10 @@ class _BookNowScreenState extends State<BookNowScreen> {
                   driverLat,
                   driverLang,
                   driverId,
-                  'userName',
-                  'userContactNumber',
-                  'userProfilePicture',
-                  'userId',
+                  myName,
+                  myContactnumber,
+                  myProfilePicture,
+                  myId,
                   lat,
                   long,
                   // destination lang
