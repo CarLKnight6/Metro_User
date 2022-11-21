@@ -36,6 +36,13 @@ class _HomeScreenState extends State<BookNow2> {
           return Scaffold(
             drawer: const DrawerWidget(),
             appBar: AppBar(
+                centerTitle: true,
+                title: TextRegular(
+                    text: data['bookingStatus'],
+                    fontSize: 18,
+                    color: data['bookingStatus'] == 'Rejected'
+                        ? Colors.red
+                        : Colors.black),
                 foregroundColor: Colors.black,
                 backgroundColor: Colors.grey[300],
                 actions: [
@@ -75,17 +82,24 @@ class _HomeScreenState extends State<BookNow2> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TextBold(
-                                  text: 'Arriving by 2:45pm',
-                                  fontSize: 18,
-                                  color: Colors.black),
+                              data['bookingStatus'] != 'Pending'
+                                  ? TextBold(
+                                      text: 'Arriving by 2:45pm',
+                                      fontSize: 18,
+                                      color: Colors.black)
+                                  : const SizedBox(),
                               const SizedBox(
                                 height: 5,
                               ),
-                              TextRegular(
-                                  text: 'Driver on the way!',
-                                  fontSize: 14,
-                                  color: Colors.black),
+                              data['bookingStatus'] != 'Pending'
+                                  ? TextRegular(
+                                      text: 'Driver on the way!',
+                                      fontSize: 14,
+                                      color: Colors.black)
+                                  : TextRegular(
+                                      text: '${data['bookingStatus']}. . .',
+                                      fontSize: 14,
+                                      color: Colors.black),
                               const SizedBox(
                                 height: 15,
                               ),
