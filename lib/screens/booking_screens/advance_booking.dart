@@ -112,32 +112,29 @@ class _BookNowScreenState extends State<AdvanceBooking> {
             onMapCreated: (GoogleMapController controller) {
               setState(() {
                 advanceBookingMarker(
-                    markers,
-                    context,
-                    profilePicture,
-                    driverName,
-                    driverContactNumber,
-                    ratings,
-                    reviews,
-                    plateNumber,
-                    vehicleColor,
-                    vehicleModel,
-                    driverLat,
-                    driverLang,
-                    driverId,
-                    'userName',
-                    'userContactNumber',
-                    'userProfilePicture',
-                    'userId',
-                    lat,
-                    long,
-                    0, // destination lat
-                    0, // destination lang
-                    'userDestination',
-                    'pickupLocation',
-                    0, // payment
-                    'Date',
-                    'Time');
+                  markers,
+                  context,
+                  profilePicture,
+                  driverName,
+                  driverContactNumber,
+                  ratings,
+                  reviews,
+                  plateNumber,
+                  vehicleColor,
+                  vehicleModel,
+                  driverLat,
+                  driverLang,
+                  driverId,
+                  'userName',
+                  'userContactNumber',
+                  'userProfilePicture',
+                  'userId',
+                  lat,
+                  long,
+                  "User's current location",
+                  0, // payment
+                  'Date',
+                );
                 myLocationMarker(markers, context, lat, long);
               });
               _controller.complete(controller);

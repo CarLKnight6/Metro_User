@@ -65,6 +65,8 @@ dependencies:
   firebase_core_platform_interface: 4.5.1
   uuid:
   http:
+  top_snackbar_flutter:
+  date_time_picker:
 
 dev_dependencies:
   flutter_test:
