@@ -360,6 +360,15 @@ bookAFriendMarker(
                                                                       _contactNumberController
                                                                           .text,
                                                                     );
+
+                                                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                                                        content: TextRegular(
+                                                                            text:
+                                                                                'Booked Succesfully!',
+                                                                            fontSize:
+                                                                                18,
+                                                                            color:
+                                                                                Colors.white)));
                                                                     Navigator.of(
                                                                             context)
                                                                         .pushReplacement(MaterialPageRoute(
