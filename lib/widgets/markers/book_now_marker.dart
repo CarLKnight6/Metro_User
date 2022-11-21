@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
@@ -253,6 +254,13 @@ bookNowMarker(
                                                                       .notifier)
                                                               .state,
                                                           payment);
+
+                                                      FirebaseFirestore.instance
+                                                          .collection('Drivers')
+                                                          .doc(driverId)
+                                                          .update({
+                                                        'ratings': reviews + 1,
+                                                      });
                                                       Navigator.of(context)
                                                           .pushReplacement(
                                                               MaterialPageRoute(

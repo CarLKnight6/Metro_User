@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
@@ -292,6 +293,13 @@ advanceBookingMarker(
                                                                   dateProvider
                                                                       .notifier)
                                                               .state);
+
+                                                      FirebaseFirestore.instance
+                                                          .collection('Drivers')
+                                                          .doc(driverId)
+                                                          .update({
+                                                        'ratings': reviews + 1,
+                                                      });
 
                                                       Scaffold.of(context)
                                                           .showSnackBar(SnackBar(
