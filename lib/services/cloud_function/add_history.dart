@@ -6,6 +6,7 @@ Future addHistory(
   String driverProfilePicture,
   String pickupLocation,
   String destinationLocation,
+  double payment,
 ) async {
   final docUser = FirebaseFirestore.instance.collection('User History').doc();
 
@@ -16,6 +17,7 @@ Future addHistory(
     'pickupLocation': pickupLocation,
     'destinationLocation': destinationLocation,
     'id': docUser.id,
+    'payment': payment,
     'dateTime': DateTime.now(),
   };
 
