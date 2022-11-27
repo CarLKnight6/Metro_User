@@ -37,6 +37,12 @@ Future addUser(
     'contactAddress2': contactAddress2,
     'id': user,
     'locations': [],
+    'homeLat': 0,
+    'homeLong': 0,
+    'officeLat': 0,
+    'officeLong': 0,
+    'schoolLat': 0,
+    'schoolLong': 0,
   };
 
   await docUser.set(json);
