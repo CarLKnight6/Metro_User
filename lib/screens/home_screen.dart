@@ -94,6 +94,100 @@ class _HomeScreenState extends State<HomeScreen> {
         draggable: true,
         markerId: const MarkerId('label'),
         infoWindow: InfoWindow(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    child: Container(
+                      color: Colors.grey[200],
+                      height: 250,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const SizedBox(),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                icon: const Icon(Icons.close),
+                              ),
+                            ],
+                          ),
+                          TextRegular(
+                              text: 'Mark this place as:',
+                              fontSize: 14,
+                              color: Colors.black),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 40, right: 40),
+                            child: MaterialButton(
+                                color: Colors.white,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.home),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    TextRegular(
+                                        text: 'Home',
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                  ],
+                                ),
+                                onPressed: () {}),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 40, right: 40),
+                            child: MaterialButton(
+                                color: Colors.white,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.work_outline_outlined),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    TextRegular(
+                                        text: 'Workplace',
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                  ],
+                                ),
+                                onPressed: () {}),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 40, right: 40),
+                            child: MaterialButton(
+                                color: Colors.white,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.school_outlined),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    TextRegular(
+                                        text: 'School',
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                  ],
+                                ),
+                                onPressed: () {}),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                });
+          },
           title: label,
         ),
         icon: BitmapDescriptor.defaultMarker,
@@ -162,12 +256,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                TextRegular(
-                                    text: ref
-                                        .read(addressProvider.notifier)
-                                        .state,
-                                    fontSize: 14,
-                                    color: Colors.black),
+                                SingleChildScrollView(
+                                  child: SizedBox(
+                                    width: 200,
+                                    child: TextRegular(
+                                        text: ref
+                                            .read(addressProvider.notifier)
+                                            .state,
+                                        fontSize: 14,
+                                        color: Colors.black),
+                                  ),
+                                ),
                                 const Icon(Icons.search),
                               ],
                             ),
