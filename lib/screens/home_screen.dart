@@ -18,12 +18,12 @@ import 'package:uuid/uuid.dart';
 import '../plugins/geolocation.dart';
 import '../widgets/delegate/search_my_places.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   final Completer<GoogleMapController> _controller = Completer();
 
   Set<Marker> markers = {};
@@ -87,7 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  late LatLng newCoordinates;
+  late LatLng newCoordinates = LatLng(
+    ref.read(latProvider.notifier).state,
+    ref.read(longProvider.notifier).state,
+  );
 
   newMarker(double lat1, double long1, String label) async {
     Marker mark1 = Marker(
