@@ -128,9 +128,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 Consumer(
                   builder: (context, ref, child) {
                     return GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         final sessionToken = const Uuid().v4();
-                        showSearch(
+
+                        await showSearch(
                             context: context,
                             delegate: LocationsSearch(sessionToken));
 
@@ -148,6 +149,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ref.read(longProvider.notifier).state,
                                 ref.read(addressProvider.notifier).state);
                           });
+                        } else {
+                          mapController?.animateCamera(
+                              CameraUpdate.newCameraPosition(CameraPosition(
+                                  target: LatLng(lat, long), zoom: 16)));
                         }
                       },
                       child: Container(
