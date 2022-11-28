@@ -68,6 +68,8 @@ dependencies:
   top_snackbar_flutter:
   date_time_picker:
   url_launcher:
+  fluttertoast:
+
 
 dev_dependencies:
   flutter_test:

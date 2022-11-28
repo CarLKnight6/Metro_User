@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -86,10 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  late LatLng newCoordinates;
+
   newMarker(double lat1, double long1, String label) async {
     Marker mark1 = Marker(
         onDrag: (value) {
-          print(value);
+          setState(() {
+            newCoordinates = value;
+          });
         },
         draggable: true,
         markerId: const MarkerId('label'),
@@ -142,7 +147,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: Colors.black),
                                   ],
                                 ),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  FirebaseFirestore.instance
+                                      .collection('Users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .update({
+                                    'homeLat': newCoordinates.latitude,
+                                    'homeLong': newCoordinates.longitude,
+                                  });
+                                  showToast();
+                                  Navigator.of(context).pop();
+                                }),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 40, right: 40),
@@ -161,7 +177,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: Colors.black),
                                   ],
                                 ),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  FirebaseFirestore.instance
+                                      .collection('Users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .update({
+                                    'officeLat': newCoordinates.latitude,
+                                    'officeLong': newCoordinates.longitude,
+                                  });
+                                  showToast();
+                                  Navigator.of(context).pop();
+                                }),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 40, right: 40),
@@ -180,7 +207,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: Colors.black),
                                   ],
                                 ),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  FirebaseFirestore.instance
+                                      .collection('Users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                      .update({
+                                    'schoolLat': newCoordinates.latitude,
+                                    'schoolLong': newCoordinates.longitude,
+                                  });
+                                  showToast();
+                                  Navigator.of(context).pop();
+                                }),
                           ),
                         ],
                       ),
@@ -194,6 +232,17 @@ class _HomeScreenState extends State<HomeScreen> {
         position: LatLng(lat1, long1));
 
     markers.add(mark1);
+  }
+
+  showToast() {
+    Fluttertoast.showToast(
+        msg: "Place updated succesfully!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 
   @override
