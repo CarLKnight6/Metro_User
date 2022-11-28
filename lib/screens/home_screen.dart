@@ -3,15 +3,19 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taxi_user/services/providers/saved_location_provider.dart';
 
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
+import 'package:uuid/uuid.dart';
 
 import '../plugins/geolocation.dart';
+import '../widgets/delegate/search_my_places.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -121,29 +125,59 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                   },
                 ),
-                Container(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextRegular(
-                              text: 'Search location',
-                              fontSize: 14,
-                              color: Colors.black),
-                          const Icon(Icons.search),
-                        ],
+                Consumer(
+                  builder: (context, ref, child) {
+                    return GestureDetector(
+                      onTap: () {
+                        final sessionToken = const Uuid().v4();
+                        showSearch(
+                            context: context,
+                            delegate: LocationsSearch(sessionToken));
+
+                        if (ref.read(latProvider.notifier).state != 0) {
+                          mapController?.animateCamera(
+                              CameraUpdate.newCameraPosition(CameraPosition(
+                                  target: LatLng(
+                                      ref.read(latProvider.notifier).state,
+                                      ref.read(longProvider.notifier).state),
+                                  zoom: 16)));
+
+                          setState(() {
+                            newMarker(
+                                ref.read(latProvider.notifier).state,
+                                ref.read(longProvider.notifier).state,
+                                ref.read(addressProvider.notifier).state);
+                          });
+                        }
+                      },
+                      child: Container(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextRegular(
+                                    text: ref
+                                        .read(addressProvider.notifier)
+                                        .state,
+                                    fontSize: 14,
+                                    color: Colors.black),
+                                const Icon(Icons.search),
+                              ],
+                            ),
+                          ),
+                        ),
+                        margin: const EdgeInsets.fromLTRB(30, 20, 30, 0),
+                        width: double.infinity,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
                       ),
-                    ),
-                  ),
-                  margin: const EdgeInsets.fromLTRB(30, 20, 30, 0),
-                  width: double.infinity,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
+                    );
+                  },
                 ),
                 StreamBuilder<DocumentSnapshot>(
                     stream: userData1,
