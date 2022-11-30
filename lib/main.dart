@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:taxi_user/screens/home_screen.dart';
+import 'package:taxi_user/screens/booking_screens/book_now.dart';
 
 import 'auth/login.dart';
 import 'firebase_options.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return HomeScreen();
+              return BookNowScreen();
             } else {
               return LoginPage();
             }
