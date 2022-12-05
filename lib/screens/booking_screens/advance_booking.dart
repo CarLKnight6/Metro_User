@@ -29,7 +29,7 @@ class _BookNowScreenState extends State<AdvanceBooking> {
     super.initState();
     determinePosition();
     getLocation();
-    getData();
+
     getData1();
   }
 
@@ -51,8 +51,9 @@ class _BookNowScreenState extends State<AdvanceBooking> {
       long = position.longitude;
       currentAddress =
           '${place.street}, ${place.subLocality}, ${place.locality}';
-      hasLoaded = true;
     });
+
+    getData();
   }
 
   late String profilePicture;
@@ -90,6 +91,32 @@ class _BookNowScreenState extends State<AdvanceBooking> {
             driverLat = data['lat'];
             driverLang = data['lang'];
             driverId = data['id'];
+
+            advanceBookingMarker(
+              markers,
+              context,
+              profilePicture,
+              driverName,
+              driverContactNumber,
+              ratings,
+              reviews,
+              plateNumber,
+              vehicleColor,
+              vehicleModel,
+              driverLat,
+              driverLang,
+              driverId,
+              myName,
+              myContactnumber,
+              myProfilePicture,
+              myId,
+              lat,
+              long,
+              "User's current location",
+              0, // payment
+              'Date',
+            );
+            hasLoaded = true;
           });
         }
       });
@@ -132,7 +159,7 @@ class _BookNowScreenState extends State<AdvanceBooking> {
     return Scaffold(
       drawer: const DrawerWidget(),
       appBar: NormalAppbar('Advance Booking', Colors.white),
-      body: Stack(
+      body: hasLoaded ? Stack(
         children: [
           GoogleMap(
             markers: Set<Marker>.from(markers),
@@ -140,30 +167,6 @@ class _BookNowScreenState extends State<AdvanceBooking> {
             initialCameraPosition: _camPosition,
             onMapCreated: (GoogleMapController controller) {
               setState(() {
-                advanceBookingMarker(
-                  markers,
-                  context,
-                  profilePicture,
-                  driverName,
-                  driverContactNumber,
-                  ratings,
-                  reviews,
-                  plateNumber,
-                  vehicleColor,
-                  vehicleModel,
-                  driverLat,
-                  driverLang,
-                  driverId,
-                  myName,
-                  myContactnumber,
-                  myProfilePicture,
-                  myId,
-                  lat,
-                  long,
-                  "User's current location",
-                  0, // payment
-                  'Date',
-                );
                 myLocationMarker(markers, context, lat, long);
               });
               _controller.complete(controller);
@@ -244,7 +247,11 @@ class _BookNowScreenState extends State<AdvanceBooking> {
             ),
           ),
         ],
+      ) : const Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }
 }
+
+

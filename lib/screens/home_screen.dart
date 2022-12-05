@@ -11,6 +11,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_user/services/providers/saved_location_provider.dart';
 
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
+import 'package:taxi_user/widgets/dialogs/error_dialog.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
 import 'package:uuid/uuid.dart';
@@ -388,18 +389,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      mapController?.animateCamera(
-                                          CameraUpdate.newCameraPosition(
-                                              CameraPosition(
-                                                  target: LatLng(
-                                                      data['homeLat'],
-                                                      data['homeLong']),
-                                                  zoom: 16)));
+                                      if (data['homeLat'] == 0) {
+                                        ErrorDialog(label: 'Location not set!');
+                                      } else {
+                                        mapController?.animateCamera(
+                                            CameraUpdate.newCameraPosition(
+                                                CameraPosition(
+                                                    target: LatLng(
+                                                        data['homeLat'],
+                                                        data['homeLong']),
+                                                    zoom: 16)));
 
-                                      setState(() {
-                                        newMarker(data['homeLat'],
-                                            data['homeLong'], 'Home');
-                                      });
+                                        setState(() {
+                                          newMarker(data['homeLat'],
+                                              data['homeLong'], 'Home');
+                                        });
+                                      }
                                     },
                                     child: Container(
                                       child: Column(
@@ -431,18 +436,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      mapController?.animateCamera(
-                                          CameraUpdate.newCameraPosition(
-                                              CameraPosition(
-                                                  target: LatLng(
-                                                      data['officeLat'],
-                                                      data['officeLong']),
-                                                  zoom: 16)));
+                                      if (data['officeLat'] == 0) {
+                                        ErrorDialog(label: 'Location not set!');
+                                      } else {
+                                        mapController?.animateCamera(
+                                            CameraUpdate.newCameraPosition(
+                                                CameraPosition(
+                                                    target: LatLng(
+                                                        data['officeLat'],
+                                                        data['officeLong']),
+                                                    zoom: 16)));
 
-                                      setState(() {
-                                        newMarker(data['officeLat'],
-                                            data['officeLong'], 'Workplace');
-                                      });
+                                        setState(() {
+                                          newMarker(data['officeLat'],
+                                              data['officeLong'], 'Workplace');
+                                        });
+                                      }
                                     },
                                     child: Container(
                                       child: Column(
@@ -474,18 +483,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      mapController?.animateCamera(
-                                          CameraUpdate.newCameraPosition(
-                                              CameraPosition(
-                                                  target: LatLng(
-                                                      data['schoolLat'],
-                                                      data['schoolLong']),
-                                                  zoom: 16)));
+                                      if (data['schoolLat'] == 0) {
+                                        ErrorDialog(label: 'Location not set!');
+                                      } else {
+                                        mapController?.animateCamera(
+                                            CameraUpdate.newCameraPosition(
+                                                CameraPosition(
+                                                    target: LatLng(
+                                                        data['schoolLat'],
+                                                        data['schoolLong']),
+                                                    zoom: 16)));
 
-                                      setState(() {
-                                        newMarker(data['schoolLat'],
-                                            data['schoolLong'], 'School');
-                                      });
+                                        setState(() {
+                                          newMarker(data['schoolLat'],
+                                              data['schoolLong'], 'School');
+                                        });
+                                      }
                                     },
                                     child: Container(
                                       child: Column(

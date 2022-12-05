@@ -128,9 +128,11 @@ class _HomeScreenState extends State<BookNow2> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               ListTile(
-                                leading: const CircleAvatar(
+                                leading: CircleAvatar(
                                   minRadius: 25,
                                   maxRadius: 25,
+                                  backgroundImage:
+                                      NetworkImage(data['profilePicture']),
                                   backgroundColor: Colors.black,
                                 ),
                                 title: TextBold(
@@ -139,7 +141,7 @@ class _HomeScreenState extends State<BookNow2> {
                                     color: Colors.black),
                                 subtitle: TextBold(
                                     text: data['vehicleModel'] +
-                                        ' ' +
+                                        ' - ' +
                                         data['plateNumber'],
                                     fontSize: 12,
                                     color: Colors.grey),

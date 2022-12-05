@@ -301,15 +301,6 @@ advanceBookingMarker(
                                                         'ratings': reviews + 1,
                                                       });
 
-                                                      Scaffold.of(context)
-                                                          .showSnackBar(SnackBar(
-                                                              content: TextRegular(
-                                                                  text:
-                                                                      'Booked Succesfully!',
-                                                                  fontSize: 18,
-                                                                  color: Colors
-                                                                      .white)));
-
                                                       Navigator.of(context)
                                                           .pushReplacement(
                                                               MaterialPageRoute(

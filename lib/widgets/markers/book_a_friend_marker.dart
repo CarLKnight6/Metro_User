@@ -362,15 +362,6 @@ bookAFriendMarker(
                                                                           .text,
                                                                     );
 
-                                                                    Scaffold.of(context).showSnackBar(SnackBar(
-                                                                        content: TextRegular(
-                                                                            text:
-                                                                                'Booked Succesfully!',
-                                                                            fontSize:
-                                                                                18,
-                                                                            color:
-                                                                                Colors.white)));
-
                                                                     FirebaseFirestore
                                                                         .instance
                                                                         .collection(

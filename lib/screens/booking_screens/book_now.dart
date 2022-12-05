@@ -29,7 +29,7 @@ class _BookNowScreenState extends State<BookNowScreen> {
     super.initState();
     determinePosition();
     getLocation();
-    getData();
+
     getData1();
   }
 
@@ -51,8 +51,9 @@ class _BookNowScreenState extends State<BookNowScreen> {
       long = position.longitude;
       currentAddress =
           '${place.street}, ${place.subLocality}, ${place.locality}';
-      hasLoaded = true;
     });
+
+    getData();
   }
 
   late String profilePicture;
@@ -90,16 +91,41 @@ class _BookNowScreenState extends State<BookNowScreen> {
             driverLat = data['lat'];
             driverLang = data['lang'];
             driverId = data['id'];
+            bookNowMarker(
+              markers,
+              context,
+              profilePicture,
+              driverName,
+              driverContactNumber,
+              ratings,
+              reviews,
+              plateNumber,
+              vehicleColor,
+              vehicleModel,
+              driverLat,
+              driverLang,
+              driverId,
+              myName,
+              myContactnumber,
+              myProfilePicture,
+              myId,
+              lat,
+              long,
+              // destination lang
+
+              0, // payment
+            );
+            hasLoaded = true;
           });
         }
       });
     }
   }
 
-  late String myName;
-  late String myContactnumber;
-  late String myProfilePicture;
-  late String myId;
+  late String myName = '';
+  late String myContactnumber = '';
+  late String myProfilePicture = '';
+  late String myId = '';
 
   getData1() async {
     // Use provider
@@ -132,119 +158,99 @@ class _BookNowScreenState extends State<BookNowScreen> {
     return Scaffold(
       drawer: const DrawerWidget(),
       appBar: NormalAppbar('Book Now', Colors.white),
-      body: Stack(
-        children: [
-          GoogleMap(
-            markers: Set<Marker>.from(markers),
-            mapType: MapType.normal,
-            initialCameraPosition: _camPosition,
-            onMapCreated: (GoogleMapController controller) {
-              setState(() {
-                bookNowMarker(
-                  markers,
-                  context,
-                  profilePicture,
-                  driverName,
-                  driverContactNumber,
-                  ratings,
-                  reviews,
-                  plateNumber,
-                  vehicleColor,
-                  vehicleModel,
-                  driverLat,
-                  driverLang,
-                  driverId,
-                  myName,
-                  myContactnumber,
-                  myProfilePicture,
-                  myId,
-                  lat,
-                  long,
-                  // destination lang
-
-                  0, // payment
-                );
-                myLocationMarker(markers, context, lat, long);
-              });
-              _controller.complete(controller);
-            },
-          ),
-          SafeArea(
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+      body: hasLoaded
+          ? Stack(
+              children: [
+                GoogleMap(
+                  markers: Set<Marker>.from(markers),
+                  mapType: MapType.normal,
+                  initialCameraPosition: _camPosition,
+                  onMapCreated: (GoogleMapController controller) {
+                    setState(() {
+                      myLocationMarker(markers, context, lat, long);
+                    });
+                    _controller.complete(controller);
+                  },
+                ),
+                SafeArea(
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                            child: Column(
                               children: [
-                                Icon(
-                                  Icons.location_on_rounded,
-                                  size: 32,
-                                  color: Colors.red[700],
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_rounded,
+                                        size: 32,
+                                        color: Colors.red[700],
+                                      ),
+                                      const SizedBox(
+                                        width: 50,
+                                      ),
+                                      TextRegular(
+                                          text: 'Current Location',
+                                          fontSize: 12,
+                                          color: Colors.black),
+                                    ],
+                                  ),
                                 ),
                                 const SizedBox(
-                                  width: 50,
+                                  height: 5,
                                 ),
-                                TextRegular(
-                                    text: 'Current Location',
-                                    fontSize: 12,
-                                    color: Colors.black),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Image.asset('assets/images/Arrow 3.png'),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                TextRegular(
-                                    text: 'Destination Location',
-                                    fontSize: 12,
-                                    color: Colors.black),
+                                Image.asset('assets/images/Arrow 3.png'),
                                 const SizedBox(
-                                  width: 50,
+                                  height: 5,
                                 ),
-                                Icon(
-                                  Icons.local_taxi_rounded,
-                                  size: 32,
-                                  color: Colors.green[700],
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      TextRegular(
+                                          text: 'Destination Location',
+                                          fontSize: 12,
+                                          color: Colors.black),
+                                      const SizedBox(
+                                        width: 50,
+                                      ),
+                                      Icon(
+                                        Icons.local_taxi_rounded,
+                                        size: 32,
+                                        color: Colors.green[700],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    height: 120,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
+                          height: 120,
+                          width: 300,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
+            )
+          : const Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-        ],
-      ),
     );
   }
 }
