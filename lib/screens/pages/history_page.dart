@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
@@ -9,8 +11,24 @@ import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
 
-class HistoryPage extends StatelessWidget {
+class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
+
+  @override
+  State<HistoryPage> createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends State<HistoryPage> {
+  showToast() {
+    Fluttertoast.showToast(
+        msg: "Driver Rated Succesfully!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.amber,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +83,88 @@ class HistoryPage extends StatelessWidget {
                                 motion: const ScrollMotion(),
                                 children: [
                                   SlidableAction(
-                                    onPressed: (context) {},
+                                    onPressed: (context) {
+                                      showModalBottomSheet(
+                                          context: context,
+                                          builder: (context) {
+                                            return SizedBox(
+                                              height: 120,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  TextBold(
+                                                      text: 'Rate your driver',
+                                                      fontSize: 12,
+                                                      color: Colors.black),
+                                                  const SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  RatingBar.builder(
+                                                    initialRating: 5,
+                                                    minRating: 1,
+                                                    direction: Axis.horizontal,
+                                                    allowHalfRating: false,
+                                                    itemCount: 5,
+                                                    itemPadding:
+                                                        const EdgeInsets
+                                                                .symmetric(
+                                                            horizontal: 0.0),
+                                                    itemBuilder: (context, _) =>
+                                                        const Icon(
+                                                      Icons.star,
+                                                      color: Colors.amber,
+                                                    ),
+                                                    onRatingUpdate:
+                                                        (_rating) async {
+                                                      var collection = FirebaseFirestore
+                                                          .instance
+                                                          .collection('Drivers')
+                                                          .where('id',
+                                                              isEqualTo: data
+                                                                          .docs[
+                                                                      index]
+                                                                  ['driverId']);
+
+                                                      var querySnapshot =
+                                                          await collection
+                                                              .get();
+
+                                                      for (var queryDocumentSnapshot
+                                                          in querySnapshot
+                                                              .docs) {
+                                                        Map<String, dynamic>
+                                                            data1 =
+                                                            queryDocumentSnapshot
+                                                                .data();
+
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                'Drivers')
+                                                            .doc(data
+                                                                    .docs[index]
+                                                                ['driverId'])
+                                                            .update({
+                                                          'star':
+                                                              data1['star'] +
+                                                                  _rating,
+                                                        });
+                                                      }
+
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    },
                                     backgroundColor: Colors.blue,
                                     foregroundColor: Colors.white,
                                     icon: Icons.star,
