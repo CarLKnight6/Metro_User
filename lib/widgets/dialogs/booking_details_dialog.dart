@@ -89,7 +89,7 @@ class BookingDetailsDialog extends StatelessWidget {
                   height: 5,
                 ),
                 TextRegular(
-                    text: 'Rating: $driverRating ★',
+                    text: 'Rating: ${driverRating.toStringAsFixed(2)} ★',
                     fontSize: 14,
                     color: Colors.black),
                 const SizedBox(

@@ -64,6 +64,7 @@ bookNowMarker(
               builder: (context) {
                 return Consumer(
                   builder: ((context, ref, child) {
+                    double rate = ratings / reviews;
                     return Container(
                       height: 750,
                       color: Colors.red[600],
@@ -99,7 +100,8 @@ bookNowMarker(
                                     height: 10,
                                   ),
                                   TextRegular(
-                                      text: 'Rating: $ratings ★',
+                                      text:
+                                          'Rating: ${rate.toStringAsFixed(2)} ★',
                                       fontSize: 14,
                                       color: Colors.black),
                                   const SizedBox(
@@ -227,7 +229,7 @@ bookNowMarker(
                                                     passengerContactNumber:
                                                         userContactNumber,
                                                     driverName: driverName,
-                                                    driverRating: ratings,
+                                                    driverRating: rate,
                                                     plateNumber: plateNumber,
                                                     vehicleColor: vehicleColor,
                                                     vehicleModel: vehicleModel,

@@ -61,6 +61,7 @@ bookAFriendMarker(
               builder: (context) {
                 return Consumer(
                   builder: ((context, ref, child) {
+                    double rate = ratings / reviews;
                     return Container(
                       height: 750,
                       color: Colors.red[600],
@@ -96,7 +97,8 @@ bookAFriendMarker(
                                     height: 10,
                                   ),
                                   TextRegular(
-                                      text: 'Rating: $ratings ★',
+                                      text:
+                                          'Rating: ${rate.toStringAsFixed(2)} ★',
                                       fontSize: 14,
                                       color: Colors.black),
                                   const SizedBox(
@@ -313,7 +315,7 @@ bookAFriendMarker(
                                                                   driverName:
                                                                       driverName,
                                                                   driverRating:
-                                                                      ratings,
+                                                                      rate,
                                                                   plateNumber:
                                                                       plateNumber,
                                                                   vehicleColor:
