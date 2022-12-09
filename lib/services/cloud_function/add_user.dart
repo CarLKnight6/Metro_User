@@ -21,7 +21,9 @@ Future addUser(
   final docUser = FirebaseFirestore.instance.collection('Users').doc(user);
 
   final json = {
-    'profilePicture': profilePicture,
+    'profilePicture': profilePicture == ''
+        ? 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+        : profilePicture,
     'firstName': firstName,
     'lastName': lastName,
     'contactNumber': contactNumber,
