@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
+import 'package:taxi_user/widgets/textfields/contactnumber_field.dart';
 
 import '../../../auth/login.dart';
 import '../../../widgets/drawer/drawer_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
+
+  final num = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,34 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   ListTile(
                     trailing: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                child: SizedBox(
+                                  height: 300,
+                                  width: 300,
+                                  child: Center(
+                                      child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ContactNumberField(
+                                          controller: num,
+                                          label: 'New Contact Number'),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      ButtonWidget(
+                                          label: 'Update',
+                                          color: Colors.red,
+                                          onPressed: () {})
+                                    ],
+                                  )),
+                                ),
+                              );
+                            });
+                      },
                       icon: const Icon(Icons.edit),
                     ),
                     title: TextBold(
@@ -78,10 +108,6 @@ class ProfileScreen extends StatelessWidget {
                     height: 10,
                   ),
                   ListTile(
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.edit),
-                    ),
                     title: TextBold(
                         text: data['email'], fontSize: 18, color: Colors.black),
                     subtitle: TextRegular(
@@ -93,20 +119,12 @@ class ProfileScreen extends StatelessWidget {
                     height: 10,
                   ),
                   ListTile(
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.edit),
-                    ),
                     title: TextBold(
                         text: data['brgy'], fontSize: 18, color: Colors.black),
                     subtitle: TextRegular(
                         text: 'Brgy.', fontSize: 12, color: Colors.grey),
                   ),
                   ListTile(
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.edit),
-                    ),
                     title: TextBold(
                         text: data['city'], fontSize: 18, color: Colors.black),
                     subtitle: TextRegular(
@@ -115,10 +133,6 @@ class ProfileScreen extends StatelessWidget {
                         color: Colors.grey),
                   ),
                   ListTile(
-                    trailing: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.edit),
-                    ),
                     title: TextBold(
                         text: data['province'],
                         fontSize: 18,

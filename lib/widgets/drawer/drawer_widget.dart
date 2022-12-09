@@ -128,7 +128,7 @@ class _MyDrawerState extends State<DrawerWidget> {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (context) => const ProfileScreen()));
+                                  builder: (context) => ProfileScreen()));
                         },
                         tileColor: Colors.transparent),
                     NormalTile(
