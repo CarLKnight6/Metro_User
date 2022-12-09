@@ -11,7 +11,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_user/services/providers/saved_location_provider.dart';
 
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
-import 'package:taxi_user/widgets/dialogs/error_dialog.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
 import 'package:uuid/uuid.dart';
@@ -249,6 +248,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         fontSize: 16.0);
   }
 
+  showToast1() {
+    Fluttertoast.showToast(
+        msg: "Location not set",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
   @override
   Widget build(BuildContext context) {
     final CameraPosition _camPosition = CameraPosition(
@@ -390,7 +400,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   GestureDetector(
                                     onTap: () {
                                       if (data['homeLat'] == 0) {
-                                        ErrorDialog(label: 'Location not set!');
+                                        showToast1();
                                       } else {
                                         mapController?.animateCamera(
                                             CameraUpdate.newCameraPosition(
@@ -437,7 +447,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   GestureDetector(
                                     onTap: () {
                                       if (data['officeLat'] == 0) {
-                                        ErrorDialog(label: 'Location not set!');
+                                        showToast1();
                                       } else {
                                         mapController?.animateCamera(
                                             CameraUpdate.newCameraPosition(
@@ -484,7 +494,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   GestureDetector(
                                     onTap: () {
                                       if (data['schoolLat'] == 0) {
-                                        ErrorDialog(label: 'Location not set!');
+                                        showToast1();
                                       } else {
                                         mapController?.animateCamera(
                                             CameraUpdate.newCameraPosition(
