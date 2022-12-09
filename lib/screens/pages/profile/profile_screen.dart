@@ -70,8 +70,9 @@ class ProfileScreen extends StatelessWidget {
                             context: context,
                             builder: (context) {
                               return Dialog(
-                                child: SizedBox(
-                                  height: 300,
+                                child: Container(
+                                  color: Colors.grey[300],
+                                  height: 250,
                                   width: 300,
                                   child: Center(
                                       child: Column(
@@ -83,10 +84,23 @@ class ProfileScreen extends StatelessWidget {
                                       const SizedBox(
                                         height: 20,
                                       ),
-                                      ButtonWidget(
-                                          label: 'Update',
-                                          color: Colors.red,
-                                          onPressed: () {})
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 30, right: 30),
+                                        child: ButtonWidget(
+                                            label: 'Update',
+                                            color: Colors.red,
+                                            onPressed: () {
+                                              FirebaseFirestore.instance
+                                                  .collection('Users')
+                                                  .doc(FirebaseAuth.instance
+                                                      .currentUser!.uid)
+                                                  .update({
+                                                'contactNumber': num.text,
+                                              });
+                                              Navigator.of(context).pop();
+                                            }),
+                                      )
                                     ],
                                   )),
                                 ),
