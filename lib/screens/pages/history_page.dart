@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
@@ -52,6 +53,11 @@ class HistoryPage extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: snapshot.data?.size ?? 0,
                       itemBuilder: ((context, index) {
+                        DateTime created =
+                            data.docs[index]['dateTime'].toDate();
+
+                        String formattedTime =
+                            DateFormat.yMMMd().add_jm().format(created);
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(10, 7.5, 10, 7.5),
                           child: Slidable(
@@ -95,70 +101,83 @@ class HistoryPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: ListTile(
-                                leading: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const [
-                                    CircleAvatar(
-                                      minRadius: 30,
-                                      maxRadius: 30,
-                                      backgroundColor: Colors.black,
-                                    ),
-                                  ],
-                                ),
-                                title: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              child: Container(
+                                color: Colors.white,
+                                child: Column(
                                   children: [
-                                    TextRegular(
-                                        text:
-                                            'Drivers Name: ${data.docs[index]['driverName']}',
-                                        fontSize: 14,
-                                        color: Colors.black),
-                                    TextRegular(
-                                        text: data.docs[index]
-                                            ['driverContactNumber'],
-                                        fontSize: 12,
-                                        color: Colors.grey),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    TextRegular(
-                                        text:
-                                            'Pickup Location: ${data.docs[index]['pickupLocation']}',
-                                        fontSize: 12,
-                                        color: Colors.black),
-                                    TextRegular(
-                                        text:
-                                            'Destination Location: ${data.docs[index]['destinationLocation']}',
-                                        fontSize: 12,
-                                        color: Colors.black),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        TextRegular(
-                                            text: 'Fare:',
-                                            fontSize: 14,
-                                            color: Colors.grey),
-                                        TextBold(
-                                            text:
-                                                '${data.docs[index]['payment']}php',
-                                            fontSize: 18,
-                                            color: Colors.black),
-                                      ],
-                                    ),
                                     const SizedBox(
                                       height: 5,
                                     ),
+                                    TextBold(
+                                        text: formattedTime,
+                                        fontSize: 12,
+                                        color: Colors.black),
+                                    ListTile(
+                                      leading: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: const [
+                                          CircleAvatar(
+                                            minRadius: 30,
+                                            maxRadius: 30,
+                                            backgroundColor: Colors.black,
+                                          ),
+                                        ],
+                                      ),
+                                      title: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          TextRegular(
+                                              text:
+                                                  'Drivers Name: ${data.docs[index]['driverName']}',
+                                              fontSize: 14,
+                                              color: Colors.black),
+                                          TextRegular(
+                                              text: data.docs[index]
+                                                  ['driverContactNumber'],
+                                              fontSize: 12,
+                                              color: Colors.grey),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          TextRegular(
+                                              text:
+                                                  'Pickup Location: ${data.docs[index]['pickupLocation']}',
+                                              fontSize: 12,
+                                              color: Colors.black),
+                                          TextRegular(
+                                              text:
+                                                  'Destination Location: ${data.docs[index]['destinationLocation']}',
+                                              fontSize: 12,
+                                              color: Colors.black),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              TextRegular(
+                                                  text: 'Fare:',
+                                                  fontSize: 14,
+                                                  color: Colors.grey),
+                                              TextBold(
+                                                  text:
+                                                      '${data.docs[index]['payment']}php',
+                                                  fontSize: 18,
+                                                  color: Colors.black),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                        ],
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      tileColor: Colors.white,
+                                    ),
                                   ],
                                 ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                tileColor: Colors.white,
                               )),
                         );
                       }),

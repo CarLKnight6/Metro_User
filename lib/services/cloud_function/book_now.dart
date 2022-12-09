@@ -60,7 +60,7 @@ Future bookNow(
   box.write('bookingId', docUser.id);
 
   addHistory(driverName, driverContactNumber, profilePicture,
-      "Your current location", userDestination, payment);
+      "Your current location", userDestination, payment, driverId);
 
   await docUser.set(json);
 }

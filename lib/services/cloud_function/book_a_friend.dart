@@ -61,7 +61,7 @@ Future bookAFriend(
   };
 
   addHistory(driverName, driverContactNumber, profilePicture,
-      userPickupLocation, userDestination, payment);
+      userPickupLocation, userDestination, payment, driverId);
 
   await docUser.set(json);
 }

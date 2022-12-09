@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 Future addHistory(
-  String driverName,
-  String driverContactNumber,
-  String driverProfilePicture,
-  String pickupLocation,
-  String destinationLocation,
-  double payment,
-) async {
+    String driverName,
+    String driverContactNumber,
+    String driverProfilePicture,
+    String pickupLocation,
+    String destinationLocation,
+    double payment,
+    String driverId) async {
   final docUser = FirebaseFirestore.instance.collection('User History').doc();
 
   final json = {
@@ -18,6 +18,7 @@ Future addHistory(
     'pickupLocation': pickupLocation,
     'destinationLocation': destinationLocation,
     'id': docUser.id,
+    'driverId': driverId,
     'payment': payment,
     'dateTime': DateTime.now(),
     'userId': FirebaseAuth.instance.currentUser!.uid,

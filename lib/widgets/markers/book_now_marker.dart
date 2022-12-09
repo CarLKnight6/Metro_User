@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -41,6 +42,17 @@ bookNowMarker(
   String _city = '';
 
   final box = GetStorage();
+
+  showToast() {
+    Fluttertoast.showToast(
+        msg: "Booked succesfully!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
 
   Marker mark1 = Marker(
       markerId: MarkerId(driverContactNumber),
@@ -261,6 +273,8 @@ bookNowMarker(
                                                           .update({
                                                         'ratings': reviews + 1,
                                                       });
+
+                                                      showToast();
                                                       Navigator.of(context)
                                                           .pushReplacement(
                                                               MaterialPageRoute(
