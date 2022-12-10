@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:taxi_user/services/providers/destination_provider.dart';
 
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
@@ -180,67 +182,80 @@ class _BookNowScreenState extends State<BookNowScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            child: Column(
-                              children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        Icons.location_on_rounded,
-                                        size: 32,
-                                        color: Colors.red[700],
+                        Consumer(
+                          builder: (context, ref, child) {
+                            return Container(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Icons.location_on_rounded,
+                                            size: 32,
+                                            color: Colors.red[700],
+                                          ),
+                                          const SizedBox(
+                                            width: 50,
+                                          ),
+                                          TextRegular(
+                                              text: ref
+                                                  .watch(
+                                                      pickupProvider.notifier)
+                                                  .state,
+                                              fontSize: 12,
+                                              color: Colors.black),
+                                        ],
                                       ),
-                                      const SizedBox(
-                                        width: 50,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Image.asset('assets/images/Arrow 3.png'),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          TextRegular(
+                                              text: ref
+                                                  .watch(destinationProvider
+                                                      .notifier)
+                                                  .state,
+                                              fontSize: 12,
+                                              color: Colors.black),
+                                          const SizedBox(
+                                            width: 50,
+                                          ),
+                                          Icon(
+                                            Icons.local_taxi_rounded,
+                                            size: 32,
+                                            color: Colors.green[700],
+                                          ),
+                                        ],
                                       ),
-                                      TextRegular(
-                                          text: 'Current Location',
-                                          fontSize: 12,
-                                          color: Colors.black),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Image.asset('assets/images/Arrow 3.png'),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      TextRegular(
-                                          text: 'Destination Location',
-                                          fontSize: 12,
-                                          color: Colors.black),
-                                      const SizedBox(
-                                        width: 50,
-                                      ),
-                                      Icon(
-                                        Icons.local_taxi_rounded,
-                                        size: 32,
-                                        color: Colors.green[700],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          height: 120,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                              ),
+                              height: 120,
+                              width: 300,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
