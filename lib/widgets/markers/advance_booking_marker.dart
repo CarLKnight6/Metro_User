@@ -347,7 +347,7 @@ advanceBookingMarker(
         const ImageConfiguration(
           size: Size(24, 24),
         ),
-        'lib/images/driver.png',
+        'assets/images/driver.png',
       ),
       position: LatLng(driverLat, driverLang));
 
