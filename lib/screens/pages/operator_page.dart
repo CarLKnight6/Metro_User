@@ -22,7 +22,7 @@ class OperatorPage extends StatelessWidget {
             children: [
               const SizedBox(height: 20),
               TextBold(
-                  text: 'Taxi Region II', fontSize: 16, color: Colors.black),
+                  text: 'CVKATCO', fontSize: 16, color: Colors.black),
               TextRegular(text: 'Operator', fontSize: 14, color: Colors.black),
               const SizedBox(height: 20),
               TextRegular(
