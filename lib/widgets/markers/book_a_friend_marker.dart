@@ -423,7 +423,12 @@ bookAFriendMarker(
         snippet: driverContactNumber,
         title: driverName,
       ),
-      icon: BitmapDescriptor.defaultMarker,
+      icon: await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(
+          size: Size(24, 24),
+        ),
+        'lib/images/driver.png',
+      ),
       position: LatLng(driverLat, driverLang));
 
   markers.add(mark1);
