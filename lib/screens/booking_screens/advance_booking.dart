@@ -202,9 +202,6 @@ class _BookNowScreenState extends State<AdvanceBooking> {
                                             size: 32,
                                             color: Colors.red[700],
                                           ),
-                                          const SizedBox(
-                                            width: 50,
-                                          ),
                                           TextRegular(
                                               text: ref
                                                   .watch(
@@ -235,9 +232,6 @@ class _BookNowScreenState extends State<AdvanceBooking> {
                                                   .state,
                                               fontSize: 12,
                                               color: Colors.black),
-                                          const SizedBox(
-                                            width: 50,
-                                          ),
                                           Icon(
                                             Icons.local_taxi_rounded,
                                             size: 32,
