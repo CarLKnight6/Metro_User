@@ -16,8 +16,8 @@ class ButtonWidget extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
         ),
-        minWidth: 275,
-        height: 40,
+        minWidth: 290,
+        height: 45,
         color: color,
         child: TextBold(
           text: label,

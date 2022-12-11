@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 Stack(
                   children: [
-                    Image.asset('assets/images/cvkatco Logo.png'),
+                    Image.asset('assets/images/cvkatco Logo.png', height: 200),
                     Padding(
                       padding: const EdgeInsets.only(top: 40),
                       child: Center(
@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
                 PasswordField(
                     controller: _passwordController, label: 'Password'),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 ButtonWidget(
                     label: 'Login',

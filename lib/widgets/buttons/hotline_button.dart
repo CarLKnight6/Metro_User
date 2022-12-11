@@ -26,7 +26,7 @@ class HotlineButton extends StatelessWidget {
               ),
               minWidth: 275,
               height: 40,
-              color: Colors.red,
+              color: Colors.blue,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                 child: Row(

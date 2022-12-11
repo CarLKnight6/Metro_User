@@ -428,7 +428,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                             color: Colors.white,
                                           ),
                                           const SizedBox(
-                                            height: 10,
+                                            height: 5,
                                           ),
                                           TextRegular(
                                               text: 'Home',
@@ -436,8 +436,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               color: Colors.white),
                                         ],
                                       ),
-                                      height: 100,
-                                      width: 100,
+                                      height: 60,
+                                      width: 80,
                                       decoration: BoxDecoration(
                                         color: Colors.red,
                                         borderRadius: BorderRadius.circular(5),
@@ -475,7 +475,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                             color: Colors.white,
                                           ),
                                           const SizedBox(
-                                            height: 10,
+                                            height: 5,
                                           ),
                                           TextRegular(
                                               text: 'Workplace',
@@ -483,8 +483,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               color: Colors.white),
                                         ],
                                       ),
-                                      height: 100,
-                                      width: 100,
+                                      height: 60,
+                                      width: 80,
                                       decoration: BoxDecoration(
                                         color: Colors.red,
                                         borderRadius: BorderRadius.circular(5),
@@ -522,7 +522,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                             color: Colors.white,
                                           ),
                                           const SizedBox(
-                                            height: 10,
+                                            height: 5,
                                           ),
                                           TextRegular(
                                               text: 'School',
@@ -530,8 +530,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               color: Colors.white),
                                         ],
                                       ),
-                                      height: 100,
-                                      width: 100,
+                                      height: 60,
+                                      width: 80,
                                       decoration: BoxDecoration(
                                         color: Colors.red,
                                         borderRadius: BorderRadius.circular(5),
@@ -541,7 +541,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 ],
                               ),
                               width: double.infinity,
-                              height: 120,
+                              height: 80,
                               color: Colors.white,
                             ),
                           ],
