@@ -24,7 +24,7 @@ class NormalDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: SizedBox(
-        height: 250,
+        height: 280,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -36,7 +36,15 @@ class NormalDialog extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            TextRegular(text: label, fontSize: 18, color: Colors.black),
+            Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                      fontFamily: 'QRegular'),
+                )),
             const SizedBox(
               height: 30,
             ),

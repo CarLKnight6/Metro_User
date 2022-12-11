@@ -10,6 +10,7 @@ import 'package:taxi_user/screens/booking_screens/book_a_friend.dart';
 import 'package:taxi_user/services/cloud_function/book_a_friend.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/delegate/search_pickup.dart';
+import 'package:taxi_user/widgets/dialogs/normal_dialog.dart';
 import 'package:taxi_user/widgets/ticket_widget.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:uuid/uuid.dart';
@@ -310,134 +311,227 @@ bookAFriendMarker(
                                                           location[0].longitude,
                                                         );
 
-                                                        Navigator.of(context)
-                                                            .pop(true);
-                                                        showDialog(
-                                                            context: context,
-                                                            builder: (context) {
-                                                              return BookingDetailsDialog(
-                                                                  passengerName:
-                                                                      _nameController
-                                                                          .text,
-                                                                  passengerContactNumber:
-                                                                      _contactNumberController
-                                                                          .text,
-                                                                  driverName:
-                                                                      driverName,
-                                                                  driverRating:
-                                                                      rate,
-                                                                  plateNumber:
-                                                                      plateNumber,
-                                                                  vehicleColor:
-                                                                      vehicleColor,
-                                                                  vehicleModel:
-                                                                      vehicleModel,
-                                                                  pickupLocation: ref
-                                                                      .watch(pickupProvider
-                                                                          .notifier)
-                                                                      .state,
-                                                                  destinationLocation: ref
-                                                                      .watch(destinationProvider
-                                                                          .notifier)
-                                                                      .state,
-                                                                  fare: ((distance *
-                                                                              12) +
-                                                                          50)
-                                                                      .toStringAsFixed(
-                                                                          2),
-                                                                  onPressed:
-                                                                      () {
-                                                                    bookAFriend(
-                                                                      profilePicture,
-                                                                      driverName,
-                                                                      driverContactNumber,
-                                                                      ratings,
-                                                                      reviews,
-                                                                      plateNumber,
-                                                                      vehicleColor,
-                                                                      vehicleModel,
-                                                                      driverLat,
-                                                                      driverLang,
-                                                                      driverId,
-                                                                      userName,
-                                                                      userContactNumber,
-                                                                      userProfilePicture,
-                                                                      userId,
-                                                                      location1[
-                                                                              0]
-                                                                          .latitude,
-                                                                      location1[
-                                                                              0]
-                                                                          .longitude,
-                                                                      location[
-                                                                              0]
-                                                                          .latitude,
-                                                                      location[
-                                                                              0]
-                                                                          .longitude,
-                                                                      ref
-                                                                          .watch(
-                                                                              destinationProvider.notifier)
-                                                                          .state,
-                                                                      ref
-                                                                          .watch(
-                                                                              pickupProvider.notifier)
-                                                                          .state,
-                                                                      (distance *
-                                                                              12) +
-                                                                          50,
-                                                                      _nameController
-                                                                          .text,
-                                                                      _contactNumberController
-                                                                          .text,
-                                                                    );
+                                                        if (distance.toInt() >
+                                                            20) {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return NormalDialog(
+                                                                    label:
+                                                                        'There is additional fee because you are travelling more than 20 km. Send a message to the driver about your fare',
+                                                                    buttonColor:
+                                                                        Colors
+                                                                            .red,
+                                                                    buttonText:
+                                                                        'I understand',
+                                                                    icon: Icons
+                                                                        .warning,
+                                                                    onPressed:
+                                                                        () {
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pop(
+                                                                              true);
+                                                                      showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (context) {
+                                                                            return BookingDetailsDialog(
+                                                                                passengerName: _nameController.text,
+                                                                                passengerContactNumber: _contactNumberController.text,
+                                                                                driverName: driverName,
+                                                                                driverRating: rate,
+                                                                                plateNumber: plateNumber,
+                                                                                vehicleColor: vehicleColor,
+                                                                                vehicleModel: vehicleModel,
+                                                                                pickupLocation: ref.watch(pickupProvider.notifier).state,
+                                                                                destinationLocation: ref.watch(destinationProvider.notifier).state,
+                                                                                fare: ((distance * 12) + 50).toStringAsFixed(2),
+                                                                                onPressed: () {
+                                                                                  bookAFriend(
+                                                                                    profilePicture,
+                                                                                    driverName,
+                                                                                    driverContactNumber,
+                                                                                    ratings,
+                                                                                    reviews,
+                                                                                    plateNumber,
+                                                                                    vehicleColor,
+                                                                                    vehicleModel,
+                                                                                    driverLat,
+                                                                                    driverLang,
+                                                                                    driverId,
+                                                                                    userName,
+                                                                                    userContactNumber,
+                                                                                    userProfilePicture,
+                                                                                    userId,
+                                                                                    location1[0].latitude,
+                                                                                    location1[0].longitude,
+                                                                                    location[0].latitude,
+                                                                                    location[0].longitude,
+                                                                                    ref.watch(destinationProvider.notifier).state,
+                                                                                    ref.watch(pickupProvider.notifier).state,
+                                                                                    (distance * 12) + 50,
+                                                                                    _nameController.text,
+                                                                                    _contactNumberController.text,
+                                                                                  );
 
-                                                                    FirebaseFirestore
-                                                                        .instance
-                                                                        .collection(
-                                                                            'Drivers')
-                                                                        .doc(
-                                                                            driverId)
-                                                                        .update({
-                                                                      'ratings':
-                                                                          reviews +
-                                                                              1,
-                                                                    });
+                                                                                  FirebaseFirestore.instance.collection('Drivers').doc(driverId).update({
+                                                                                    'ratings': reviews + 1,
+                                                                                  });
 
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pushReplacement(MaterialPageRoute(
-                                                                            builder: (context) =>
-                                                                                BookAFriend()));
+                                                                                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BookAFriend()));
 
-                                                                    showDialog(
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            (context) {
-                                                                          return Scaffold(
-                                                                            backgroundColor:
-                                                                                Colors.transparent,
-                                                                            body:
-                                                                                Center(
-                                                                              child: SizedBox(
-                                                                                child: TicketWidget(
-                                                                                    width: 350,
-                                                                                    height: 500,
-                                                                                    child: TicketData(
-                                                                                      passenger: _nameController.text,
-                                                                                      driver: driverName,
-                                                                                      plateNum: plateNumber,
-                                                                                      destination: ref.watch(destinationProvider.notifier).state,
-                                                                                      distance: distance.toStringAsFixed(2),
-                                                                                      fare: ((distance * 12) + 50).toStringAsFixed(2),
-                                                                                    )),
+                                                                                  showDialog(
+                                                                                      context: context,
+                                                                                      builder: (context) {
+                                                                                        return Scaffold(
+                                                                                          backgroundColor: Colors.transparent,
+                                                                                          body: Center(
+                                                                                            child: SizedBox(
+                                                                                              child: TicketWidget(
+                                                                                                  width: 350,
+                                                                                                  height: 500,
+                                                                                                  child: TicketData(
+                                                                                                    passenger: _nameController.text,
+                                                                                                    driver: driverName,
+                                                                                                    plateNum: plateNumber,
+                                                                                                    destination: ref.watch(destinationProvider.notifier).state,
+                                                                                                    distance: distance.toStringAsFixed(2),
+                                                                                                    fare: ((distance * 12) + 50).toStringAsFixed(2),
+                                                                                                  )),
+                                                                                            ),
+                                                                                          ),
+                                                                                        );
+                                                                                      });
+                                                                                });
+                                                                          });
+                                                                    },
+                                                                    iconColor:
+                                                                        Colors
+                                                                            .red);
+                                                              });
+                                                        } else {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return BookingDetailsDialog(
+                                                                    passengerName:
+                                                                        _nameController
+                                                                            .text,
+                                                                    passengerContactNumber:
+                                                                        _contactNumberController
+                                                                            .text,
+                                                                    driverName:
+                                                                        driverName,
+                                                                    driverRating:
+                                                                        rate,
+                                                                    plateNumber:
+                                                                        plateNumber,
+                                                                    vehicleColor:
+                                                                        vehicleColor,
+                                                                    vehicleModel:
+                                                                        vehicleModel,
+                                                                    pickupLocation: ref
+                                                                        .watch(pickupProvider
+                                                                            .notifier)
+                                                                        .state,
+                                                                    destinationLocation: ref
+                                                                        .watch(destinationProvider
+                                                                            .notifier)
+                                                                        .state,
+                                                                    fare: ((distance *
+                                                                                12) +
+                                                                            50)
+                                                                        .toStringAsFixed(
+                                                                            2),
+                                                                    onPressed:
+                                                                        () {
+                                                                      bookAFriend(
+                                                                        profilePicture,
+                                                                        driverName,
+                                                                        driverContactNumber,
+                                                                        ratings,
+                                                                        reviews,
+                                                                        plateNumber,
+                                                                        vehicleColor,
+                                                                        vehicleModel,
+                                                                        driverLat,
+                                                                        driverLang,
+                                                                        driverId,
+                                                                        userName,
+                                                                        userContactNumber,
+                                                                        userProfilePicture,
+                                                                        userId,
+                                                                        location1[0]
+                                                                            .latitude,
+                                                                        location1[0]
+                                                                            .longitude,
+                                                                        location[0]
+                                                                            .latitude,
+                                                                        location[0]
+                                                                            .longitude,
+                                                                        ref
+                                                                            .watch(destinationProvider.notifier)
+                                                                            .state,
+                                                                        ref
+                                                                            .watch(pickupProvider.notifier)
+                                                                            .state,
+                                                                        (distance *
+                                                                                12) +
+                                                                            50,
+                                                                        _nameController
+                                                                            .text,
+                                                                        _contactNumberController
+                                                                            .text,
+                                                                      );
+
+                                                                      FirebaseFirestore
+                                                                          .instance
+                                                                          .collection(
+                                                                              'Drivers')
+                                                                          .doc(
+                                                                              driverId)
+                                                                          .update({
+                                                                        'ratings':
+                                                                            reviews +
+                                                                                1,
+                                                                      });
+
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pushReplacement(
+                                                                              MaterialPageRoute(builder: (context) => BookAFriend()));
+
+                                                                      showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (context) {
+                                                                            return Scaffold(
+                                                                              backgroundColor: Colors.transparent,
+                                                                              body: Center(
+                                                                                child: SizedBox(
+                                                                                  child: TicketWidget(
+                                                                                      width: 350,
+                                                                                      height: 500,
+                                                                                      child: TicketData(
+                                                                                        passenger: _nameController.text,
+                                                                                        driver: driverName,
+                                                                                        plateNum: plateNumber,
+                                                                                        destination: ref.watch(destinationProvider.notifier).state,
+                                                                                        distance: distance.toStringAsFixed(2),
+                                                                                        fare: ((distance * 12) + 50).toStringAsFixed(2),
+                                                                                      )),
+                                                                                ),
                                                                               ),
-                                                                            ),
-                                                                          );
-                                                                        });
-                                                                  });
-                                                            });
+                                                                            );
+                                                                          });
+                                                                    });
+                                                              });
+                                                        }
                                                       },
                                                       child: TextBold(
                                                           text: 'Continue',

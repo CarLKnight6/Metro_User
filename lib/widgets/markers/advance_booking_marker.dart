@@ -17,6 +17,7 @@ import 'package:uuid/uuid.dart';
 import '../../services/providers/destination_provider.dart';
 import '../delegate/search_destination.dart';
 import '../dialogs/booking_details_dialog.dart';
+import '../dialogs/normal_dialog.dart';
 import '../text/text_bold.dart';
 import '../text/text_regular.dart';
 
@@ -274,109 +275,249 @@ advanceBookingMarker(
                                               location[0].latitude,
                                               location[0].longitude);
 
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return BookingDetailsDialog(
-                                                    passengerName: userName,
-                                                    passengerContactNumber:
-                                                        userContactNumber,
-                                                    driverName: driverName,
-                                                    driverRating: rate,
-                                                    plateNumber: plateNumber,
-                                                    vehicleColor: vehicleColor,
-                                                    vehicleModel: vehicleModel,
-                                                    pickupLocation:
-                                                        'Your Current Location',
-                                                    destinationLocation: ref
-                                                        .watch(
-                                                            destinationProvider
-                                                                .notifier)
-                                                        .state,
-                                                    fare: ((distance * 12) + 50)
-                                                        .toStringAsFixed(2),
-                                                    onPressed: () {
-                                                      advanceBooking(
-                                                          profilePicture,
-                                                          driverName,
-                                                          driverContactNumber,
-                                                          ratings,
-                                                          reviews,
-                                                          plateNumber,
-                                                          vehicleColor,
-                                                          vehicleModel,
-                                                          driverLat,
-                                                          driverLang,
-                                                          driverId,
-                                                          userName,
-                                                          userContactNumber,
-                                                          userProfilePicture,
-                                                          userId,
-                                                          userLat,
-                                                          userLang,
-                                                          location[0].latitude,
-                                                          location[0].longitude,
-                                                          ref
-                                                              .watch(
-                                                                  destinationProvider
-                                                                      .notifier)
-                                                              .state,
-                                                          pickupLocation,
-                                                          (distance * 12) + 50,
-                                                          ref
-                                                              .watch(
-                                                                  dateProvider
-                                                                      .notifier)
-                                                              .state);
-
-                                                      FirebaseFirestore.instance
-                                                          .collection('Drivers')
-                                                          .doc(driverId)
-                                                          .update({
-                                                        'ratings': reviews + 1,
-                                                      });
-
-                                                      Navigator.of(context)
-                                                          .pushReplacement(
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          AdvanceBooking()));
-
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return Scaffold(
-                                                              backgroundColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              body: Center(
-                                                                child: SizedBox(
-                                                                  child: TicketWidget(
-                                                                      width: 350,
-                                                                      height: 500,
-                                                                      child: TicketData(
-                                                                        passenger:
-                                                                            userName,
-                                                                        driver:
-                                                                            driverName,
-                                                                        plateNum:
-                                                                            plateNumber,
-                                                                        destination: ref
-                                                                            .watch(destinationProvider.notifier)
+                                          if (distance.toInt() > 20) {
+                                            print(distance.toInt());
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return NormalDialog(
+                                                      label:
+                                                          'There is additional fee because you are travelling more than 20 km. Send a message to the driver about your fare',
+                                                      buttonColor: Colors.red,
+                                                      buttonText:
+                                                          'I understand',
+                                                      icon: Icons.warning,
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                        showDialog(
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return BookingDetailsDialog(
+                                                                  passengerName:
+                                                                      userName,
+                                                                  passengerContactNumber:
+                                                                      userContactNumber,
+                                                                  driverName:
+                                                                      driverName,
+                                                                  driverRating:
+                                                                      rate,
+                                                                  plateNumber:
+                                                                      plateNumber,
+                                                                  vehicleColor:
+                                                                      vehicleColor,
+                                                                  vehicleModel:
+                                                                      vehicleModel,
+                                                                  pickupLocation:
+                                                                      'Your Current Location',
+                                                                  destinationLocation: ref
+                                                                      .watch(destinationProvider
+                                                                          .notifier)
+                                                                      .state,
+                                                                  fare: ((distance *
+                                                                              12) +
+                                                                          50)
+                                                                      .toStringAsFixed(
+                                                                          2),
+                                                                  onPressed:
+                                                                      () {
+                                                                    advanceBooking(
+                                                                        profilePicture,
+                                                                        driverName,
+                                                                        driverContactNumber,
+                                                                        ratings,
+                                                                        reviews,
+                                                                        plateNumber,
+                                                                        vehicleColor,
+                                                                        vehicleModel,
+                                                                        driverLat,
+                                                                        driverLang,
+                                                                        driverId,
+                                                                        userName,
+                                                                        userContactNumber,
+                                                                        userProfilePicture,
+                                                                        userId,
+                                                                        userLat,
+                                                                        userLang,
+                                                                        location[0]
+                                                                            .latitude,
+                                                                        location[0]
+                                                                            .longitude,
+                                                                        ref
+                                                                            .watch(destinationProvider
+                                                                                .notifier)
                                                                             .state,
-                                                                        distance:
-                                                                            distance.toStringAsFixed(2),
-                                                                        fare: ((distance * 12) +
-                                                                                50)
-                                                                            .toStringAsFixed(2),
-                                                                      )),
+                                                                        pickupLocation,
+                                                                        (distance *
+                                                                                12) +
+                                                                            50,
+                                                                        ref
+                                                                            .watch(dateProvider.notifier)
+                                                                            .state);
+
+                                                                    FirebaseFirestore
+                                                                        .instance
+                                                                        .collection(
+                                                                            'Drivers')
+                                                                        .doc(
+                                                                            driverId)
+                                                                        .update({
+                                                                      'ratings':
+                                                                          reviews +
+                                                                              1,
+                                                                    });
+
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pushReplacement(MaterialPageRoute(
+                                                                            builder: (context) =>
+                                                                                AdvanceBooking()));
+
+                                                                    showDialog(
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (context) {
+                                                                          return Scaffold(
+                                                                            backgroundColor:
+                                                                                Colors.transparent,
+                                                                            body:
+                                                                                Center(
+                                                                              child: SizedBox(
+                                                                                child: TicketWidget(
+                                                                                    width: 350,
+                                                                                    height: 500,
+                                                                                    child: TicketData(
+                                                                                      passenger: userName,
+                                                                                      driver: driverName,
+                                                                                      plateNum: plateNumber,
+                                                                                      destination: ref.watch(destinationProvider.notifier).state,
+                                                                                      distance: distance.toStringAsFixed(2),
+                                                                                      fare: ((distance * 12) + 50).toStringAsFixed(2),
+                                                                                    )),
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        });
+                                                                  });
+                                                            });
+                                                      },
+                                                      iconColor: Colors.red);
+                                                });
+                                          } else {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return BookingDetailsDialog(
+                                                      passengerName: userName,
+                                                      passengerContactNumber:
+                                                          userContactNumber,
+                                                      driverName: driverName,
+                                                      driverRating: rate,
+                                                      plateNumber: plateNumber,
+                                                      vehicleColor:
+                                                          vehicleColor,
+                                                      vehicleModel:
+                                                          vehicleModel,
+                                                      pickupLocation:
+                                                          'Your Current Location',
+                                                      destinationLocation: ref
+                                                          .watch(
+                                                              destinationProvider
+                                                                  .notifier)
+                                                          .state,
+                                                      fare: ((distance * 12) +
+                                                              50)
+                                                          .toStringAsFixed(2),
+                                                      onPressed: () {
+                                                        advanceBooking(
+                                                            profilePicture,
+                                                            driverName,
+                                                            driverContactNumber,
+                                                            ratings,
+                                                            reviews,
+                                                            plateNumber,
+                                                            vehicleColor,
+                                                            vehicleModel,
+                                                            driverLat,
+                                                            driverLang,
+                                                            driverId,
+                                                            userName,
+                                                            userContactNumber,
+                                                            userProfilePicture,
+                                                            userId,
+                                                            userLat,
+                                                            userLang,
+                                                            location[0]
+                                                                .latitude,
+                                                            location[0]
+                                                                .longitude,
+                                                            ref
+                                                                .watch(
+                                                                    destinationProvider
+                                                                        .notifier)
+                                                                .state,
+                                                            pickupLocation,
+                                                            (distance * 12) +
+                                                                50,
+                                                            ref
+                                                                .watch(
+                                                                    dateProvider
+                                                                        .notifier)
+                                                                .state);
+
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                'Drivers')
+                                                            .doc(driverId)
+                                                            .update({
+                                                          'ratings':
+                                                              reviews + 1,
+                                                        });
+
+                                                        Navigator.of(context)
+                                                            .pushReplacement(
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            AdvanceBooking()));
+
+                                                        showDialog(
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return Scaffold(
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                body: Center(
+                                                                  child:
+                                                                      SizedBox(
+                                                                    child: TicketWidget(
+                                                                        width: 350,
+                                                                        height: 500,
+                                                                        child: TicketData(
+                                                                          passenger:
+                                                                              userName,
+                                                                          driver:
+                                                                              driverName,
+                                                                          plateNum:
+                                                                              plateNumber,
+                                                                          destination: ref
+                                                                              .watch(destinationProvider.notifier)
+                                                                              .state,
+                                                                          distance:
+                                                                              distance.toStringAsFixed(2),
+                                                                          fare:
+                                                                              ((distance * 12) + 50).toStringAsFixed(2),
+                                                                        )),
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            );
-                                                          });
-                                                    });
-                                              });
+                                                              );
+                                                            });
+                                                      });
+                                                });
+                                          }
                                         },
                                       ),
                                     ),
