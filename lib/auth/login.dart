@@ -5,8 +5,6 @@ import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
 import 'package:taxi_user/widgets/textfields/normal_field.dart';
 import 'package:taxi_user/widgets/textfields/password_field.dart';
-import 'package:taxi_user/widgets/ticket_widget.dart';
-import 'package:ticket_widget/ticket_widget.dart';
 
 class LoginPage extends StatelessWidget {
   final _usernameController = TextEditingController();
@@ -67,11 +65,6 @@ class LoginPage extends StatelessWidget {
                           color: Colors.black),
                     ),
                   ),
-                ),
-                const TicketWidget(
-                  width: 300,
-                  height: 500,
-                  child: TicketData(),
                 ),
                 const SizedBox(
                   height: 10,

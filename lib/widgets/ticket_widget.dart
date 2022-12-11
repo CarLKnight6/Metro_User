@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 
 class TicketData extends StatelessWidget {
-  const TicketData({
-    Key? key,
-  }) : super(key: key);
+  late String passenger = '';
+  late String driver = '';
+  late String plateNum = '';
+
+  late String destination = '';
+  late String distance = '';
+  late String fare = '';
+
+  TicketData(
+      {required this.passenger,
+      required this.driver,
+      required this.plateNum,
+      required this.destination,
+      required this.distance,
+      required this.fare});
 
   @override
   Widget build(BuildContext context) {
+    String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -82,12 +96,11 @@ class TicketData extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ticketDetailsWidget(
-                  'Passengers', 'Hafiz M Mujahid', 'Date', '28-08-2022'),
+              ticketDetailsWidget('Passengers', passenger, 'Date', cdate),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0, right: 52.0),
-                child: ticketDetailsWidget(
-                    'Driver', 'Lance Olana', 'Plate #', '66B'),
+                child:
+                    ticketDetailsWidget('Driver', driver, 'Plate #', plateNum),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),
@@ -96,12 +109,12 @@ class TicketData extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),
-                child: ticketDetailsWidget('Destination', 'Business', '', ''),
+                child: ticketDetailsWidget('Destination', destination, '', ''),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),
-                child:
-                    ticketDetailsWidget('Distance', '100km', 'Fare', '200php'),
+                child: ticketDetailsWidget(
+                    'Distance', distance, 'Fare', '${fare}php'),
               ),
             ],
           ),
