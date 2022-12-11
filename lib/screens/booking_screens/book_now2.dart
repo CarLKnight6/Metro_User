@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:taxi_user/services/cloud_function/add_message.dart';
 import 'package:taxi_user/widgets/drawer/drawer_widget.dart';
 import 'package:taxi_user/widgets/markers/my_location_marker.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
@@ -22,6 +24,34 @@ class _HomeScreenState extends State<BookNow2> {
   Set<Marker> markers = {};
 
   final box = GetStorage();
+
+  final msgController = TextEditingController();
+
+  late String myName = '';
+
+  getData1() async {
+    // Use provider
+    var collection = FirebaseFirestore.instance
+        .collection('Users')
+        .where('id', isEqualTo: FirebaseAuth.instance.currentUser!.uid);
+
+    var querySnapshot = await collection.get();
+    if (mounted) {
+      setState(() {
+        for (var queryDocumentSnapshot in querySnapshot.docs) {
+          Map<String, dynamic> data = queryDocumentSnapshot.data();
+          myName = data['firstName'] + ' ' + data['lastName'];
+        }
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData1();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +186,7 @@ class _HomeScreenState extends State<BookNow2> {
                                     width: 240,
                                     height: 50,
                                     child: TextFormField(
+                                      controller: msgController,
                                       textCapitalization:
                                           TextCapitalization.sentences,
                                       style: const TextStyle(
@@ -164,7 +195,22 @@ class _HomeScreenState extends State<BookNow2> {
                                       onChanged: (_input) {},
                                       decoration: InputDecoration(
                                         suffixIcon: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            addMessage(
+                                                data['profilePicture'],
+                                                data['driverName'],
+                                                msgController.text,
+                                                data['driverId'],
+                                                myName);
+                                            addMessage1(
+                                                data['profilePicture'],
+                                                data['driverName'],
+                                                msgController.text,
+                                                data['driverId'],
+                                                myName);
+
+                                            msgController.clear();
+                                          },
                                           icon: const Icon(Icons.send),
                                         ),
                                         prefixIcon: const Icon(
