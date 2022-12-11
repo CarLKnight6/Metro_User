@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_user/auth/signup.dart';
-import 'package:taxi_user/services/authentication/email_login.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
@@ -51,8 +50,8 @@ class LoginPage extends StatelessWidget {
                     label: 'Login',
                     color: Colors.amber,
                     onPressed: () {
-                      emailLogin(_usernameController.text,
-                          _passwordController.text, context);
+                      // emailLogin(_usernameController.text,
+                      //     _passwordController.text, context);
                     }),
                 Padding(
                   padding: const EdgeInsets.only(right: 40),

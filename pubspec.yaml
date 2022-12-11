@@ -71,6 +71,7 @@ dependencies:
   fluttertoast:
   flutter_onboard:
   ticketview:
+  ticket_widget:
 
 
 dev_dependencies:
