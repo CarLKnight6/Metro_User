@@ -71,6 +71,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     child: ListView.builder(
                       itemCount: snapshot.data?.size ?? 0,
                       itemBuilder: ((context, index) {
+                        double payment = data.docs[index]['payment'];
                         DateTime created =
                             data.docs[index]['dateTime'].toDate();
 
@@ -256,13 +257,13 @@ class _HistoryPageState extends State<HistoryPage> {
                                             children: [
                                               TextRegular(
                                                   text: 'Fare:',
-                                                  fontSize: 14,
+                                                  fontSize: 12,
                                                   color: Colors.grey),
                                               TextBold(
                                                   text:
-                                                      '${data.docs[index]['payment']}php',
-                                                  fontSize: 18,
-                                                  color: Colors.black),
+                                                      '${payment.toStringAsFixed(2)}php',
+                                                  fontSize: 14,
+                                                  color: Colors.amber),
                                             ],
                                           ),
                                           const SizedBox(
