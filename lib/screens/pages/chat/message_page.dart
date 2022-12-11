@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:taxi_user/screens/pages/chat/convo_page.dart';
 import 'package:taxi_user/widgets/appbar/normal_appbar.dart';
+import 'package:taxi_user/widgets/delegate/search_driver.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
 
 import '../../../widgets/drawer/drawer_widget.dart';
@@ -99,6 +100,15 @@ class MessagePage extends StatelessWidget {
                   ),
                 );
               }),
+            );
+          }),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.red,
+          child: const Icon(Icons.add, color: Colors.white),
+          onPressed: () {
+            showSearch(
+              context: context,
+              delegate: SearchMessages(),
             );
           }),
     );
