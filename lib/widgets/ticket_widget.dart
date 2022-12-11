@@ -10,8 +10,20 @@ class TicketData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: IconButton(
+            onPressed: () {
+              // Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.close, color: Colors.red),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -96,7 +108,7 @@ class TicketData extends StatelessWidget {
         ),
         const Center(
             child: Padding(
-                padding: EdgeInsets.only(top: 50.0, left: 30.0, right: 30.0),
+                padding: EdgeInsets.only(top: 40.0, left: 30.0, right: 30.0),
                 child: Center(
                     child: Text(
                   'Developer: SCiVER IT Solutions',
@@ -113,7 +125,7 @@ class TicketData extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 20),
         TextBold(
             text: 'Screenshot your E-Ticket', fontSize: 12, color: Colors.grey),
       ],
