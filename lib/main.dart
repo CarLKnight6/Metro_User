@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taxi_user/screens/home_screen.dart';
+import 'package:taxi_user/screens/on_boarding.dart';
 
 import 'auth/login.dart';
 import 'firebase_options.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               return HomeScreen();
             } else {
-              return LoginPage();
+              return const OnboardingScreen();
             }
           }),
     );
