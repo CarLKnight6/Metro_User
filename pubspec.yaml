@@ -69,6 +69,8 @@ dependencies:
   date_time_picker:
   url_launcher:
   fluttertoast:
+  flutter_onboard:
+  ticketview:
 
 
 dev_dependencies:
