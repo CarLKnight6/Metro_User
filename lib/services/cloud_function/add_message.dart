@@ -68,21 +68,21 @@ Future addMessage1(
   final json = {
     'nameOfPersonToSend': nameOfPersonToSend,
     'message': message,
-    'myName': myName,
+    'myName': profilePicOfPersonToSend,
     'id': docUser.id,
     'time': tdata,
     'dateTime': DateTime.now(),
-    'profilePicOfPersonToSend': profilePicOfPersonToSend,
+    'profilePicOfPersonToSend': myName,
   };
 
   final json1 = {
     'nameOfPersonToSend': nameOfPersonToSend,
     'message': message,
-    'myName': myName,
+    'myName': profilePicOfPersonToSend,
     'id': docUser.id,
     'time': tdata,
     'dateTime': DateTime.now(),
-    'profilePicOfPersonToSend': profilePicOfPersonToSend,
+    'profilePicOfPersonToSend': myName,
   };
 
   await docUser1.set(json1);
