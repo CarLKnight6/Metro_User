@@ -253,12 +253,12 @@ class _ConvoPageState extends State<ConvoPage> {
                                     box.read('uid'),
                                     myName);
 
-                                _messageController.clear();
-
                                 _scrollController.animateTo(
                                     _scrollController.position.maxScrollExtent,
                                     duration: const Duration(milliseconds: 500),
                                     curve: Curves.easeOut);
+
+                                _messageController.clear();
                               }
                             },
                             icon: const Icon(Icons.send, color: Colors.blue),
