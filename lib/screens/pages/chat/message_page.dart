@@ -19,7 +19,7 @@ class MessagePage extends StatelessWidget {
     return Scaffold(
       drawer: const DrawerWidget(),
       backgroundColor: Colors.grey[200],
-      appBar: NormalAppbar('Messages', Colors.grey[300]!),
+      appBar: NormalAppbar('Messages', Colors.grey[200]!),
       body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection(FirebaseAuth.instance.currentUser!.uid)
@@ -70,6 +70,7 @@ class MessagePage extends StatelessWidget {
                     child: ListTile(
                       onTap: () {
                         box.write('uid', data.docs[index].id);
+                        box.write('name', data.docs[index].id);
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ConvoPage()));
                       },
@@ -77,13 +78,6 @@ class MessagePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       tileColor: Colors.white,
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        minRadius: 25,
-                        maxRadius: 25,
-                        backgroundImage: NetworkImage(
-                            data.docs[index]['profilePicOfPersonToSend']),
-                      ),
                       title: Text(
                         data.docs[index]['message'],
                         overflow: TextOverflow.ellipsis,
@@ -93,7 +87,8 @@ class MessagePage extends StatelessWidget {
                             fontFamily: 'QBold'),
                       ),
                       subtitle: TextRegular(
-                          text: data.docs[index]['nameOfPersonToSend'],
+                          text: 'Last message from: ' +
+                              data.docs[index]['myName'],
                           fontSize: 12,
                           color: Colors.grey),
                       trailing: TextRegular(

@@ -3,9 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:taxi_user/services/cloud_function/add_message.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
+
+import '../../../services/cloud_function/add_message.dart';
 
 class ConvoPage extends StatefulWidget {
   @override
@@ -65,8 +66,8 @@ class _ConvoPageState extends State<ConvoPage> {
     print(box.read('uid'));
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection(FirebaseAuth.instance.currentUser!.uid)
-            .doc(box.read('uid'))
+            .collection(box.read('uid'))
+            .doc(FirebaseAuth.instance.currentUser!.uid)
             .collection('Messages')
             .orderBy('dateTime')
             .snapshots(),
@@ -94,9 +95,17 @@ class _ConvoPageState extends State<ConvoPage> {
               centerTitle: true,
               backgroundColor: Colors.grey[300],
               title: TextBold(
-                  text: data.docs[0]['nameOfPersonToSend'],
+                  text: data.docs[0]['myName'],
                   fontSize: 22,
                   color: Colors.black),
+              actions: const [
+                CircleAvatar(
+                  minRadius: 10,
+                  maxRadius: 10,
+                  backgroundColor: Colors.red,
+                ),
+                SizedBox(width: 10),
+              ],
             ),
             body: Column(
               children: [
@@ -110,11 +119,11 @@ class _ConvoPageState extends State<ConvoPage> {
                               data.docs[index]['nameOfPersonToSend'];
                           profilePicOfPersonToSend =
                               data.docs[index]['profilePicOfPersonToSend'];
-                          return data.docs[index]['nameOfPersonToSend'] !=
+                          return data.docs[index]['nameOfPersonToSend'] ==
                                   myName
                               ? Padding(
                                   padding: const EdgeInsets.fromLTRB(
-                                      120, 10, 10, 10),
+                                      100, 10, 10, 10),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
@@ -199,7 +208,7 @@ class _ConvoPageState extends State<ConvoPage> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(right: 250),
+                                            const EdgeInsets.only(right: 230),
                                         child: TextRegular(
                                             text: data.docs[index]['time'],
                                             fontSize: 12,

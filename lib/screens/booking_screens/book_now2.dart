@@ -192,7 +192,6 @@ class _HomeScreenState extends State<BookNow2> {
                                       style: const TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Quicksand'),
-                                      onChanged: (_input) {},
                                       decoration: InputDecoration(
                                         suffixIcon: IconButton(
                                           onPressed: () {
