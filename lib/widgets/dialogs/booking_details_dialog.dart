@@ -146,7 +146,7 @@ class BookingDetailsDialog extends StatelessWidget {
                       fontSize: 14,
                       color: Colors.black),
                   trailing: TextBold(
-                      text: '$fare.00php', fontSize: 18, color: Colors.black),
+                      text: '${fare}php', fontSize: 18, color: Colors.black),
                 ),
                 const Divider(),
                 Padding(

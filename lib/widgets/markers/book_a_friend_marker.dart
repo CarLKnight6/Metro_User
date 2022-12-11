@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,6 +51,15 @@ bookAFriendMarker(
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
+  }
+
+  double calculateDistance(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((lat2 - lat1) * p) / 2 +
+        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+    return 12742 * asin(sqrt(a));
   }
 
   Marker mark1 = Marker(
@@ -300,6 +311,16 @@ bookAFriendMarker(
                                                                       .notifier)
                                                               .state,
                                                         );
+
+                                                        double distance =
+                                                            calculateDistance(
+                                                          location1[0].latitude,
+                                                          location1[0]
+                                                              .longitude,
+                                                          location[0].latitude,
+                                                          location[0].longitude,
+                                                        );
+
                                                         Navigator.of(context)
                                                             .pop(true);
                                                         showDialog(
@@ -330,7 +351,11 @@ bookAFriendMarker(
                                                                       .watch(destinationProvider
                                                                           .notifier)
                                                                       .state,
-                                                                  fare: '200',
+                                                                  fare: ((distance *
+                                                                              12) +
+                                                                          50)
+                                                                      .toStringAsFixed(
+                                                                          2),
                                                                   onPressed:
                                                                       () {
                                                                     bookAFriend(
@@ -369,7 +394,9 @@ bookAFriendMarker(
                                                                           .watch(
                                                                               pickupProvider.notifier)
                                                                           .state,
-                                                                      payment,
+                                                                      (distance *
+                                                                              12) +
+                                                                          50,
                                                                       _nameController
                                                                           .text,
                                                                       _contactNumberController
