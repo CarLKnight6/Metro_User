@@ -77,10 +77,12 @@ class MessagePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       tileColor: Colors.white,
-                      leading: const CircleAvatar(
-                        backgroundColor: Colors.black,
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.grey,
                         minRadius: 25,
                         maxRadius: 25,
+                        backgroundImage: NetworkImage(
+                            data.docs[index]['profilePicOfPersonToSend']),
                       ),
                       title: Text(
                         data.docs[index]['message'],
