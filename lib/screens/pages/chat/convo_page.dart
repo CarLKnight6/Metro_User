@@ -58,6 +58,8 @@ class _ConvoPageState extends State<ConvoPage> {
 
   late String profilePicOfPersonToSend, nameOfPersonToSend;
 
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     print(box.read('uid'));
@@ -101,6 +103,7 @@ class _ConvoPageState extends State<ConvoPage> {
                 Expanded(
                   child: SizedBox(
                     child: ListView.builder(
+                        controller: _scrollController,
                         itemCount: snapshot.data?.size ?? 0,
                         itemBuilder: (context, index) {
                           nameOfPersonToSend =
@@ -223,12 +226,26 @@ class _ConvoPageState extends State<ConvoPage> {
                               if (_messageController.text == '') {
                                 showToast();
                               } else {
+                                // addMessage(
+                                //     profilePicOfPersonToSend,
+                                //     nameOfPersonToSend,
+                                //     _messageController.text,
+                                //     box.read('uid'),
+                                //     myName);
+                                // addMessage1(
+                                //     profilePicOfPersonToSend,
+                                //     nameOfPersonToSend,
+                                //     _messageController.text,
+                                //     box.read('uid'),
+                                //     myName);
+
                                 addMessage(
                                     profilePicOfPersonToSend,
                                     nameOfPersonToSend,
                                     _messageController.text,
                                     box.read('uid'),
                                     myName);
+
                                 addMessage1(
                                     profilePicOfPersonToSend,
                                     nameOfPersonToSend,
@@ -237,6 +254,11 @@ class _ConvoPageState extends State<ConvoPage> {
                                     myName);
 
                                 _messageController.clear();
+
+                                _scrollController.animateTo(
+                                    _scrollController.position.maxScrollExtent,
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.easeOut);
                               }
                             },
                             icon: const Icon(Icons.send, color: Colors.blue),

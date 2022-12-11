@@ -66,23 +66,23 @@ Future addMessage1(
   String tdata = DateFormat("hh:mm a").format(DateTime.now());
 
   final json = {
-    'nameOfPersonToSend': nameOfPersonToSend,
+    'nameOfPersonToSend': myName,
     'message': message,
-    'myName': profilePicOfPersonToSend,
+    'myName': nameOfPersonToSend,
     'id': docUser.id,
     'time': tdata,
     'dateTime': DateTime.now(),
-    'profilePicOfPersonToSend': myName,
+    'profilePicOfPersonToSend': profilePicOfPersonToSend
   };
 
   final json1 = {
-    'nameOfPersonToSend': nameOfPersonToSend,
+    'nameOfPersonToSend': myName,
     'message': message,
-    'myName': profilePicOfPersonToSend,
+    'myName': nameOfPersonToSend,
     'id': docUser.id,
     'time': tdata,
     'dateTime': DateTime.now(),
-    'profilePicOfPersonToSend': myName,
+    'profilePicOfPersonToSend': profilePicOfPersonToSend,
   };
 
   await docUser1.set(json1);
