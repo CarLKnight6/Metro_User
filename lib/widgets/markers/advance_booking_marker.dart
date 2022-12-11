@@ -11,6 +11,8 @@ import 'package:taxi_user/services/cloud_function/advance_booking.dart';
 import 'package:taxi_user/services/providers/date_provider.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:taxi_user/widgets/ticket_widget.dart';
+import 'package:ticket_widget/ticket_widget.dart';
 import 'package:uuid/uuid.dart';
 import '../../services/providers/destination_provider.dart';
 import '../delegate/search_destination.dart';
@@ -334,14 +336,45 @@ advanceBookingMarker(
                                                         'ratings': reviews + 1,
                                                       });
 
-                                                      showToast();
-
                                                       Navigator.of(context)
                                                           .pushReplacement(
                                                               MaterialPageRoute(
                                                                   builder:
                                                                       (context) =>
                                                                           AdvanceBooking()));
+
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Scaffold(
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              body: Center(
+                                                                child: SizedBox(
+                                                                  child: TicketWidget(
+                                                                      width: 350,
+                                                                      height: 500,
+                                                                      child: TicketData(
+                                                                        passenger:
+                                                                            userName,
+                                                                        driver:
+                                                                            driverName,
+                                                                        plateNum:
+                                                                            plateNumber,
+                                                                        destination: ref
+                                                                            .watch(destinationProvider.notifier)
+                                                                            .state,
+                                                                        distance:
+                                                                            distance.toStringAsFixed(2),
+                                                                        fare: ((distance * 12) +
+                                                                                50)
+                                                                            .toStringAsFixed(2),
+                                                                      )),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          });
                                                     });
                                               });
                                         },

@@ -15,6 +15,8 @@ class TextRegular extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
       style:
           TextStyle(fontSize: fontSize, color: color, fontFamily: 'QRegular'),
     );

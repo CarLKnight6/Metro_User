@@ -8,16 +8,18 @@ class TicketData extends StatelessWidget {
   late String plateNum = '';
 
   late String destination = '';
+
   late String distance = '';
   late String fare = '';
 
-  TicketData(
-      {required this.passenger,
-      required this.driver,
-      required this.plateNum,
-      required this.destination,
-      required this.distance,
-      required this.fare});
+  TicketData({
+    required this.passenger,
+    required this.driver,
+    required this.plateNum,
+    required this.destination,
+    required this.distance,
+    required this.fare,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class TicketData extends StatelessWidget {
           alignment: Alignment.topRight,
           child: IconButton(
             onPressed: () {
-              // Navigator.of(context).pop();
+              Navigator.of(context).pop();
             },
             icon: const Icon(Icons.close, color: Colors.red),
           ),
@@ -114,7 +116,7 @@ class TicketData extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),
                 child: ticketDetailsWidget(
-                    'Distance', distance, 'Fare', '${fare}php'),
+                    'Distance', '${distance}km', 'Fare', '${fare}php'),
               ),
             ],
           ),
@@ -164,6 +166,8 @@ Widget ticketDetailsWidget(String firstTitle, String firstDesc,
               padding: const EdgeInsets.only(top: 4.0),
               child: Text(
                 firstDesc,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(color: Colors.black),
               ),
             )
