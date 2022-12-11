@@ -201,13 +201,16 @@ class _BookNowScreenState extends State<BookNowScreen> {
                                             size: 32,
                                             color: Colors.red[700],
                                           ),
-                                          TextRegular(
-                                              text: ref
-                                                  .watch(
-                                                      pickupProvider.notifier)
-                                                  .state,
-                                              fontSize: 12,
-                                              color: Colors.black),
+                                          SizedBox(
+                                            width: 220,
+                                            child: TextRegular(
+                                                text: ref
+                                                    .watch(
+                                                        pickupProvider.notifier)
+                                                    .state,
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -224,13 +227,16 @@ class _BookNowScreenState extends State<BookNowScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
-                                          TextRegular(
-                                              text: ref
-                                                  .watch(destinationProvider
-                                                      .notifier)
-                                                  .state,
-                                              fontSize: 12,
-                                              color: Colors.black),
+                                          SizedBox(
+                                            width: 220,
+                                            child: TextRegular(
+                                                text: ref
+                                                    .watch(destinationProvider
+                                                        .notifier)
+                                                    .state,
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
                                           Icon(
                                             Icons.local_taxi_rounded,
                                             size: 32,
