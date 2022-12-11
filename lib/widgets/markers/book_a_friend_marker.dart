@@ -148,7 +148,7 @@ bookAFriendMarker(
                                     height: 10,
                                   ),
                                   TextRegular(
-                                      text: "Friend's Current Location",
+                                      text: "Select Friend's Current Location",
                                       fontSize: 14,
                                       color: Colors.black),
                                   const SizedBox(
@@ -189,7 +189,8 @@ bookAFriendMarker(
                                     height: 10,
                                   ),
                                   TextRegular(
-                                      text: "Friend's Destination Location",
+                                      text:
+                                          "Select Friend's Destination Location",
                                       fontSize: 14,
                                       color: Colors.black),
                                   const SizedBox(
