@@ -6,6 +6,8 @@ import 'package:taxi_user/widgets/text/text_regular.dart';
 import 'package:taxi_user/widgets/textfields/normal_field.dart';
 import 'package:taxi_user/widgets/textfields/password_field.dart';
 
+import '../services/authentication/email_login.dart';
+
 class LoginPage extends StatelessWidget {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -50,8 +52,8 @@ class LoginPage extends StatelessWidget {
                     label: 'Login',
                     color: Colors.amber,
                     onPressed: () {
-                      // emailLogin(_usernameController.text,
-                      //     _passwordController.text, context);
+                      emailLogin(_usernameController.text,
+                          _passwordController.text, context);
                     }),
                 Padding(
                   padding: const EdgeInsets.only(right: 40),
