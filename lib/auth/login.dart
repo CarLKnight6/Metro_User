@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_user/auth/forgot_password.dart';
 import 'package:taxi_user/auth/signup.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
@@ -60,7 +61,10 @@ class LoginPage extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+	builder: (context) =>  ForgotPasswordPage()));
+                      },
                       child: TextBold(
                           text: 'Forgot Password?',
                           fontSize: 12,
