@@ -42,7 +42,7 @@ class ForgotPasswordPage extends StatelessWidget {
                         builder: (context) {
                           return NormalDialog(
                               label:
-                                  'Password Configuration was sent to your email',
+                                  'Password Configuration was sent to your email under spam section',
                               buttonColor: Colors.amber,
                               buttonText: 'Continue',
                               icon: Icons.check_circle_outline_outlined,
