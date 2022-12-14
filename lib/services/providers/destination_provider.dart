@@ -7,3 +7,7 @@ final destinationProvider = StateProvider.autoDispose<String>((ref) {
 final pickupProvider = StateProvider.autoDispose<String>((ref) {
   return 'Pickup Location';
 });
+
+final addressProvider = StateProvider.autoDispose<String>((ref) {
+  return 'Select Barangay';
+});

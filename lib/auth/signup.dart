@@ -2,9 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:taxi_user/auth/signup2.dart';
+import 'package:taxi_user/services/providers/destination_provider.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
+import 'package:taxi_user/widgets/delegate/search_brgy.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
 import 'package:taxi_user/widgets/textfields/contactnumber_field.dart';
@@ -12,15 +15,16 @@ import 'package:taxi_user/widgets/textfields/normal_field.dart';
 import 'package:taxi_user/widgets/textfields/password_field.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
+import 'package:uuid/uuid.dart';
 
 import '../widgets/dialogs/error_dialog.dart';
 
-class SignupPage extends StatefulWidget {
+class SignupPage extends ConsumerStatefulWidget {
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  ConsumerState<SignupPage> createState() => _SignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignupPageState extends ConsumerState<SignupPage> {
   final _firstnameController = TextEditingController();
 
   final _lastnameController = TextEditingController();
@@ -203,6 +207,8 @@ class _SignupPageState extends State<SignupPage> {
     'Solano',
     'Villaverde',
   ];
+
+  List<String> listBrgyIsabela = [];
 
   @override
   Widget build(BuildContext context) {
@@ -435,95 +441,27 @@ class _SignupPageState extends State<SignupPage> {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 2, 20, 2),
-                    child: DropdownButton(
-                      underline: Container(color: Colors.transparent),
-                      iconEnabledColor: Colors.black,
-                      isExpanded: true,
-                      value: dropDownValue3,
-                      items: [
-                        DropdownMenuItem(
-                          onTap: () {
-                            brgy = "Sample 1";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 1",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 1,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            brgy = "Sample 2";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 2",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 2,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            brgy = "Sample 3";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 3",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 3,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            brgy = "Sample 4";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 4",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 4,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            brgy = "Sample 5";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 5",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 5,
-                        ),
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          dropDownValue3 = int.parse(value.toString());
-                        });
-                      },
+                child: GestureDetector(
+                  onTap: () {
+                    final sessionToken = const Uuid().v4();
+                    showSearch(
+                        context: context, delegate: SearchBrgy(sessionToken));
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 500,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(2, 2, 2, 2),
+                      child: Center(
+                        child: TextRegular(
+                            text: ref.watch(addressProvider.notifier).state,
+                            fontSize: 18,
+                            color: Colors.black),
+                      ),
                     ),
                   ),
                 ),
