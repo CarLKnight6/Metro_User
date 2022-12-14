@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:taxi_user/auth/login.dart';
+import 'package:taxi_user/plugins/geolocation.dart';
 
 class LoadingScreenToLogIn extends StatefulWidget {
   @override
@@ -10,6 +11,8 @@ class LoadingScreenToLogIn extends StatefulWidget {
 class _ScreenState extends State<LoadingScreenToLogIn> {
   @override
   void initState() {
+    determinePosition();
+
     // TODO: implement initState
     super.initState();
     Timer(const Duration(seconds: 5), () async {

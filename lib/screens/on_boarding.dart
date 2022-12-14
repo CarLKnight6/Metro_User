@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_onboard/flutter_onboard.dart';
+import 'package:taxi_user/plugins/geolocation.dart';
 import 'package:taxi_user/screens/splash_screen.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  OnboardingScreen({Key? key}) : super(key: key);
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    determinePosition();
+  }
 
   final List<OnBoardModel> onBoardData = [
     const OnBoardModel(
