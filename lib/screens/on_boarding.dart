@@ -50,6 +50,7 @@ class OnboardingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: OnBoard(
+        imageWidth: 250,
         pageController: _pageController,
         // Either Provide onSkip Callback or skipButton Widget to handle skip state
 
