@@ -21,8 +21,7 @@ class OperatorPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              TextBold(
-                  text: 'CVKATCO', fontSize: 16, color: Colors.black),
+              TextBold(text: 'CVKATCO', fontSize: 16, color: Colors.black),
               TextRegular(text: 'Operator', fontSize: 14, color: Colors.black),
               const SizedBox(height: 20),
               TextRegular(
@@ -52,6 +51,11 @@ class OperatorPage extends StatelessWidget {
               TextRegular(
                   text:
                       "Social Goals\nImprove the quality of public transport service in line with the present utility vehicle modernization.",
+                  fontSize: 12,
+                  color: Colors.black),
+              const SizedBox(height: 20),
+              TextRegular(
+                  text: "Contact Numbers:\n09213820660\n09174046777",
                   fontSize: 12,
                   color: Colors.black),
               const SizedBox(height: 20),
