@@ -37,8 +37,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   late String currentAddress;
 
-  late double lat;
-  late double long;
+  late double lat = 0;
+  late double long = 0;
 
   var hasLoaded = false;
   getLocation() async {

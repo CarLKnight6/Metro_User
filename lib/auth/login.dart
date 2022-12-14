@@ -56,8 +56,7 @@ class LoginPage extends StatelessWidget {
                     onPressed: () async {
                       LocationPermission permission;
                       permission = await Geolocator.requestPermission();
-                      Position position = await Geolocator.getCurrentPosition(
-                          desiredAccuracy: LocationAccuracy.high);
+
                       bool serviceEnabled;
 
                       // Test if location services are enabled.
