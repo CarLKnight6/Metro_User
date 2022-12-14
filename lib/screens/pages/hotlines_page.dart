@@ -6,7 +6,9 @@ import '../../widgets/appbar/normal_appbar.dart';
 import '../../widgets/drawer/drawer_widget.dart';
 
 class HotlinesPage extends StatelessWidget {
-  const HotlinesPage({Key? key}) : super(key: key);
+  HotlinesPage({Key? key}) : super(key: key);
+
+  List hotlines = [];
 
   @override
   Widget build(BuildContext context) {

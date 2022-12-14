@@ -155,7 +155,7 @@ class _MyDrawerState extends State<DrawerWidget> {
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (context) => const HotlinesPage()));
+                                  builder: (context) => HotlinesPage()));
                         },
                         tileColor: Colors.transparent),
                     NormalTile(
