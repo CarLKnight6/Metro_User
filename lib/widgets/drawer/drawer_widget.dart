@@ -196,57 +196,50 @@ class _MyDrawerState extends State<DrawerWidget> {
                                   builder: (context) => const AboutusPage()));
                         },
                         tileColor: Colors.transparent),
-                    BookingTile(
-                        icon: Icons.logout,
-                        label: 'Logout',
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    title: TextBold(
-                                        text: 'Logout Confirmation',
-                                        color: Colors.black,
-                                        fontSize: 14),
-                                    content: TextRegular(
-                                        text:
-                                            'Are you sure you want to logout?',
-                                        color: Colors.black,
-                                        fontSize: 16),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(true),
-                                        child: TextBold(
-                                            text: 'Close',
-                                            color: Colors.black,
-                                            fontSize: 14),
-                                      ),
-                                      FlatButton(
-                                        onPressed: () async {
-                                          await FirebaseAuth.instance.signOut();
-                                          Navigator.of(context).pushReplacement(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      LoginPage()));
-                                        },
-                                        child: TextBold(
-                                            text: 'Continue',
-                                            color: Colors.black,
-                                            fontSize: 14),
-                                      ),
-                                    ],
-                                  ));
-                        },
-                        tileColor: Colors.red[600]!),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Image.asset(
-                      'assets/images/SCIVER LOGO.png',
-                      height: 80,
+                    NormalTile(
+                      tileColor: Colors.transparent,
+                      icon: Icons.logout,
+                      label: 'Logout',
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: TextBold(
+                                      text: 'Logout Confirmation',
+                                      color: Colors.black,
+                                      fontSize: 14),
+                                  content: TextRegular(
+                                      text: 'Are you sure you want to logout?',
+                                      color: Colors.black,
+                                      fontSize: 16),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(true),
+                                      child: TextBold(
+                                          text: 'Close',
+                                          color: Colors.black,
+                                          fontSize: 14),
+                                    ),
+                                    FlatButton(
+                                      onPressed: () async {
+                                        await FirebaseAuth.instance.signOut();
+                                        Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginPage()));
+                                      },
+                                      child: TextBold(
+                                          text: 'Continue',
+                                          color: Colors.black,
+                                          fontSize: 14),
+                                    ),
+                                  ],
+                                ));
+                      },
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 50,
                     ),
                   ],
                 ),
