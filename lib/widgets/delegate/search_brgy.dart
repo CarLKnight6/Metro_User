@@ -46,6 +46,7 @@ class SearchBrgy extends SearchDelegate<Suggestion> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    final box = GetStorage();
     return FutureBuilder(
         future: query == ""
             ? null
@@ -55,7 +56,7 @@ class SearchBrgy extends SearchDelegate<Suggestion> {
           return query == ''
               ? Container(
                   padding: const EdgeInsets.all(16.0),
-                  child: const Text('Search'),
+                  child: const Text('Search your Barangay'),
                 )
               : snapshot.hasData
                   ? Consumer(
@@ -65,12 +66,20 @@ class SearchBrgy extends SearchDelegate<Suggestion> {
                             title: Text((snapshot.data![index] as Suggestion)
                                 .description),
                             onTap: () {
-                              close(
-                                  context, snapshot.data![index] as Suggestion);
-
                               ref.read(addressProvider.notifier).state =
                                   (snapshot.data![index] as Suggestion)
                                       .description;
+                              close(
+                                  context, snapshot.data![index] as Suggestion);
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  duration: const Duration(seconds: 5),
+                                  content: Text('Selected Barangay: ' +
+                                      (snapshot.data![index] as Suggestion)
+                                          .description),
+                                ),
+                              );
                             },
                           ),
                           itemCount: snapshot.data!.length,

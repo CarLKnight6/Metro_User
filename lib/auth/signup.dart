@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:taxi_user/auth/signup2.dart';
-import 'package:taxi_user/services/providers/destination_provider.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/delegate/search_brgy.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
@@ -210,8 +210,14 @@ class _SignupPageState extends ConsumerState<SignupPage> {
 
   List<String> listBrgyIsabela = [];
 
+  final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
+    final myBrgy = box.read('brgy') ?? 'Select Barangay';
+
+    final finalBrgy = myBrgy.split(',');
+
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: SingleChildScrollView(
@@ -442,9 +448,9 @@ class _SignupPageState extends ConsumerState<SignupPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     final sessionToken = const Uuid().v4();
-                    showSearch(
+                    await showSearch(
                         context: context, delegate: SearchBrgy(sessionToken));
                   },
                   child: Container(
@@ -457,10 +463,12 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(2, 2, 2, 2),
                       child: Center(
-                        child: TextRegular(
-                            text: ref.watch(addressProvider.notifier).state,
-                            fontSize: 18,
-                            color: Colors.black),
+                        child: Builder(builder: (context) {
+                          return TextRegular(
+                              text: finalBrgy[0],
+                              fontSize: 18,
+                              color: Colors.black);
+                        }),
                       ),
                     ),
                   ),
@@ -497,7 +505,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
                                 password: _passwordController.text,
                                 province: province,
                                 city: city,
-                                brgy: brgy,
+                                brgy: finalBrgy[0],
                               )));
                     }
                   }),
