@@ -68,6 +68,13 @@ class AboutusPage extends StatelessWidget {
                                 "SCIVER IT SOLUTIONS partners with both government entities and private companies in the Philippines as the technology arm to help fulfill business objectives and to keep innovating with software solutions.",
                             fontSize: 12,
                             color: Colors.black),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextRegular(
+                            text: "Contact Number: 09980064774",
+                            fontSize: 12,
+                            color: Colors.black),
                       ],
                     ),
                   ),
