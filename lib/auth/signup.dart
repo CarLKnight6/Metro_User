@@ -118,6 +118,92 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
+  List<String> listProvince = ['Cagayan', 'Isabela', 'Nueva Vizcaya'];
+
+  List<String> listCity = [
+    'Abulug',
+    'Alcala',
+    'Allacapan',
+    'Amulung',
+    'Aparri',
+    'Baggao',
+    'Ballesteros',
+    'Buguey',
+    'Calayan',
+    'Camalaniugan',
+    'Claveria',
+    'Enrile',
+    'Gattaran',
+    'Gonzaga',
+    'Iguig',
+    'Lal-lo',
+    'Lasam',
+    'Pamplona',
+    'Peñablanca',
+    'Piat',
+    'Rizal',
+    'Sanchez-Mira',
+    'Santa Ana',
+    'Santa Praxedes',
+    'Santa Teresita',
+    'Santo Niño',
+    'Solana',
+    'Tuao',
+    'Tuguegarao',
+    'Alicia',
+    'Angadanan',
+    'Aurora',
+    'Benito Soliven',
+    'Burgos',
+    'Cabagan',
+    'Cabatuan',
+    'Cauayan',
+    'Cordon',
+    'Delfin Albano',
+    'Dinapigue',
+    'Divilacan',
+    'Echague',
+    'Gamu',
+    'Ilagan',
+    'Jones',
+    'Luna',
+    'Maconacon',
+    'Mallig',
+    'Naguilian',
+    'Palanan',
+    'Quezon',
+    'Quirino',
+    'Ramon',
+    'Reina Mercedes',
+    'Roxas',
+    'San Agustin',
+    'San Guillermo',
+    'San Isidro',
+    'San Manuel',
+    'San Mariano',
+    'San Mateo',
+    'San Pablo',
+    'Santa Maria',
+    'Santiago',
+    'Santo Tomas',
+    'Tumauini',
+    'Alfonso Castañeda',
+    'Ambaguio',
+    'Aritao',
+    'Bagabag',
+    'Bambang',
+    'Bayombong',
+    'Diadi',
+    'Dupax del Norte',
+    'Dupax del Sur',
+    'Kasibu',
+    'Kayapa',
+    'Quezon',
+    'Santa Fe',
+    'Solano',
+    'Villaverde',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -258,76 +344,21 @@ class _SignupPageState extends State<SignupPage> {
                       isExpanded: true,
                       value: dropDownValue1,
                       items: [
-                        DropdownMenuItem(
-                          onTap: () {
-                            province = "Sample 1";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 1",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 1,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            province = "Sample 2";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 2",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 2,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            province = "Sample 3";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 3",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 3,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            province = "Sample 4";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 4",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 4,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            province = "Sample 5";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 5",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 5,
-                        ),
+                        for (int i = 0; i < listProvince.length; i++)
+                          DropdownMenuItem(
+                            onTap: () {
+                              province = listProvince[i];
+                            },
+                            child: Center(
+                                child: Row(children: [
+                              Text(listProvince[i],
+                                  style: const TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    color: Colors.black,
+                                  ))
+                            ])),
+                            value: i,
+                          ),
                       ],
                       onChanged: (value) {
                         setState(() {
@@ -366,76 +397,21 @@ class _SignupPageState extends State<SignupPage> {
                       isExpanded: true,
                       value: dropDownValue2,
                       items: [
-                        DropdownMenuItem(
-                          onTap: () {
-                            city = "Sample 1";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 1",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 1,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            city = "Sample 2";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 2",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 2,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            city = "Sample 3";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 3",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 3,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            city = "Sample 4";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 4",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 4,
-                        ),
-                        DropdownMenuItem(
-                          onTap: () {
-                            city = "Sample 5";
-                          },
-                          child: Center(
-                              child: Row(children: const [
-                            Text("Sample 5",
-                                style: TextStyle(
-                                  fontFamily: 'Quicksand',
-                                  color: Colors.black,
-                                ))
-                          ])),
-                          value: 5,
-                        ),
+                        for (int i = 0; i < listCity.length; i++)
+                          DropdownMenuItem(
+                            onTap: () {
+                              city = listCity[i];
+                            },
+                            child: Center(
+                                child: Row(children: [
+                              Text(listCity[i],
+                                  style: const TextStyle(
+                                    fontFamily: 'Quicksand',
+                                    color: Colors.black,
+                                  ))
+                            ])),
+                            value: i,
+                          ),
                       ],
                       onChanged: (value) {
                         setState(() {
