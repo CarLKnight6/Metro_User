@@ -126,14 +126,14 @@ class TicketData extends StatelessWidget {
                 padding: EdgeInsets.only(top: 40.0, left: 30.0, right: 30.0),
                 child: Center(
                     child: Text(
-                  'Developer: SCiVER IT Solutions',
+                  'CVKATCO',
                   style: TextStyle(fontSize: 16, color: Colors.amber),
                 )))),
         const Center(
           child: Padding(
             padding: EdgeInsets.only(top: 10.0, left: 75.0, right: 75.0),
             child: Text(
-              '09980064774',
+              '09213820660\n09174046777',
               style: TextStyle(
                 color: Colors.black,
               ),
