@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:taxi_user/auth/forgot_password.dart';
 import 'package:taxi_user/auth/signup.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
@@ -52,9 +53,45 @@ class LoginPage extends StatelessWidget {
                 ButtonWidget(
                     label: 'Login',
                     color: Colors.amber,
-                    onPressed: () {
-                      emailLogin(_usernameController.text,
-                          _passwordController.text, context);
+                    onPressed: () async {
+                      LocationPermission permission;
+                      permission = await Geolocator.requestPermission();
+                      Position position = await Geolocator.getCurrentPosition(
+                          desiredAccuracy: LocationAccuracy.high);
+                      bool serviceEnabled;
+
+                      // Test if location services are enabled.
+                      serviceEnabled =
+                          await Geolocator.isLocationServiceEnabled();
+                      if (!serviceEnabled) {
+                        permission = await Geolocator.requestPermission();
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: TextBold(
+                                      text: 'Cannot Procceed',
+                                      color: Colors.black,
+                                      fontSize: 14),
+                                  content: TextRegular(
+                                      text: 'Location is not turned on',
+                                      color: Colors.black,
+                                      fontSize: 12),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(true),
+                                      child: TextBold(
+                                          text: 'Close',
+                                          color: Colors.black,
+                                          fontSize: 12),
+                                    ),
+                                  ],
+                                ));
+                      } else {
+                        permission = await Geolocator.requestPermission();
+                        emailLogin(_usernameController.text,
+                            _passwordController.text, context);
+                      }
                     }),
                 Padding(
                   padding: const EdgeInsets.only(right: 40),
@@ -63,7 +100,7 @@ class LoginPage extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-	builder: (context) =>  ForgotPasswordPage()));
+                            builder: (context) => ForgotPasswordPage()));
                       },
                       child: TextBold(
                           text: 'Forgot Password?',
