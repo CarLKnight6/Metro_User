@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:taxi_user/screens/booking_screens/advance_booking.dart';
+import 'package:taxi_user/screens/booking_screens/convo_booking_screen.dart';
 import 'package:taxi_user/services/cloud_function/advance_booking.dart';
 import 'package:taxi_user/services/providers/date_provider.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
@@ -64,6 +65,8 @@ advanceBookingMarker(
         c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
   }
+
+  final box = GetStorage();
 
   Marker mark1 = Marker(
       markerId: MarkerId(driverContactNumber),
@@ -367,11 +370,15 @@ advanceBookingMarker(
                                                                               1,
                                                                     });
 
+                                                                    box.write(
+                                                                        'uid',
+                                                                        driverId);
+
                                                                     Navigator.of(
                                                                             context)
                                                                         .pushReplacement(MaterialPageRoute(
                                                                             builder: (context) =>
-                                                                                AdvanceBooking()));
+                                                                                ConvoBookingPage()));
 
                                                                     showDialog(
                                                                         context:
@@ -476,12 +483,15 @@ advanceBookingMarker(
                                                               reviews + 1,
                                                         });
 
+                                                        box.write(
+                                                            'uid', driverId);
+
                                                         Navigator.of(context)
                                                             .pushReplacement(
                                                                 MaterialPageRoute(
                                                                     builder:
                                                                         (context) =>
-                                                                            AdvanceBooking()));
+                                                                            ConvoBookingPage()));
 
                                                         showDialog(
                                                             context: context,
