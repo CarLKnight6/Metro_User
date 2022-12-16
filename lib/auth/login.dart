@@ -62,35 +62,10 @@ class LoginPage extends StatelessWidget {
                       // Test if location services are enabled.
                       serviceEnabled =
                           await Geolocator.isLocationServiceEnabled();
-                      if (!serviceEnabled) {
-                        permission = await Geolocator.requestPermission();
-                        showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                                  title: TextBold(
-                                      text: 'Cannot Procceed',
-                                      color: Colors.black,
-                                      fontSize: 14),
-                                  content: TextRegular(
-                                      text: 'Location is not turned on',
-                                      color: Colors.black,
-                                      fontSize: 12),
-                                  actions: <Widget>[
-                                    FlatButton(
-                                      onPressed: () =>
-                                          Navigator.of(context).pop(true),
-                                      child: TextBold(
-                                          text: 'Close',
-                                          color: Colors.black,
-                                          fontSize: 12),
-                                    ),
-                                  ],
-                                ));
-                      } else {
-                        permission = await Geolocator.requestPermission();
-                        emailLogin(_usernameController.text,
-                            _passwordController.text, context);
-                      }
+
+                      permission = await Geolocator.requestPermission();
+                      emailLogin(_usernameController.text,
+                          _passwordController.text, context);
                     }),
                 Padding(
                   padding: const EdgeInsets.only(right: 40),
