@@ -6,9 +6,13 @@ class ButtonWidget extends StatelessWidget {
   late String label;
   late VoidCallback onPressed;
   late Color color;
+  late Color? textcolor;
 
   ButtonWidget(
-      {required this.label, required this.color, required this.onPressed});
+      {required this.label,
+      required this.color,
+      required this.onPressed,
+      this.textcolor = Colors.white});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class ButtonWidget extends StatelessWidget {
         child: TextBold(
           text: label,
           fontSize: 16,
-          color: Colors.white,
+          color: textcolor!,
         ),
         onPressed: onPressed);
   }

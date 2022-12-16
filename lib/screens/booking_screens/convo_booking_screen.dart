@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:taxi_user/screens/home_screen.dart';
+import 'package:taxi_user/widgets/buttons/button_widget.dart';
 import 'package:taxi_user/widgets/text/text_bold.dart';
 import 'package:taxi_user/widgets/text/text_regular.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../services/cloud_function/add_message.dart';
 
@@ -64,6 +67,10 @@ class _ConvoPageState extends State<ConvoBookingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final Stream<DocumentSnapshot> userData = FirebaseFirestore.instance
+        .collection('Drivers')
+        .doc(box.read('uid'))
+        .snapshots();
     print(box.read('uid'));
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -98,84 +105,161 @@ class _ConvoPageState extends State<ConvoBookingPage> {
                       context: context,
                       builder: (context) {
                         return Dialog(
-                          child: Container(
-                            color: Colors.blue[600],
-                            height: 300,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Center(
-                                    child: TextBold(
-                                        text: 'Rating',
-                                        fontSize: 22,
-                                        color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Center(
-                                    child: TextBold(
-                                        text:
-                                            'Thankyou for choosing our Taxi Service!',
-                                        fontSize: 14,
-                                        color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Center(
-                                    child: TextRegular(
-                                        text: 'Please rate our service',
-                                        fontSize: 10,
-                                        color: Colors.white),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  RatingBar.builder(
-                                    initialRating: 5,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: false,
-                                    itemCount: 5,
-                                    itemPadding: const EdgeInsets.symmetric(
-                                        horizontal: 0.0),
-                                    itemBuilder: (context, _) => const Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
+                          child: StreamBuilder<DocumentSnapshot>(
+                              stream: userData,
+                              builder: (context,
+                                  AsyncSnapshot<DocumentSnapshot> snapshot) {
+                                if (!snapshot.hasData) {
+                                  return const Center(child: Text('Loading'));
+                                } else if (snapshot.hasError) {
+                                  return const Center(
+                                      child: Text('Something went wrong'));
+                                } else if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }
+                                dynamic data = snapshot.data;
+                                return Container(
+                                  color: Colors.blue[600],
+                                  height: 420,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Center(
+                                          child: TextBold(
+                                              text: 'Rating',
+                                              fontSize: 22,
+                                              color: Colors.white),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Center(
+                                          child: TextBold(
+                                              text:
+                                                  'Thankyou for choosing our Taxi Service!',
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Center(
+                                          child: TextRegular(
+                                              text: 'Please rate our service',
+                                              fontSize: 10,
+                                              color: Colors.white),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Center(
+                                          child: RatingBar.builder(
+                                            initialRating: 5,
+                                            minRating: 1,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: false,
+                                            itemCount: 5,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 0.0),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (_rating) async {
+                                              var collection = FirebaseFirestore
+                                                  .instance
+                                                  .collection('Drivers')
+                                                  .where('id',
+                                                      isEqualTo:
+                                                          box.read('uid'));
+
+                                              var querySnapshot =
+                                                  await collection.get();
+
+                                              for (var queryDocumentSnapshot
+                                                  in querySnapshot.docs) {
+                                                Map<String, dynamic> data1 =
+                                                    queryDocumentSnapshot
+                                                        .data();
+
+                                                FirebaseFirestore.instance
+                                                    .collection('Drivers')
+                                                    .doc(
+                                                        box.read('uid').update({
+                                                      'star': data1['star'] +
+                                                          _rating,
+                                                    }));
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Center(
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            minRadius: 50,
+                                            maxRadius: 50,
+                                            backgroundImage: NetworkImage(
+                                                data['profile_picture']),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Center(
+                                          child: TextBold(
+                                              text: data['name'],
+                                              fontSize: 18,
+                                              color: Colors.white),
+                                        ),
+                                        const SizedBox(
+                                          height: 40,
+                                        ),
+                                        Center(
+                                          child: TextRegular(
+                                              text:
+                                                  'Thankyou for trusting our Taxi Service',
+                                              fontSize: 12,
+                                              color: Colors.white),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20, right: 30),
+                                            child: ButtonWidget(
+                                                textcolor: Colors.black,
+                                                label: 'Continue',
+                                                color: Colors.white,
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pushReplacement(
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  HomeScreen()));
+                                                }),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    onRatingUpdate: (_rating) async {
-                                      var collection = FirebaseFirestore
-                                          .instance
-                                          .collection('Drivers')
-                                          .where('id',
-                                              isEqualTo: box.read('uid'));
-
-                                      var querySnapshot =
-                                          await collection.get();
-
-                                      for (var queryDocumentSnapshot
-                                          in querySnapshot.docs) {
-                                        Map<String, dynamic> data1 =
-                                            queryDocumentSnapshot.data();
-
-                                        FirebaseFirestore.instance
-                                            .collection('Drivers')
-                                            .doc(box.read('uid').update({
-                                              'star': data1['star'] + _rating,
-                                            }));
-                                      }
-                                    },
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
+                                );
+                              }),
                         );
                       });
                   // Navigator.of(context).pushReplacement(
@@ -190,13 +274,31 @@ class _ConvoPageState extends State<ConvoBookingPage> {
                   text: data.docs[0]['myName'],
                   fontSize: 22,
                   color: Colors.black),
-              actions: const [
-                CircleAvatar(
-                  minRadius: 10,
-                  maxRadius: 10,
-                  backgroundColor: Colors.red,
-                ),
-                SizedBox(width: 10),
+              actions: [
+                StreamBuilder<DocumentSnapshot>(
+                    stream: userData,
+                    builder:
+                        (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(child: Text('Loading'));
+                      } else if (snapshot.hasError) {
+                        return const Center(
+                            child: Text('Something went wrong'));
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      dynamic data = snapshot.data;
+                      return IconButton(
+                        onPressed: () async {
+                          var _text = 'tel:${data['contact_number']}';
+                          if (await canLaunch(_text)) {
+                            await launch(_text);
+                          }
+                        },
+                        icon: const Icon(Icons.phone),
+                      );
+                    }),
               ],
             ),
             body: Column(
