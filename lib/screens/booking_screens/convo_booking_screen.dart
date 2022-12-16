@@ -71,6 +71,11 @@ class _ConvoPageState extends State<ConvoBookingPage> {
         .collection('Drivers')
         .doc(box.read('uid'))
         .snapshots();
+
+    final Stream<DocumentSnapshot> userData1 = FirebaseFirestore.instance
+        .collection('Drivers')
+        .doc(box.read('uid'))
+        .snapshots();
     print(box.read('uid'));
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -106,7 +111,7 @@ class _ConvoPageState extends State<ConvoBookingPage> {
                       builder: (context) {
                         return Dialog(
                           child: StreamBuilder<DocumentSnapshot>(
-                              stream: userData,
+                              stream: userData1,
                               builder: (context,
                                   AsyncSnapshot<DocumentSnapshot> snapshot) {
                                 if (!snapshot.hasData) {
@@ -119,7 +124,7 @@ class _ConvoPageState extends State<ConvoBookingPage> {
                                   return const Center(
                                       child: CircularProgressIndicator());
                                 }
-                                dynamic data = snapshot.data;
+                                dynamic data1 = snapshot.data;
                                 return Container(
                                   color: Colors.blue[600],
                                   height: 420,
@@ -213,7 +218,7 @@ class _ConvoPageState extends State<ConvoBookingPage> {
                                             minRadius: 50,
                                             maxRadius: 50,
                                             backgroundImage: NetworkImage(
-                                                data['profile_picture']),
+                                                data1['profile_picture']),
                                           ),
                                         ),
                                         const SizedBox(
@@ -221,7 +226,7 @@ class _ConvoPageState extends State<ConvoBookingPage> {
                                         ),
                                         Center(
                                           child: TextBold(
-                                              text: data['name'],
+                                              text: data1['name'],
                                               fontSize: 18,
                                               color: Colors.white),
                                         ),
@@ -288,10 +293,10 @@ class _ConvoPageState extends State<ConvoBookingPage> {
                           ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       }
-                      dynamic data = snapshot.data;
+                      dynamic data1 = snapshot.data;
                       return IconButton(
                         onPressed: () async {
-                          var _text = 'tel:${data['contact_number']}';
+                          var _text = 'tel:${data1['contact_number']}';
                           if (await canLaunch(_text)) {
                             await launch(_text);
                           }
