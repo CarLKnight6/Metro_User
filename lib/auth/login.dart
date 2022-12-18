@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:taxi_user/auth/forgot_password.dart';
 import 'package:taxi_user/auth/signup.dart';
 import 'package:taxi_user/widgets/buttons/button_widget.dart';
@@ -53,17 +52,17 @@ class LoginPage extends StatelessWidget {
                 ButtonWidget(
                     label: 'Login',
                     color: Colors.amber,
-                    onPressed: () async {
-                      LocationPermission permission;
-                      permission = await Geolocator.requestPermission();
+                    onPressed: () {
+                      // LocationPermission permission;
+                      // permission = await Geolocator.requestPermission();
 
-                      bool serviceEnabled;
+                      // bool serviceEnabled;
 
-                      // Test if location services are enabled.
-                      serviceEnabled =
-                          await Geolocator.isLocationServiceEnabled();
+                      // // Test if location services are enabled.
+                      // serviceEnabled =
+                      //     await Geolocator.isLocationServiceEnabled();
 
-                      permission = await Geolocator.requestPermission();
+                      // permission = await Geolocator.requestPermission();
                       emailLogin(_usernameController.text,
                           _passwordController.text, context);
                     }),

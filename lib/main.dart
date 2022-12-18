@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             if (snapshot.hasData) {
               return HomeScreen();
             } else {
-              return OnboardingScreen();
+              return const OnboardingScreen();
             }
           }),
     );
