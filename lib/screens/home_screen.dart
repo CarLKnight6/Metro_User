@@ -376,29 +376,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 child: FloatingActionButton(
                                     backgroundColor: Colors.red,
                                     child: const Icon(
-                                      Icons.my_location,
+                                      Icons.home,
                                       color: Colors.white,
                                     ),
                                     onPressed: () {
-                                      mapController?.animateCamera(
-                                          CameraUpdate.newCameraPosition(
-                                              CameraPosition(
-                                                  target: LatLng(lat, long),
-                                                  zoom: 16)));
-
-                                      setState(() {
-                                        newMarker(lat, long, 'Your Location');
-                                      });
-                                    }),
-                              ),
-                            ),
-                            Container(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
                                       if (data['homeLat'] == 0) {
                                         showToast1();
                                       } else {
@@ -415,37 +396,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               data['homeLong'], 'Home');
                                         });
                                       }
-                                    },
-                                    child: Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            Icons.home,
-                                            color: Colors.white,
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          TextRegular(
-                                              text: 'Home',
-                                              fontSize: 12,
-                                              color: Colors.white),
-                                        ],
-                                      ),
-                                      height: 60,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
+                                    }),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 10, bottom: 10),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: FloatingActionButton(
+                                    backgroundColor: Colors.red,
+                                    child: const Icon(
+                                      Icons.work_outline_outlined,
+                                      color: Colors.white,
                                     ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
+                                    onPressed: () {
                                       if (data['officeLat'] == 0) {
                                         showToast1();
                                       } else {
@@ -462,37 +427,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               data['officeLong'], 'Workplace');
                                         });
                                       }
-                                    },
-                                    child: Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            Icons.work_outline_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          TextRegular(
-                                              text: 'Workplace',
-                                              fontSize: 12,
-                                              color: Colors.white),
-                                        ],
-                                      ),
-                                      height: 60,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
+                                    }),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 10, bottom: 10),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: FloatingActionButton(
+                                    backgroundColor: Colors.red,
+                                    child: const Icon(
+                                      Icons.school,
+                                      color: Colors.white,
                                     ),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
+                                    onPressed: () {
                                       if (data['schoolLat'] == 0) {
                                         showToast1();
                                       } else {
@@ -509,40 +458,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                               data['schoolLong'], 'School');
                                         });
                                       }
-                                    },
-                                    child: Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            Icons.school_outlined,
-                                            color: Colors.white,
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          TextRegular(
-                                              text: 'School',
-                                              fontSize: 12,
-                                              color: Colors.white),
-                                        ],
-                                      ),
-                                      height: 60,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                    }),
                               ),
-                              width: double.infinity,
-                              height: 80,
-                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 10, bottom: 10),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: FloatingActionButton(
+                                    backgroundColor: Colors.red,
+                                    child: const Icon(
+                                      Icons.my_location,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      mapController?.animateCamera(
+                                          CameraUpdate.newCameraPosition(
+                                              CameraPosition(
+                                                  target: LatLng(lat, long),
+                                                  zoom: 16)));
+
+                                      setState(() {
+                                        newMarker(lat, long, 'Your Location');
+                                      });
+                                    }),
+                              ),
                             ),
                           ],
                         ),
