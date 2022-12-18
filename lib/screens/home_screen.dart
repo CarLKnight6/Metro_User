@@ -272,7 +272,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             body: Stack(
               children: [
                 GoogleMap(
+                  zoomControlsEnabled: false,
                   markers: markers,
+                  myLocationEnabled: true,
                   mapType: MapType.normal,
                   initialCameraPosition: _camPosition,
                   onMapCreated: (controller) {
@@ -363,130 +365,133 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                       print(data['homeLat']);
 
-                      return Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 10, bottom: 10),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: FloatingActionButton(
-                                    backgroundColor: Colors.red,
-                                    child: const Icon(
-                                      Icons.home,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      if (data['homeLat'] == 0) {
-                                        showToast1();
-                                      } else {
-                                        mapController?.animateCamera(
-                                            CameraUpdate.newCameraPosition(
-                                                CameraPosition(
-                                                    target: LatLng(
-                                                        data['homeLat'],
-                                                        data['homeLong']),
-                                                    zoom: 16)));
-
-                                        setState(() {
-                                          newMarker(data['homeLat'],
-                                              data['homeLong'], 'Home');
-                                        });
-                                      }
-                                    }),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 10, bottom: 10),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: FloatingActionButton(
-                                    backgroundColor: Colors.red,
-                                    child: const Icon(
-                                      Icons.work_outline_outlined,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      if (data['officeLat'] == 0) {
-                                        showToast1();
-                                      } else {
-                                        mapController?.animateCamera(
-                                            CameraUpdate.newCameraPosition(
-                                                CameraPosition(
-                                                    target: LatLng(
-                                                        data['officeLat'],
-                                                        data['officeLong']),
-                                                    zoom: 16)));
-
-                                        setState(() {
-                                          newMarker(data['officeLat'],
-                                              data['officeLong'], 'Workplace');
-                                        });
-                                      }
-                                    }),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 10, bottom: 10),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: FloatingActionButton(
-                                    backgroundColor: Colors.red,
-                                    child: const Icon(
-                                      Icons.school,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      if (data['schoolLat'] == 0) {
-                                        showToast1();
-                                      } else {
-                                        mapController?.animateCamera(
-                                            CameraUpdate.newCameraPosition(
-                                                CameraPosition(
-                                                    target: LatLng(
-                                                        data['schoolLat'],
-                                                        data['schoolLong']),
-                                                    zoom: 16)));
-
-                                        setState(() {
-                                          newMarker(data['schoolLat'],
-                                              data['schoolLong'], 'School');
-                                        });
-                                      }
-                                    }),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 10, bottom: 10),
-                              child: Align(
-                                alignment: Alignment.bottomRight,
-                                child: FloatingActionButton(
-                                    backgroundColor: Colors.red,
-                                    child: const Icon(
-                                      Icons.my_location,
-                                      color: Colors.white,
-                                    ),
-                                    onPressed: () {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 70,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: FloatingActionButton(
+                                  mini: true,
+                                  backgroundColor: Colors.white,
+                                  child: const Icon(
+                                    Icons.home,
+                                    color: Colors.red,
+                                  ),
+                                  onPressed: () {
+                                    if (data['homeLat'] == 0) {
+                                      showToast1();
+                                    } else {
                                       mapController?.animateCamera(
                                           CameraUpdate.newCameraPosition(
                                               CameraPosition(
-                                                  target: LatLng(lat, long),
+                                                  target: LatLng(
+                                                      data['homeLat'],
+                                                      data['homeLong']),
                                                   zoom: 16)));
 
                                       setState(() {
-                                        newMarker(lat, long, 'Your Location');
+                                        newMarker(data['homeLat'],
+                                            data['homeLong'], 'Home');
                                       });
-                                    }),
-                              ),
+                                    }
+                                  }),
                             ),
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: FloatingActionButton(
+                                  mini: true,
+                                  backgroundColor: Colors.white,
+                                  child: const Icon(
+                                    Icons.work_outline_outlined,
+                                    color: Colors.red,
+                                  ),
+                                  onPressed: () {
+                                    if (data['officeLat'] == 0) {
+                                      showToast1();
+                                    } else {
+                                      mapController?.animateCamera(
+                                          CameraUpdate.newCameraPosition(
+                                              CameraPosition(
+                                                  target: LatLng(
+                                                      data['officeLat'],
+                                                      data['officeLong']),
+                                                  zoom: 16)));
+
+                                      setState(() {
+                                        newMarker(data['officeLat'],
+                                            data['officeLong'], 'Workplace');
+                                      });
+                                    }
+                                  }),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: FloatingActionButton(
+                                  mini: true,
+                                  backgroundColor: Colors.white,
+                                  child: const Icon(
+                                    Icons.school,
+                                    color: Colors.red,
+                                  ),
+                                  onPressed: () {
+                                    if (data['schoolLat'] == 0) {
+                                      showToast1();
+                                    } else {
+                                      mapController?.animateCamera(
+                                          CameraUpdate.newCameraPosition(
+                                              CameraPosition(
+                                                  target: LatLng(
+                                                      data['schoolLat'],
+                                                      data['schoolLong']),
+                                                  zoom: 16)));
+
+                                      setState(() {
+                                        newMarker(data['schoolLat'],
+                                            data['schoolLong'], 'School');
+                                      });
+                                    }
+                                  }),
+                            ),
+                          ),
+                          const Expanded(
+                            child: SizedBox(),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(right: 10, bottom: 10),
+                            child: Align(
+                              alignment: Alignment.bottomRight,
+                              child: FloatingActionButton(
+                                  backgroundColor: Colors.red,
+                                  child: const Icon(
+                                    Icons.my_location,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    mapController?.animateCamera(
+                                        CameraUpdate.newCameraPosition(
+                                            CameraPosition(
+                                                target: LatLng(lat, long),
+                                                zoom: 16)));
+
+                                    setState(() {
+                                      newMarker(lat, long, 'Your Location');
+                                    });
+                                  }),
+                            ),
+                          ),
+                        ],
                       );
                     }),
               ],
