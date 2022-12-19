@@ -101,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 builder: (context) {
                   return NormalDialog(
                       label:
-                          "This app requires access to your location in order to provide you with the full range of features and functionality. Please allow access to your location in your device's settings.",
+                          "Taxi Region II collects location data to enable user tracking for the transaction of ride to be proccessed even when the app is closed or not in use.",
                       buttonColor: Colors.red,
                       buttonText: 'I understand',
                       icon: Icons.warning,
@@ -131,7 +131,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       builder: (context) {
                         return NormalDialog(
                             label:
-                                "This app requires access to your location in order to provide you with the full range of features and functionality. Please allow access to your location in your device's settings.",
+                                "Taxi Region II collects location data to enable user tracking for the transaction of ride to be proccessed even when the app is closed or not in use.",
                             buttonColor: Colors.red,
                             buttonText: 'I understand',
                             icon: Icons.warning,
