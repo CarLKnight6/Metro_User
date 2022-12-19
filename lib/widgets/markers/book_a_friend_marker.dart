@@ -444,8 +444,8 @@ bookAFriendMarker(
                                                                             .notifier)
                                                                         .state,
                                                                     fare: ((distance *
-                                                                                12) +
-                                                                            50)
+                                                                                13.50) +
+                                                                            40)
                                                                         .toStringAsFixed(
                                                                             2),
                                                                     onPressed:
@@ -481,8 +481,8 @@ bookAFriendMarker(
                                                                             .watch(pickupProvider.notifier)
                                                                             .state,
                                                                         (distance *
-                                                                                12) +
-                                                                            50,
+                                                                                13.50) +
+                                                                            40,
                                                                         _nameController
                                                                             .text,
                                                                         _contactNumberController

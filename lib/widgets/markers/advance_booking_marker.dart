@@ -433,8 +433,9 @@ advanceBookingMarker(
                                                               destinationProvider
                                                                   .notifier)
                                                           .state,
-                                                      fare: ((distance * 12) +
-                                                              50)
+                                                      fare: ((distance *
+                                                                  13.50) +
+                                                              40)
                                                           .toStringAsFixed(2),
                                                       onPressed: () {
                                                         advanceBooking(
@@ -465,8 +466,8 @@ advanceBookingMarker(
                                                                         .notifier)
                                                                 .state,
                                                             pickupLocation,
-                                                            (distance * 12) +
-                                                                50,
+                                                            (distance * 13.50) +
+                                                                40,
                                                             ref
                                                                 .watch(
                                                                     dateProvider

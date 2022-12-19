@@ -388,8 +388,9 @@ bookNowMarker(
                                                               destinationProvider
                                                                   .notifier)
                                                           .state,
-                                                      fare: ((distance * 12) +
-                                                              50)
+                                                      fare: ((distance *
+                                                                  13.50) +
+                                                              40)
                                                           .toStringAsFixed(2),
                                                       onPressed: () {
                                                         bookNow(
@@ -419,8 +420,8 @@ bookNowMarker(
                                                                     destinationProvider
                                                                         .notifier)
                                                                 .state,
-                                                            (distance * 12) +
-                                                                50);
+                                                            (distance * 13.50) +
+                                                                40);
 
                                                         FirebaseFirestore
                                                             .instance
