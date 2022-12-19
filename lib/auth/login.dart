@@ -9,8 +9,14 @@ import 'package:taxi_user/widgets/textfields/password_field.dart';
 
 import '../services/authentication/email_login.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
+
   final _passwordController = TextEditingController();
 
   @override

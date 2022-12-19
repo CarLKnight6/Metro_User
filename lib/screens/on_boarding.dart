@@ -3,6 +3,8 @@ import 'package:flutter_onboard/flutter_onboard.dart';
 import 'package:taxi_user/plugins/geolocation.dart';
 import 'package:taxi_user/screens/splash_screen.dart';
 
+import '../widgets/dialogs/normal_dialog.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
 
@@ -94,8 +96,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         // Either Provide onSkip Callback or skipButton Widget to handle skip state
         skipButton: TextButton(
           onPressed: () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => LoadingScreenToLogIn()));
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return NormalDialog(
+                      label:
+                          "This app requires access to your location in order to provide you with the full range of features and functionality. Please allow access to your location in your device's settings.",
+                      buttonColor: Colors.red,
+                      buttonText: 'I understand',
+                      icon: Icons.warning,
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => LoadingScreenToLogIn()));
+                      },
+                      iconColor: Colors.red);
+                });
           },
           child: Text(
             "Skip",
@@ -111,8 +126,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             final state = ref.watch(onBoardStateProvider);
             return InkWell(
               onTap: () => state.isLastPage
-                  ? Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => LoadingScreenToLogIn()))
+                  ? showDialog(
+                      context: context,
+                      builder: (context) {
+                        return NormalDialog(
+                            label:
+                                "This app requires access to your location in order to provide you with the full range of features and functionality. Please allow access to your location in your device's settings.",
+                            buttonColor: Colors.red,
+                            buttonText: 'I understand',
+                            icon: Icons.warning,
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          LoadingScreenToLogIn()));
+                            },
+                            iconColor: Colors.red);
+                      })
                   : _onNextTap(state),
               child: Container(
                 width: 230,
