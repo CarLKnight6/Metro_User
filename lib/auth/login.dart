@@ -7,6 +7,7 @@ import 'package:taxi_user/widgets/text/text_regular.dart';
 import 'package:taxi_user/widgets/textfields/normal_field.dart';
 import 'package:taxi_user/widgets/textfields/password_field.dart';
 
+import '../plugins/geolocation.dart';
 import '../services/authentication/email_login.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,6 +16,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  @override
+  void initState() {
+    super.initState();
+    determinePosition();
+  }
+
   final _usernameController = TextEditingController();
 
   final _passwordController = TextEditingController();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_onboard/flutter_onboard.dart';
-import 'package:taxi_user/plugins/geolocation.dart';
 import 'package:taxi_user/screens/splash_screen.dart';
 
 import '../widgets/dialogs/normal_dialog.dart';
@@ -16,7 +15,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-    determinePosition();
   }
 
   final List<OnBoardModel> onBoardData = [
